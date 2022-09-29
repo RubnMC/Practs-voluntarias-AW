@@ -1,0 +1,67 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.bordeAzul{
+    border: 2px solid rgb(0, 183, 255);
+    padding: 10px;
+}
+
+/*Encabezado*/
+
+header{
+    position: fixed;  
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+}
+
+.divEncabezado{
+    display: block;
+    text-align: center;
+}
+
+#divDerEncabezado{
+    display: flex;
+    margin-right: 10px;
+}
+
+#spaceEncabezado{
+    margin-left: auto !important;
+}
+
+#divDeslogear{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#botonDesconectar{
+    background-color: rgb(196, 195, 195);
+    margin-top: 10px;
+    width: fit-content;
+}
+
+/*Footer*/
+
+footer{
+    margin-top: 200px;
+}
+
+#divGestTareas{
+    align-items: center;
+    text-align: center;
+}
+
+#botonAniadir{
+    display: inline-block;
+    background-color: rgb(87, 156, 7);
+}
+
+#botonEliminar{
+    display: inline-block;
+    background-color: red;
+}
