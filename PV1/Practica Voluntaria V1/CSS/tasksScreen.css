@@ -18,9 +18,18 @@
     background-color: #EADEDA;
 }
 
+.texto-rojo{
+    color: red;
+}
+
 .encabezado{
-    height: 7em;
+    height: fit-content;
     position: sticky;
+}
+
+#logo{
+    height: 4em;
+    width: 4em;
 }
 
 .row{
