@@ -27,6 +27,12 @@
     position: sticky;
 }
 
+.bordeado-myrt{
+    border: 1px solid #1D7874;
+    border-radius: 5px;
+    padding: 7px;
+}
+
 #logo{
     height: 4em;
     width: 4em;
@@ -42,4 +48,8 @@
 
 #botonesInferiores{
     text-align: center;
+}
+
+.margenb{
+    margin-bottom: 15%;
 }
