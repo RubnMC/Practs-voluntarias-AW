@@ -1,0 +1,23 @@
+header,footer, button{
+    display: none !important;
+}
+
+.etiqueta-print{
+    font-weight: normal;
+}
+
+.etiqueta-print::before{
+    content: "(";
+}
+
+.etiqueta-print::after{
+    content: ")";
+}
+
+.en-negrita{
+    font-weight: bold;
+}
+
+ul,li,div{
+    list-style-type: circle;
+}

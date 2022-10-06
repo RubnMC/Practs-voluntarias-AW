@@ -42,14 +42,23 @@
     width: 100%;
 }
 
-.pepe{
-    width: fit-content;
-}
-
 #botonesInferiores{
     text-align: center;
 }
 
 .margenb{
-    margin-bottom: 15%;
+    margin-bottom: 4em;
 }
+
+.altura-tarea{
+    min-height: 3.5em;
+}
+
+.transparente{
+    background-color: transparent;
+}
+
+#tareas{
+    display: none;
+}
+
