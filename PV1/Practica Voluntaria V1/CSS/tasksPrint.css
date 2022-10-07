@@ -1,9 +1,12 @@
 header,footer, button{
     display: none !important;
 }
-
 .etiqueta-print{
     font-weight: normal;
+}
+
+.tarea-print::after{
+    content: ":";
 }
 
 .etiqueta-print::before{
@@ -18,6 +21,12 @@ header,footer, button{
     font-weight: bold;
 }
 
-ul,li,div{
-    list-style-type: circle;
+.print-tarea{
+    display: list-item;
+    margin-left: 1em;
 }
+
+.print-tachada{
+    margin-left: 2em;
+}
+
