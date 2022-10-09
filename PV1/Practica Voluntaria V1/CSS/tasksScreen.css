@@ -1,36 +1,11 @@
-.jungleGreen{
-    background-color: #071E22;    
+@import url('https://fonts.googleapis.com/css2?family=Shade&family=Finger+Paint&display=swap');
+
+#tareas{
+    display: none;
 }
 
-.myrtleGreen{
-    background-color: #1D7874;
-}
-
-.beige{
-    background-color: #F2F3D9;
-}
-
-.dogwoodRose{
-    background-color: #D90368 ;
-}
-
-.timberwolf{
-    background-color: #EADEDA;
-}
-
-.texto-rojo{
-    color: red;
-}
-
-.encabezado{
-    height: fit-content;
-    position: sticky;
-}
-
-.bordeado-myrt{
-    border: 1px solid #1D7874;
-    border-radius: 5px;
-    padding: 7px;
+#botonesInferiores{
+    text-align: center;
 }
 
 #logo{
@@ -38,12 +13,31 @@
     width: 4em;
 }
 
-.row{
-    width: 100%;
+/*Clases propias*/
+.jungleGreen{
+    background-color: #292929;    
 }
 
-#botonesInferiores{
-    text-align: center;
+.darkGray{
+    background-color: #121212;
+}
+
+.timberwolfLetra{
+    color: #EADEDA;
+}
+
+.fontLetra{
+    font-family: 'Finger Paint', cursive;
+}
+
+.encabezado{
+    height: fit-content;
+    position: sticky;
+}
+
+.bordeado-morado{
+    border: 2px solid #9153F4;
+    padding: 7px;
 }
 
 .margenb{
@@ -58,6 +52,7 @@
     background-color: transparent;
 }
 
-#tareas{
-    display: none;
+/*Clases Bootstrap*/
+.row{
+    width: 100%;
 }
