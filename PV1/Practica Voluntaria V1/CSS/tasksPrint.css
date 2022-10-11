@@ -1,4 +1,4 @@
-header,footer, button{
+header,footer, a{
     display: none !important;
 }
 .etiqueta-print{
@@ -21,12 +21,12 @@ header,footer, button{
     font-weight: bold;
 }
 
-.print-tarea{
+.tarea-print{
     display: list-item;
     margin-left: 1em;
 }
 
-.print-tachada{
+.tachada-print{
     margin-left: 2em;
 }
 
