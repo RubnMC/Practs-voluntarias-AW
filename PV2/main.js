@@ -13,9 +13,7 @@ function getToDoTasks(tareas) {
 }
 
 function findByTag(tareas, tag) {
-    return tareas.filter(function (task) {
-        return task.tags.includes(tag);
-    });
+    return tareas.filter(task => task.tags.includes(tag))
 }
 
 function findByTags(tareas, listaTags) {
@@ -27,7 +25,7 @@ function findByTags(tareas, listaTags) {
 }
 
 function countDone(listaTareas) {
-    return listaTareas.reduce((acum, { done }) => acum + (done ? 1 : 0), 0);
+    return listaTareas.reduce((acum, t) => acum + (t.done ? 1 : 0), 0);
 }
 
 function createTask(tareaTexto) {
