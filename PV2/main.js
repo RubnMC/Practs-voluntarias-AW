@@ -36,18 +36,17 @@ function createTask(tareaTexto) {
     
     let tareTexto = arrayPalabras.filter(r => !r.startsWith("@"));
 
-    listaT.push({ text: tareTexto.join(' '), tags: labels })
+    return { text: tareTexto.join(' '), tags: labels }
 }
 
 console.log(getToDoTasks(listaT).map(o => o.text));
 console.log("-------------------------------------------");
-console.log(findByTag(listaT, "personal").map(o => o.text));
+console.log(findByTag(listaT, "personal").map((o) => ({text:o.text, tags:o.tags})));
 console.log("-------------------------------------------");
-console.log(findByTags(listaT, ["universidad", "deportes"]).map(o => o.text))
+console.log(findByTags(listaT, ["universidad", "deportes"]).map((o) => ({text:o.text, tags:o.tags})))
 console.log("-------------------------------------------");
 console.log(countDone(listaT));
 console.log("-------------------------------------------");
-createTask("Ir al medico @personal @salud")
-createTask("Ir a @deporte entrenar")
-createTask("@universidad @practica Preparar prácticas TP")
-console.log(listaT)
+console.log(createTask("Ir al medico @personal @salud"))
+console.log(createTask("Ir a @deporte entrenar"))
+console.log(createTask("@universidad @practica Preparar prácticas TP"))
