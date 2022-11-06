@@ -50,7 +50,7 @@ class DAOUsers {
                                 callback(null, null); //no está el usuario con el email proporcionado
                             }
                             else {
-                                callback(null, rows);
+                                callback(null, "Imagen: "+rows[0].img);
                             }
                         }
                     });

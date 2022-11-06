@@ -17,6 +17,9 @@ function prueba (a,b){
     console.log(b);
 }
 
-daoTask.getAllTasks("aitor.tilla@ucm.es",prueba);
+daoUser.isUserCorrect("aitor.tilla@ucm.es","aitor",prueba);
+daoUser.getUserImage("aitor.tilla@ucm.es",prueba);
+daoTask.getAllTasks("bill.puertas@ucm.es",prueba);
+daoTask.markTaskDone(1,prueba);
 // Definición de las funciones callback
 // Uso de los métodos de las clases DAOUsers y DAOTasks
