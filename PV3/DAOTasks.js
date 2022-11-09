@@ -40,81 +40,113 @@ class DAOTasks {
     insertTask(email, task, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(new Error("Error de conexión a la base de datos pool"));
             }
             else {
                 connection.query("SELECT idUser FROM aw_tareas_usuarios WHERE email = ?;",
                     [email],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(new Error("Error de acceso a la base de datos, buscar usuario"));
                         }
                         else {
                             if (rows.length === 0) {
-                                callback(null, false); //no está el usuario con el password proporcionado
+                                callback(null, "No existe el usuario"); //no está el usuario con el password proporcionado
                             }
                             else {
+                                let idUsuario = rows[0].idUser;
 
-                                let idU = rows[0].idUser;
                                 connection.query("INSERT INTO aw_tareas_tareas(texto) VALUES (?)",
-                                    [task.text],
+                                    [task.texto],
                                     function (err, rows) {
-                                        connection.release(); // devolver al pool la conexión
                                         if (err) {
-                                            callback(new Error("Error de acceso a la base de datos"));
+                                            callback(new Error("Error de acceso a la base de datos, insertar tarea"));
                                         }
                                         else {
                                             if (rows.length === 0) {
-                                                callback(null, false); //no está el usuario con el password proporcionado
+                                                callback(null, "No se ha podido añadir la tarea"); //no está el usuario con el password proporcionado
                                             }
                                             else {
-                                                let idT = rows[0].idTarea;
-                                                connection.query("INSERT INTO aw_tareas_user_tareas(idUser,idTarea,hecho) VALUES (?,?,false);",
-                                                    [idU, idT],
+                                                let idTarea = rows.insertId;
+                                                let sentenciaTags = "INSERT INTO aw_tareas_etiquetas(texto) VALUES";
+
+                                                console.log(task.tags);
+
+                                                task.tags.forEach(function (element, idx, array) {
+                                                    if (idx === array.length - 1) {
+                                                        sentenciaTags += " ('" + element + "');";
+                                                    } else {
+                                                        sentenciaTags += " ('" + element + "'),";
+                                                    }
+                                                });
+
+                                                console.log(sentenciaTags);
+
+                                                connection.query(sentenciaTags,
+
                                                     function (err, rows) {
-                                                        connection.release(); // devolver al pool la conexión
                                                         if (err) {
-                                                            callback(new Error("Error de acceso a la base de datos"));
+                                                            callback(new Error("Error de acceso a la base de datos, insertar etiquetas"));
                                                         }
                                                         else {
                                                             if (rows.length === 0) {
-                                                                callback(null, false); //no está el usuario con el password proporcionado
+                                                                callback(null, "No existe el usuario"); //no está el usuario con el password proporcionado
                                                             }
                                                             else {
-                                                                //INSERT INTO tag (taskId, tag) VALUES (?, ?), (?, ?), (?, ?)
-                                                                let listaTags = "INSERT INTO aw_tareas_etiquetas (idEtiqueta, texto) VALUES";
-                                                                task.tags.forEach(currentItem => {
-                                                                    listaTags += " (" + currentItem.texto + ")";
-                                                                });
-                                                                connection.query(listaTags,
+                                                                let sentenciaTareaTag = "INSERT INTO aw_tareas_tareas_etiquetas (idEtiqueta, idTarea) VALUES";
+
+                                                                console.log(rows.affectedRows);
+
+                                                                for (let i = 0; i < rows.affectedRows; i++) {
+                                                                    if (i === rows.affectedRows - 1) {
+                                                                        sentenciaTareaTag += " (" + (rows.insertId + i) + ", " + idTarea + ")";
+                                                                    } else {
+                                                                        sentenciaTareaTag += " (" + (rows.insertId + i) + ", " + idTarea + "),";
+                                                                    }
+                                                                }
+
+                                                                console.log(sentenciaTareaTag);
+
+                                                                connection.query(sentenciaTareaTag,
                                                                     function (err, rows) {
                                                                         connection.release(); // devolver al pool la conexión
                                                                         if (err) {
-                                                                            callback(new Error("Error de acceso a la base de datos"));
+                                                                            callback(new Error("Error de acceso a la base de datos, insertar realación tarea etiqueta"));
                                                                         }
                                                                         else {
                                                                             if (rows.length === 0) {
-                                                                                callback(null, false); //no está el usuario con el password proporcionado
+                                                                                callback(null, "Problemas"); //no está el usuario con el password proporcionado
                                                                             }
                                                                             else {
-                                                                                
+                                                                                callback(null, "Tarea insertada con éxito!!");
                                                                             }
                                                                         }
-                                                                    }
-                                                                );
+                                                                    });
                                                             }
                                                         }
-                                                    }
-                                                );
+                                                    });
+
+                                                connection.query("INSERT INTO aw_tareas_user_tareas(idUser, idTarea, hecho) VALUES(?, ?, false)",
+                                                    [idUsuario, idTarea],
+                                                    function (err, rows) {
+                                                        if (err) {
+                                                            callback(new Error("Error de acceso a la base de datos, relación tarea usuario"));
+                                                        }
+                                                        else {
+                                                            if (rows.length === 0) {
+                                                                callback(null, "Problemas"); //no está el usuario con el password proporcionado
+                                                            }
+                                                            else {
+                                                                /*CONTINUA*/
+                                                            }
+                                                        }
+                                                    });
                                             }
                                         }
-                                    }
-                                );
+                                    });
                             }
                         }
-                    }
-                );
+                    });
             }
         }
         );
@@ -131,7 +163,7 @@ class DAOTasks {
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
-                            callback(null,new Error("Error de acceso a la base de datos"));
+                            callback(null, new Error("Error de acceso a la base de datos"));
                         }
                         else {
                             if (rows.length === 0) {
