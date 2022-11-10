@@ -32,18 +32,18 @@ function createTask(tareaTexto) {
 
     let arrayPalabras = tareaTexto.split(" ");
 
-    let labels = arrayPalabras.filter(r => r.startsWith("@")).map(r => r.replace("@",''));
-    
+    let labels = arrayPalabras.filter(r => r.startsWith("@")).map(r => r.replace("@", ''));
+
     let tareTexto = arrayPalabras.filter(r => !r.startsWith("@"));
 
     return { text: tareTexto.join(' '), tags: labels }
 }
 
-console.log(getToDoTasks(listaT).map(o => o.text));
+console.log(getToDoTasks(listaT).map(o => o.text)); find
 console.log("-------------------------------------------");
-console.log(findByTag(listaT, "personal").map((o) => ({text:o.text, tags:o.tags})));
+console.log(findByTag(listaT, "personal").map((o) => ({ text: o.text, tags: o.tags })));
 console.log("-------------------------------------------");
-console.log(findByTags(listaT, ["universidad", "deportes"]).map((o) => ({text:o.text, tags:o.tags})))
+console.log(findByTags(listaT, ["universidad", "deportes"]).map((o) => ({ text: o.text, tags: o.tags })))
 console.log("-------------------------------------------");
 console.log(countDone(listaT));
 console.log("-------------------------------------------");
