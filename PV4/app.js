@@ -1,6 +1,6 @@
 // app.js 
 const config = require("./config");
-const DAOTasks = require("./DAOTasks");
+const DAOTasks = require("./javascripts/DAOTasks");
 const utils = require("./utils");
 const path = require("path");
 const mysql = require("mysql");
