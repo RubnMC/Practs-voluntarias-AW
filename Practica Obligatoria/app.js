@@ -10,7 +10,6 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.static('public'));
-app.use(express.static('images'))
 
 // Crear un pool de conexiones a la base de datos de MySQL 
 const pool = mysql.createPool(config.mysqlConfig);
