@@ -34,7 +34,7 @@ CREATE TABLE aw_tareas_tareas_etiquetas(
 	idEtiqueta INT,
     idTarea INT,
     FOREIGN KEY(idEtiqueta) REFERENCES aw_tareas_etiquetas(idEtiqueta),
-    FOREIGN KEY(idTarea) REFERENCES aw_tareas_tareas(idTarea)  ON DELETE CASCADE,
+    FOREIGN KEY(idTarea) REFERENCES aw_tareas_tareas(idTarea),
     CONSTRAINT PK_tareas_tareas_etiqueta PRIMARY KEY (idEtiqueta, idTarea)
 );
 
