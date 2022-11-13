@@ -210,62 +210,20 @@ class DAOTasks {
                                                 callback(null, "No tiene ninguna tarea completada"); //no está el usuario con el password proporcionado
                                             }
                                             else {
-                                                console.log(rows);
-
                                                 rows.forEach((element, idx, array) => {
-                                                    console.log(element.idTarea);
-                                                    connection.query("SELECT * FROM aw_tareas_user_tareas WHERE idTarea = ?;",
-                                                        [element.idTarea],
-                                                        function (err, rows) {
-                                                            if (err) {
-                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                    
+                                                    connection.query("DELETE FROM aw_tareas_user_tareas WHERE idTarea = ? AND idUser = ?;",
+                                                    [element.idTarea, idUsuario],
+                                                    function (err, rows) {
+                                                        if (err) {
+                                                            callback(new Error("Error de acceso a la base de datos, borrar relación tarea-usuario"));
+                                                        }
+                                                        else {
+                                                            if (idx === array.length - 1) {
+                                                                connection.release();
                                                             }
-                                                            else {
-                                                                if (rows.length === 1) {
-                                                                    connection.query("DELETE FROM aw_tareas_user_tareas WHERE idTarea = ?;",
-                                                                        [element.idTarea],
-                                                                        function (err, rows) {
-                                                                            if (err) {
-                                                                                callback(new Error("Error de acceso a la base de datos, borrar relación tarea-usuario"));
-                                                                            }
-                                                                            else {
-                                                                                connection.query("DELETE FROM aw_tareas_tareas WHERE idTarea = ?;",
-                                                                                    [element.idTarea],
-                                                                                    function (err, rows) {
-                                                                                        if (err) {
-                                                                                            callback(new Error("Error de acceso a la base de datos, borrar tarea"));
-                                                                                        }
-                                                                                        else {
-                                                                                            if (rows.length === 0) {
-                                                                                                callback(null, false); //no está el usuario con el password proporcionado
-                                                                                            }
-                                                                                            else {
-                                                                                                if (idx === array.length - 1) {
-                                                                                                    connection.release();
-                                                                                                }
-                                                                                            }
-                                                                                        }
-                                                                                    });
-
-                                                                            }
-                                                                        });
-                                                                }
-                                                                else {
-                                                                    connection.query("DELETE FROM aw_tareas_user_tareas WHERE idTarea = ? AND idUser = ?;",
-                                                                        [element.idTarea, idUsuario],
-                                                                        function (err, rows) {
-                                                                            if (err) {
-                                                                                callback(new Error("Error de acceso a la base de datos, borrar relación tarea-usuario"));
-                                                                            }
-                                                                            else {
-                                                                                if (idx === array.length - 1) {
-                                                                                    connection.release();
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                }
-                                                            }
-                                                        });
+                                                        }
+                                                    });
                                                 });
 
                                             }

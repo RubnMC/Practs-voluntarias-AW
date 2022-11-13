@@ -25,10 +25,10 @@ function prueba (a,b){
     }
 }
 
-daoTask.deleteCompleted("aitor.tilla@ucm.es", prueba);
-daoUser.isUserCorrect("aitor.tilla@ucm.es","aitor",prueba);
+daoTask.deleteCompleted("steve.curros@ucm.es", prueba);
+/*daoUser.isUserCorrect("aitor.tilla@ucm.es","aitor",prueba);
 daoUser.getUserImage("aitor.tilla@ucm.es",prueba);
 daoTask.getAllTasks("bill.puertas@ucm.es",prueba);
 daoTask.markTaskDone(1,prueba);
-daoTask.insertTask("aitor.tilla@ucm.es", {texto:"Prueba de tarea 1", tags:["Tag1", "Tag2"]}, prueba);
+daoTask.insertTask("aitor.tilla@ucm.es", {texto:"Prueba de tarea 1", tags:["Tag1", "Tag2"]}, prueba);*/
 
