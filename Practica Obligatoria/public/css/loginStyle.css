@@ -8,3 +8,30 @@ body,html{
     background-size: cover;
     position: relative;
 }
+
+.loginCaract{
+    height: 30em;
+    background-color: rgb(255, 255, 255);
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.controlGrey{
+    background-color: rgb(221, 221, 221);
+    color: black;
+}
+
+.form-control::placeholder {
+    color: black;
+    opacity: 0.7;
+}
+
+.buttonBlue{
+    background-color: #182c4c;
+    color: white;
+}
+
+.buttonBlue:hover{
+    color: white;
+    background-color: #265474;
+}
