@@ -17,6 +17,18 @@ const pool = mysql.createPool(config.mysqlConfig);
 // Crear una instancia de DAOTasks 
 const daoT = new DAOTasks(pool);
 
+//Static public
+app.use(express.static('public'));
+
+//Manejador rutas
+app.get("/tasks", function(request, response) {
+    response.status(200);
+    daoT.getAllTasks("steve.curros@ucm.es", function(a, params) {
+       console.log(params);
+       response.render("tasks.ejs", {tareas: params});
+    });
+});
+
 // Arrancar el servidor 
 app.listen(config.port, function (err) {
     if (err) {

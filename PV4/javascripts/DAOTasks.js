@@ -11,12 +11,13 @@ class DAOTasks {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
+                console.log(email);
                 connection.query("SELECT A.idUser, A.email, C.texto AS tarea, B.hecho, E.texto FROM aw_tareas_usuarios A" +
                     " LEFT JOIN aw_tareas_user_tareas B ON A.idUser = B.idUser" +
                     " LEFT JOIN aw_tareas_tareas C ON B.idTarea = C.idTarea" +
                     " LEFT JOIN aw_tareas_tareas_etiquetas D ON D.idTarea = C.idTarea" +
                     " LEFT JOIN aw_tareas_etiquetas E ON E.idEtiqueta = D.idEtiqueta" +
-                    " WHERE B.hecho = true AND A.email = ?;",
+                    " WHERE A.email = ?;",
                     [email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
