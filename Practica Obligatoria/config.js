@@ -8,8 +8,9 @@ module.exports = {
         host: "localhost",
         user: "root",
         password: "",
-        database: "UCM-CAU"
+        database: "UCM-CAU",
+        port: 3306
     },
 
-    port: 3000
+    portS: 3000
 }
