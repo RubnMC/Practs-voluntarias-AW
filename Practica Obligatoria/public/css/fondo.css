@@ -1,0 +1,5 @@
+.backGround {
+    background: url("../svg/Sprinkle.svg") center repeat;
+    background-size: cover;
+    position: relative;
+}

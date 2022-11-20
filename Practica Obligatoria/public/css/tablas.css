@@ -1,0 +1,26 @@
+.table{
+    color: black;
+    border-spacing: 1em;
+    background-color: white;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: rgb(216, 216, 216); // Choose your own color here
+ }
+
+ .tamTipo{
+    width: 4em;
+ }
+
+ .tamFecha{
+    width: 4em;
+ }
+
+ .tamTexto{
+    width: 20em;
+ }
+
+ .tamAcciones{
+    width: 6em;
+ }
