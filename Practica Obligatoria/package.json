@@ -9,6 +9,7 @@
   "author": "Rubén y David",
   "license": "ISC",
   "dependencies": {
+    "bootstrap-icons": "^1.10.2",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "mysql": "^2.18.1"

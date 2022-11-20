@@ -6,3 +6,11 @@
     max-height: 8em;
     height: auto;
 }
+
+.texto-rojo{
+    color: red;
+}
+
+.form{
+    position: relative;
+}
