@@ -1,8 +1,8 @@
 .fondo{
-    background-color: black;
+    background-color: rgb(43, 57, 121);
 }
 
 .alturaCabecera{
     max-height: 8em;
-    height: 8em;
+    height: auto;
 }
