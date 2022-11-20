@@ -41,7 +41,7 @@ app.get("/c", function(request, response) {
 });
 
 // Arrancar el servidor 
-app.listen(config.port, function (err) {
+app.listen(config.portS, function (err) {
     if (err) {
         console.log("ERROR al iniciar el servidor");
     } else {
