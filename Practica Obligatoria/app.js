@@ -35,7 +35,7 @@ app.get("/user", function(request, response) {
     response.render("vistaUsuario.ejs");
 });
 
-app.get("/c", function(request, response) {
+app.get("/c", function(request, response) {  //TODO: esto se borrará cuando no sea necesario
     response.status(200);
     response.render("subplantillas/cabecera.ejs");
 });
