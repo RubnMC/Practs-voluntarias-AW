@@ -28,3 +28,11 @@
  .tamTecnico{
    width: 20%;
 }
+
+.table-striped tr:last-child td:last-child {
+   border-bottom-right-radius: 0.3rem;
+}
+
+.table-striped tr:last-child td:first-child {
+   border-bottom-left-radius: 0.3rem;
+}
