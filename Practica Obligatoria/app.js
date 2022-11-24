@@ -45,6 +45,15 @@ app.get("/c", function(request, response) {  //TODO: esto se borrará cuando no 
     response.render("subplantillas/cabecera.ejs");
 });
 
+function prueba(err,response) {
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(response);
+    }
+}
+
 // Arrancar el servidor 
 app.listen(config.portS, function (err) {
     if (err) {
