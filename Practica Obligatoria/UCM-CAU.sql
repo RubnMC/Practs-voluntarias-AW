@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS UCM_AW_CAU_USU_Usuarios;
 CREATE TABLE UCM_AW_CAU_USU_Usuarios(
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
-    nombrePublico VARCHAR(30) NOT NULL,
     correo VARCHAR(30) NOT NULL,
     rol VARCHAR(10) NOT NULL,
     fecha DATE NOT NULL,
@@ -31,7 +30,8 @@ CREATE TABLE UCM_AW_CAU_AV_Avisos(
     idAviso INT PRIMARY KEY AUTO_INCREMENT,
     texto VARCHAR(30) NOT NULL,
     tipo VARCHAR(30) NOT NULL,
-    fecha DATE NOT NULL
+    fecha DATE NOT NULL,
+    solucionado BOOLEAN NOT NULL
 );
 
 CREATE TABLE UCM_AW_CAU_AU_AvisosUsuarios(

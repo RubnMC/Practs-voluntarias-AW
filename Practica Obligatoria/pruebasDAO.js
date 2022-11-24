@@ -5,15 +5,15 @@ const daoUS = require("./public/javascripts/DAOUsuario");
 const pool = mysql.createPool(config.mysqlConfig);
 
 let dao = new daoUS(pool);
-let user = {
-    nombre,
-    nombrePublico,
-    correo,
-    rol,
-    numTecnico,
-    perfilUniversitario,
-    password
-};
+// let user = {
+//     nombre,
+//     nombrePublico,
+//     correo,
+//     rol,
+//     numTecnico,
+//     perfilUniversitario,
+//     password
+// };
 
 function prueba(err, res) {
     if (err) {
@@ -24,6 +24,8 @@ function prueba(err, res) {
     }
 }
 
-//dao.isUserCorrect("pepe","pepe", prueba);
-dao.createUser({ nombre: "pepe", nombrePublico: "pepe", correo: "pepe@correo",
- rol: false, numTecnico: "aaaaaaaa", perfilUniversitario: "buenardo", password: "1234" },prueba);
+dao.isUserCorrect("ministraGOV@vivaLaRepublica.ru", "pepe", prueba);
+dao.createUser({
+    nombre: "IreneMontero", correo: "ministraGOV@vivaLaRepublica.ru",
+    rol: true, numTecnico: "1234-IRN", perfilUniversitario: "master", password: "pepe"
+}, prueba);
