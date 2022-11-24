@@ -1,5 +1,4 @@
-/*DROP TABLE UCM_AW_CAU_AU_AvisosTecnicos;
-DROP TABLE UCM_AW_CAU_AU_AvisosUsuarios;
+/*DROP TABLE UCM_AW_CAU_AU_AvisosUsuarios;
 DROP TABLE UCM_AW_CAU_AV_Avisos;
 DROP TABLE UCM_AW_CAU_UT_UsuarioTecnico;
 DROP TABLE UCM_AW_CAU_CON_Contrasenas;
@@ -22,11 +21,11 @@ CREATE TABLE UCM_AW_CAU_CON_Contrasenas(
 );
 
 CREATE TABLE UCM_AW_CAU_UT_UsuarioTecnico(
+    numTecnico VARCHAR(8) PRIMARY KEY,
     idUsuario INT,
-    numTecnico INT,
-    FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario),
-    CONSTRAINT PK_UCM_AW_CAU_UT_UsuarioTecnico PRIMARY KEY (idUsuario,numTecnico)
+    FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
 );
+
 
 CREATE TABLE UCM_AW_CAU_AV_Avisos(
     idAviso INT PRIMARY KEY AUTO_INCREMENT,
