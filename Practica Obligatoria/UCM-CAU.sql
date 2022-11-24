@@ -18,8 +18,9 @@ CREATE TABLE UCM_AW_CAU_CON_Contrasenas(
 );
 
 CREATE TABLE UCM_AW_CAU_UT_UsuarioTecnico(
-    idUsuario INT PRIMARY KEY,
-    numTecnico INT PRIMARY KEY 
+    idUsuario INT,
+    numTecnico INT PRIMARY KEY AUTO_INCREMENT,
+    FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
 );
 
 CREATE TABLE UCM_AW_CAU_AV_Avisos(
@@ -30,15 +31,17 @@ CREATE TABLE UCM_AW_CAU_AV_Avisos(
 );
 
 CREATE TABLE UCM_AW_CAU_AU_AvisosUsuarios(
-    idUsuario INT PRIMARY KEY,
-    idAviso INT PRIMARY KEY,
-   	FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
-    FOREIGN KEY(idAviso) REFERENCES UCM_AW_CAU_AV_Avisos(idAviso)
+    idUsuario INT,
+    idAviso INT,
+   	FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario),
+    FOREIGN KEY(idAviso) REFERENCES UCM_AW_CAU_AV_Avisos(idAviso),
+    CONSTRAINT PK_UCM_AW_CAU_AU_AvisosUsuarios PRIMARY KEY (idUsuario,idAviso)
 );
 
 CREATE TABLE UCM_AW_CAU_AU_AvisosTenicos(
-    idAviso INT PRIMARY KEY,
-    numTecnico INT PRIMARY KEY,
-   	FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
-    FOREIGN KEY(numTecnico) REFERENCES UCM_AW_CAU_UT_UsuarioTecnico(numTecnico)
+    idAviso INT,
+    numTecnico INT,
+   	FOREIGN KEY(idAviso) REFERENCES UCM_AW_CAU_AV_Avisos(idAviso),
+    FOREIGN KEY(numTecnico) REFERENCES UCM_AW_CAU_UT_UsuarioTecnico(numTecnico),
+    CONSTRAINT PK_UCM_AW_CAU_AU_AvisosTenicos PRIMARY KEY (idAviso,numTecnico)
 );
