@@ -23,7 +23,6 @@ class DAOUsuario {
                             }
                             else {
                                 let idUsuario = rows[0].idUsuario;
-                                //console.log(rows);
                                 connection.query("SELECT * FROM UCM_AW_CAU_CON_Contrasenas WHERE password = ? AND idUsuario = ?",
                                     [password, idUsuario],
                                     function (err, rows) {
@@ -62,8 +61,6 @@ class DAOUsuario {
                         }
                         else {
                             if (rows.length === 0) {
-                                console.log(rows);
-                                console.log(user.correo);
                                 let userRol, signal = false;
                                 if (user.rol === true) {
                                     userRol = "Técnico";
@@ -79,7 +76,7 @@ class DAOUsuario {
                                                 }
                                                 else {
 
-                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, perfilUniversitario) VALUES (?, ?, '" + userRol + "', ?);",
+                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?);",
                                                         [user.nombre, user.correo, user.perfilUniversitario],
                                                         function (err, rows) {
                                                             if (err) {
@@ -113,10 +110,10 @@ class DAOUsuario {
                                                                             }
                                                                             else {
                                                                                 if (rows.length === 0) {
-                                                                                    callback(null, "No se ha podido añadir al técnico"); //no está el usuario con el password proporcionado
+                                                                                    callback(null, false); //no está el usuario con el password proporcionado
                                                                                 }
                                                                                 else {
-                                                                                    callback(null, "Técnico añadido correctamente");
+                                                                                    callback(null, true);
                                                                                 }
                                                                             }
                                                                         }
@@ -132,7 +129,7 @@ class DAOUsuario {
                                 }
                                 else {
                                     userRol = "Usuario";
-                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, perfilUniversitario) VALUES (?, ?, '" + userRol + "', ?)",
+                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?);",
                                         [user.nombre, user.correo, user.perfilUniversitario],
                                         function (err, rows) {
                                             if (err) {
@@ -143,7 +140,6 @@ class DAOUsuario {
                                                     callback(null, "No se ha podido añadir la tarea"); //no está el usuario con el password proporcionado
                                                 }
                                                 else {
-                                                    console.log(rows);
                                                     let idUsuario = rows.insertId;
 
                                                     connection.query("INSERT INTO UCM_AW_CAU_CON_Contrasenas(idUsuario, password) VALUES (?, ?)",
@@ -154,7 +150,10 @@ class DAOUsuario {
                                                             }
                                                             else {
                                                                 if (rows.length === 0) {
-                                                                    callback(null, "No se ha podido añadir la tarea"); //no está el usuario con el password proporcionado
+                                                                    callback(null, false); //no está el usuario con el password proporcionado
+                                                                }
+                                                                else {
+                                                                    callback(null, true);
                                                                 }
                                                             }
                                                         }
@@ -165,7 +164,7 @@ class DAOUsuario {
                                 }
                             }
                             else {
-                                callback(null, "Esta dirección de correo ya está asignada a un usuario");
+                                callback(new Error("Esta dirección de correo ya está asignada a un usuario"));
                             }
                         }
                     });

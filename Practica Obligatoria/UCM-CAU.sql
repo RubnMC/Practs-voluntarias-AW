@@ -9,7 +9,7 @@ CREATE TABLE UCM_AW_CAU_USU_Usuarios(
     nombre VARCHAR(30) NOT NULL,
     correo VARCHAR(30) NOT NULL,
     rol VARCHAR(10) NOT NULL,
-    fecha DATE NOT NULL,
+    fecha TIMESTAMP NOT NULL,
     perfilUniversitario VARCHAR(20) NOT NULL
 );
 

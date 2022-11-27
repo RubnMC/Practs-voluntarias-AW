@@ -24,50 +24,50 @@
                     </div>
                 </div>
 
-                <form class="" action="" method="post" title="Formulario login">
+                <form class="" action="process_singup" method="POST" title="Formulario login">
                     <div class="row mt-4">
                         <div class="col col-12">
                             <div class="row">
                                 <div class="col col-6 ">
-                                    <input type="email" class="form-control controlGrey" id="#"
-                                        aria-describedby="emailHelp" placeholder="Email">
+                                    <input type="email" class="form-control controlGrey" name="email" id="email"
+                                        aria-describedby="emailHelp" placeholder="Email" required>
                                 </div>
                                 <div class="col col-6 ">
-                                    <input type="nombre" class="form-control controlGrey" id="#"
-                                        aria-describedby="emailHelp" placeholder="Nombre para mostrar">
+                                    <input type="text" class="form-control controlGrey" name="nombre" id="nombre"
+                                        aria-describedby="nombreHelp" placeholder="Nombre para mostrar" required>
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col col-6 ">
-                                    <input type="password" class="form-control controlGrey" id="#"
-                                        aria-describedby="conttrasenia" placeholder="Contraseña">
+                                    <input type="password" maxlength="16" class="form-control controlGrey" name="password" id="password"
+                                        aria-describedby="conttrasenia" placeholder="Contraseña" required>
                                 </div>
                                 <div class="col col-6 ">
-                                    <select class="form-select controlGrey" aria-label="perfil_universitario">
-                                        <option selected>Perfil Universitario</option>
-                                        <option value="1">Alumno</option>
-                                        <option value="2">Personal de Administración y Servicio</option>
-                                        <option value="3">Personal Docente e Investigador</option>
-                                        <option value="4">Antiguo Alumno</option>
+                                    <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
+                                        <option disabled selected value>Perfil Universitario</option>
+                                        <option value="A">Alumno</option>
+                                        <option value="PAS">Personal de Administración y Servicio</option>
+                                        <option value="PDI">Personal Docente e Investigador</option>
+                                        <option value="AA">Antiguo Alumno</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col col-6 ">
-                                    <input type="password" class="form-control controlGrey" id="#"
-                                        aria-describedby="confirmarContrasenia" placeholder="Confirmar contraseña">
+                                    <input type="password" maxlength="16" class="form-control controlGrey" name="password_2" id="password_2"
+                                        aria-describedby="confirmarContrasenia" placeholder="Confirmar contraseña" required>
                                 </div>
                                 <div class="col col-6 d-flex align-items-center justify-content-around">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckTecnico">
+                                        <input class="form-check-input" type="checkbox" value="ON" name="esTecnico" id="flexCheckTecnico">
                                         <label class="form-check-label" for="flexCheckTecnico">
                                             Técnico
                                         </label>
                                     </div>
                                     <div class="">
-                                        <input type="numEmpleado" class="form-control controlGrey" id="#"
+                                        <input type="numEmpleado" class="form-control controlGrey" name="numEmpleado" id="numEmpleado"
                                             aria-describedby="numEmpleado" placeholder="Número empleado">
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                             <div class="row mt-4">
                                 <div class="col col-12 ">
                                     <div class="input-group">
-                                        <input type="file" class="form-control" id="inputGroupFile">
+                                        <input type="file" class="form-control" name="profile_Image" id="profile_Image">
                                         <label class="input-group-text" for="inputGroupFile02"> Seleccionar imagen de perfil </label>
                                     </div>
                                 </div>

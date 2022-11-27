@@ -1,10 +1,9 @@
 const config = require("./config");
 const mysql = require("mysql");
-const daoUS = require("./public/javascripts/DAOUsuario");
 
 const pool = mysql.createPool(config.mysqlConfig);
 
-let dao = new daoUS(pool);
+var today = new Date();
 // let user = {
 //     nombre,
 //     nombrePublico,
@@ -24,8 +23,10 @@ function prueba(err, res) {
     }
 }
 
-dao.isUserCorrect("ministraGOV@vivaLaRepublica.ru", "pepe", prueba);
-dao.createUser({
-    nombre: "IreneMontero", correo: "ministraGOV@vivaLaRepublica.ru",
-    rol: true, numTecnico: "1234-IRN", perfilUniversitario: "master", password: "pepe"
-}, prueba);
+// dao.isUserCorrect("ministraGOV@vivaLaRepublica.ru", "pepe", prueba);
+// dao.createUser({
+//     nombre: "IreneMontero", correo: "ministraGOV@vivaLaRepublica.ru",
+//     rol: true, numTecnico: "1234-IRN", perfilUniversitario: "master", password: "pepe"
+// }, prueba);
+
+console.log(today.toLocaleString());
