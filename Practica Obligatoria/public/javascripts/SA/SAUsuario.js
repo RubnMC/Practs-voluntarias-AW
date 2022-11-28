@@ -39,11 +39,21 @@ class SAUsuario {
                 throw err;
             }
             else {
-                console.log(res);
+                return res;
             }
         });
     }
 
+    usurioCorrecto(userData, callback) {
+        this.daoUser.isUserCorrect(userData.email, userData.password, function(err, res){
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
 }
 
 module.exports = SAUsuario;

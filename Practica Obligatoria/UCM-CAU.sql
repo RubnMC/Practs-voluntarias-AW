@@ -30,7 +30,7 @@ CREATE TABLE UCM_AW_CAU_AV_Avisos(
     idAviso INT PRIMARY KEY AUTO_INCREMENT,
     texto VARCHAR(30) NOT NULL,
     tipo VARCHAR(30) NOT NULL,
-    fecha DATE NOT NULL,
+    fecha TIMESTAMP NOT NULL,
     solucionado BOOLEAN NOT NULL
 );
 

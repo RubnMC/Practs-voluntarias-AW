@@ -22,9 +22,19 @@ class DAOUsuario {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
                             else {
-                                let idUsuario = rows[0].idUsuario;
+                                let usuario = {
+                                    idUsuario: rows[0].idUsuario,
+                                    correo: rows[0].correo,
+                                    rol: rows[0].rol,
+                                    numTecnico: rows[0].numTecnico,
+                                    nombre: rows[0].nombre,
+                                    perfilUniversitario: rows[0].perfilUniversitario,
+                                    fecha: rows[0].fecha,
+                                    imagen: rows[0].profile_Image
+                                };
+
                                 connection.query("SELECT * FROM UCM_AW_CAU_CON_Contrasenas WHERE password = ? AND idUsuario = ?",
-                                    [password, idUsuario],
+                                    [password, usuario.idUsuario],
                                     function (err, rows) {
                                         connection.release(); // devolver al pool la conexión
                                         if (err) {
@@ -32,10 +42,10 @@ class DAOUsuario {
                                         }
                                         else {
                                             if (rows.length === 0) {
-                                                callback(null, false); //no está el usuario con el password proporcionado
+                                                callback(null, null); //no está el usuario con el password proporcionado
                                             }
                                             else {
-                                                callback(null, true);
+                                                callback(null, usuario);
                                             }
                                         }
                                     });
