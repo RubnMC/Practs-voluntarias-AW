@@ -16,12 +16,20 @@
 
     <%- include ("subplantillas/cabecera") %>
 
-        <div class="container mt-5 ">
-            <div class="table-responsive">
+        <div class="container mt-2">
+            <ul class="nav">
+                <li class="nav-item bg-light me-1 rounded-3">
+                    <a class="nav-link" href="#">Mis avisos</a>
+                </li>
+                <li class="nav-item bg-light me-1 rounded-3">
+                    <a class="nav-link" href="#">Histórico de avisos</a>
+                </li>
+            </ul>
+            <div class="table-responsive mt-1">
                 <table class="table custom-table rounded-3 table-borderless table-striped">
                     <thead>
                         <tr>
-                            <th scope="col" >Fecha</th>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Texto</th>
                             <th scope="col" class="text-center">Tipo</th>
                             <th scope="col">Ténico</th>
@@ -31,7 +39,8 @@
                         <tr>
                             <td class="align-middle tamFecha"> 1392 </td>
                             <td class="align-middle tamTexto"> xd haha salu3 </td>
-                            <td class="align-middle text-center tamTipo"> <img src="./images/felicitacion.png" alt=""></td>
+                            <td class="align-middle text-center tamTipo"> <img src="./images/felicitacion.png" alt="">
+                            </td>
                             <td class="align-middle tamTecnico"> Rubén </td>
                         </tr>
 
@@ -48,7 +57,7 @@
                             <td class="align-middle text-center"> <img src="./images/incidencia.png" alt=""></td>
                             <td class="align-middle"> Rubén </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>

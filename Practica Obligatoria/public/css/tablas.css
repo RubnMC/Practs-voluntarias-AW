@@ -36,3 +36,7 @@
 .table-striped tr:last-child td:first-child {
    border-bottom-left-radius: 0.3rem;
 }
+
+.nav-link{
+   color: black !important;
+}

@@ -14,6 +14,7 @@ const mysqlSession = require("express-mysql-session");
 
 // Imports de SA's
 const SAUsuario = require("./public/javascripts/SA/SAUsuario");
+const { nextTick } = require("process");
 
 //Sesiones
 const MySQLStore = mysqlSession(session);
@@ -34,20 +35,24 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(middelwareSession);
 
+
 // Crear un pool de conexiones a la base de datos de MySQL 
 const pool = mysql.createPool(config.mysqlConfig);
 const saUsuario = new SAUsuario(pool);
 
 //Manejadores de ruta
-
 //Login
 app.get("/login", function (request, response) {
     response.status(200);
     response.render("login.ejs", { error: null });
 });
 
+app.get("/logout", function (request, response) {
+    request.session.destroy();
+    response.redirect("login");
+});
+
 app.post("/process_login", function (request, response) {
-    //console.log(request.body);  
     let res = saUsuario.usurioCorrecto(request.body, function (err, res) {
         if (err) {
             response.status(500);
@@ -57,12 +62,13 @@ app.post("/process_login", function (request, response) {
                 request.session.currentUser = request.body.email;
 
                 let usuario = res;
-                if(res.rol === "Usuario"){
+                response.status(200);
+                if (res.rol === "Usuario") {
                     response.render("vistaUsuario", usuario);
-                } else{
+                } else {
                     response.render("vistaTecnico", usuario);
                 }
-                
+
             } else {
                 response.status(200);
                 response.render("login", { error: "La contraseña o el correo son erroneos" })
@@ -79,10 +85,9 @@ app.get("/singup", function (request, response) {
 });
 
 app.post("/process_singup", function (request, response) {
-    //console.log(request.body);
     try {
         let res = saUsuario.crearUsuario(request.body);
-        console.log(res);
+        response.render("login", { error: null });
     } catch (error) {
         console.log(error.message);
     }
@@ -100,9 +105,15 @@ app.get("/tech", function (request, response) {
     response.render("vistaTecnico.ejs");
 });
 
-app.get("/c", function (request, response) {  //TODO: esto se borrará cuando no sea necesario
-    response.status(200);
-    response.render("subplantillas/cabecera.ejs");
+app.get("*", function () {
+    if (request.session.currentUser) {
+        console.log("pepa");
+        response.redirect("user")
+    }
+    else {
+        console.log("pepe");
+        response.redirect("login");
+    }
 });
 
 // Arrancar el servidor 
