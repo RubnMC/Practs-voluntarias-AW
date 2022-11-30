@@ -96,7 +96,7 @@ app.post("/process_login", function (request, response) {
     saUsuario.usurioCorrecto(request.body, function (err, res) {
         if (err) {
             response.status(500);
-            response.render("login", { error: error });
+            response.render("login", { error: err });
         } else {
             if (res) {
                 request.session.currentUser = res;
