@@ -24,7 +24,7 @@ class SAUsuario {
         };
     }
 
-    crearUsuario(user) {
+    crearUsuario(user,callback) {
         if (user.password !== user.password_2) {
             throw new Error("Error: Las contraseñas no coinciden");
         }
@@ -36,10 +36,10 @@ class SAUsuario {
         }
         this.daoUser.createUser(this.parseUser(user), function (err, res) {
             if (err) {
-                throw err;
+                callback(err);
             }
             else {
-                return res;
+                callback(null,res);
             }
         });
     }

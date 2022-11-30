@@ -8,4 +8,16 @@ class DAOAvisos {
     createAviso(aviso){
         
     }
+
+    getAvisos(user, callback){
+        if(user.rol === "Usuario"){
+
+        } else{
+            
+        }
+    }
 }
+
+module.exports = {
+    DAOAvisos
+};

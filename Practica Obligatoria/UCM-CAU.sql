@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS UCM_AW_CAU_UT_UsuarioTecnico;
 DROP TABLE IF EXISTS UCM_AW_CAU_CON_Contrasenas;
 DROP TABLE IF EXISTS UCM_AW_CAU_USU_Usuarios;
 DROP TABLE IF EXISTS UCM_AW_CAU_SU_Sugerencias;
+DROP TABLE IF EXISTS UCM_AW_CAU_AT_AvisosTecnicos;
 
 CREATE TABLE UCM_AW_CAU_USU_Usuarios(
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -47,6 +48,14 @@ CREATE TABLE ucm_aw_cau_su_sugerencias(
     id INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(4) NOT NULL,
     texto VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE UCM_AW_CAU_AT_AvisosTecnicos(
+    numTecnico VARCHAR(8),
+    idAviso INT,
+   	FOREIGN KEY(numTecnico) REFERENCES ucm_aw_cau_ut_usuariotecnico(numTecnico),
+    FOREIGN KEY(idAviso) REFERENCES UCM_AW_CAU_AV_Avisos(idAviso),
+    CONSTRAINT PK_UCM_AW_CAU_AT_AvisosTecnicos PRIMARY KEY (numTecnico,idAviso)
 );
 
 INSERT INTO ucm_aw_cau_su_sugerencias (tipo,texto) VALUES ('AD','Certificado digital de persona física');

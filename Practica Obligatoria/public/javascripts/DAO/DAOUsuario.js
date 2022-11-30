@@ -120,7 +120,7 @@ class DAOUsuario {
                                                                             }
                                                                             else {
                                                                                 if (rows.length === 0) {
-                                                                                    callback(null, false); //no está el usuario con el password proporcionado
+                                                                                    callback(null, false);
                                                                                 }
                                                                                 else {
                                                                                     callback(null, true);

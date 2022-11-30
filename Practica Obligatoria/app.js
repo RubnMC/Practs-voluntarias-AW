@@ -31,6 +31,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.static('views'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(middelwareSession);
@@ -40,80 +41,91 @@ app.use(middelwareSession);
 const pool = mysql.createPool(config.mysqlConfig);
 const saUsuario = new SAUsuario(pool);
 
+
+function auth(request, response, next) {
+    if (request.session.currentUser) {
+        next();
+    }
+    else {
+        response.redirect("login");
+    }
+}
+
 //Manejadores de ruta
 //Login
+app.get("/", function (request, response) {
+    response.status(200);
+    response.redirect("login");
+});
+
 app.get("/login", function (request, response) {
     response.status(200);
     response.render("login.ejs", { error: null });
 });
 
-app.get("/logout", function (request, response) {
+app.get("/logout", auth, function (request, response) {
     request.session.destroy();
     response.redirect("login");
 });
 
+//Registro
+app.get("/singup", function (request, response) {
+    response.status(200);
+    response.render("singup.ejs", { error: null });
+});
+
+app.post("/process_singup", function (request, response) {
+
+    saUsuario.crearUsuario(request.body, function (err, res) {
+        if (err) {
+            response.status(200);
+            console.log(err);
+            response.render("singup", { error: err });
+        } else {
+            if (res) {
+                response.render("login", { error: null });
+            } else {
+                response.status(200);
+                response.render("singup.ejs", { error: null });
+            }
+        }
+    });
+})
+
 app.post("/process_login", function (request, response) {
-    let res = saUsuario.usurioCorrecto(request.body, function (err, res) {
+    saUsuario.usurioCorrecto(request.body, function (err, res) {
         if (err) {
             response.status(500);
             response.render("login", { error: error });
         } else {
             if (res) {
-                request.session.currentUser = request.body.email;
+                request.session.currentUser = res;
 
-                let usuario = res;
                 response.status(200);
                 if (res.rol === "Usuario") {
-                    response.render("vistaUsuario", usuario);
+                    response.redirect("logged_user");
                 } else {
-                    response.render("vistaTecnico", usuario);
+                    response.redirect("logged_tec");
                 }
 
             } else {
                 response.status(200);
-                response.render("login", { error: "La contraseña o el correo son erroneos" })
+                response.render("login.ejs", { error: "La contraseña o el correo son erroneos" })
             }
         }
 
     });
 })
 
-//Registro
-app.get("/singup", function (request, response) {
-    response.status(200);
-    response.render("singup.ejs");
-});
-
-app.post("/process_singup", function (request, response) {
-    try {
-        let res = saUsuario.crearUsuario(request.body);
-        response.render("login", { error: null });
-    } catch (error) {
-        console.log(error.message);
-    }
-    response.end();
-})
-
 //Usuario
-app.get("/user", function (request, response) {
+app.get("/logged_user", auth, function (request, response) {
     response.status(200);
-    response.render("vistaUsuario.ejs");
+    response.render("vistaUsuario.ejs", request.session.currentUser);
 });
 
-app.get("/tech", function (request, response) {
+app.get("/logged_tec", auth, function (request, response) {
     response.status(200);
-    response.render("vistaTecnico.ejs");
-});
-
-app.get("*", function () {
-    if (request.session.currentUser) {
-        console.log("pepa");
-        response.redirect("user")
-    }
-    else {
-        console.log("pepe");
-        response.redirect("login");
-    }
+    response.render("vistaTecnico.ejs", request.session.currentUser);
 });
 
 // Arrancar el servidor 

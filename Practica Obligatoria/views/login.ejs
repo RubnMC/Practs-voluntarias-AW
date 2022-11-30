@@ -24,16 +24,18 @@
                         <input type="email" class="form-control controlGrey" id="email" name="email"
                             aria-describedby="emailHelp" placeholder="Email">
                     </div>
-                    <div class="mb-5 mx-sm-5">
+                    <div class="mb-2 mx-sm-5">
                         <input type="password" class="form-control controlGrey" id="password" name="password"
                             aria-describedby="emailHelp" placeholder="Contraseña">
 
                     </div>
+                    
                     <div class="row d-flex justify-content-center">
                         <div class="col col-auto d-flex flex-column">
-                            <button type="submit" class="btn shadow mb-2 buttonBlue">LOGIN</button>
+                            <%= error %> 
+                            <button type="submit" class="btn shadow mb-2 mt-2 buttonBlue">LOGIN</button>
                             <div>
-                                ¿Eres nuevo?
+                                ¿Eres nuevo? 
                                 <a href="/singup"> Regístrate </a>
                             </div>
                         </div>
