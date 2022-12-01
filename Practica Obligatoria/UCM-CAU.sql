@@ -34,7 +34,7 @@ CREATE TABLE UCM_AW_CAU_AV_Avisos(
     tipo VARCHAR(30) NOT NULL,
     subtipo VARCHAR(50),
     fecha TIMESTAMP NOT NULL,
-    obervaciones VARCHAR(300),
+    observaciones VARCHAR(300),
     solucionado BOOLEAN NOT NULL
 );
 
