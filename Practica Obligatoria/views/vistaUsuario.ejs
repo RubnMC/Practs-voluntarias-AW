@@ -36,6 +36,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
+                        <% avisos.array.forEach(element => { %>
+                            <tr>
+                            <td class="align-middle tamFecha"> <%=  element.fecha %> </td>
+                            <td class="align-middle tamTexto"> <%=  element.texto %> </td>
+
+                            <% 
+                            let imagen;
+                            switch(element.tipo){
+
+                                case "F":
+                                    imagen = "./images/felicitacion.png";
+                                break;
+                                case "S":
+                                    imagen = "./images/sugerencia.png";
+                                break;
+                                case "I":
+                                    imagen = "./images/incidencia.png";
+                                break;
+                            }%> 
+
+                            <td class="align-middle text-center tamTipo"> <img src= <%= imagen %>  alt="">
+                            </td>
+                            <td class="align-middle tamTecnico"> ---- </td>
+                        </tr>
+                        <% }); %> 
+
                         <tr>
                             <td class="align-middle tamFecha"> 1392 </td>
                             <td class="align-middle tamTexto"> xd haha salu3 </td>
