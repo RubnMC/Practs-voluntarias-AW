@@ -14,6 +14,7 @@ const mysqlSession = require("express-mysql-session");
 
 // Imports de SA's
 const SAUsuario = require("./public/javascripts/SA/SAUsuario");
+const SAAvisos = require("./public/javascripts/SA/SAAvisos");
 const { nextTick } = require("process");
 
 //Sesiones
@@ -40,6 +41,7 @@ app.use(middelwareSession);
 // Crear un pool de conexiones a la base de datos de MySQL 
 const pool = mysql.createPool(config.mysqlConfig);
 const saUsuario = new SAUsuario(pool);
+const saAvisos = new SAAvisos(pool);
 
 
 function auth(request, response, next) {
@@ -120,6 +122,21 @@ app.post("/process_login", function (request, response) {
 //Usuario
 app.get("/logged_user", auth, function (request, response) {
     response.status(200);
+
+    saAvisos.getAvisos(request.session.currentUser, function(err, res){
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            if (res) {
+                request.session.currentUser.avisos = res;
+            } else {
+                response.status(200);
+                //response.render("login.ejs", { error: "La contraseña o el correo son erroneos" })
+                console.log("Vacio");
+            }
+        }
+    })
     response.render("vistaUsuario.ejs", request.session.currentUser);
 });
 

@@ -2,7 +2,7 @@
 
 const DAOAvisos = require('../DAO/DAOAvisos');
 
-class SAUsuario {
+class SAAvisos {
     constructor(pool) {
         this.daoAvisos = new DAOAvisos(pool);
         this.today = new Date();
@@ -21,3 +21,5 @@ class SAUsuario {
 
 
 }
+
+module.exports = SAAvisos;
