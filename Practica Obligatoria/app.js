@@ -85,6 +85,7 @@ app.post("/process_singup", function (request, response) {
             response.render("singup", { error: err });
         } else {
             if (res) {
+                response.status(200);
                 response.render("login", { error: null });
             } else {
                 response.status(200);
@@ -95,7 +96,7 @@ app.post("/process_singup", function (request, response) {
 })
 
 app.post("/process_login", function (request, response) {
-    saUsuario.usurioCorrecto(request.body, function (err, res) {
+    saUsuario.usuarioCorrecto(request.body, function (err, res) {
         if (err) {
             response.status(500);
             response.render("login", { error: err });
@@ -130,6 +131,7 @@ app.get("/logged_user", auth, function (request, response) {
         } else {
             response.status(200);
             request.session.currentUser.avisos = res;
+            console.log(request.session.currentUser.avisos);
             response.render("vistaUsuario.ejs", request.session.currentUser);
 
         }

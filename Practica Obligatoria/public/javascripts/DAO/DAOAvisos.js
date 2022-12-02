@@ -1,8 +1,9 @@
 "use strict"
 
+const moment = require("moment");
+
 function stampToDate(timestamp) {
-    let date = new Date(timestamp);
-    return date.getDay + "/" + date.getMonth + "/" + date.getFullYear;
+    return moment(timestamp).format('DD/MM/YYYY')
 }
 
 class DAOAvisos {
@@ -89,13 +90,12 @@ class DAOAvisos {
                                     let i = 0;
 
                                     rows.forEach(element => {
-                                        console.log(element);
                                         arrayAvisos.push({
                                             idAviso: element.idAviso,
                                             tipo: element.tipo,
                                             texto: element.texto,
                                             subtipo: element.subtipo,
-                                            fecha: element.fecha,
+                                            fecha: stampToDate(element.fecha),
                                             observaciones: element.observaciones,
                                             solucionado: element.solucionado
                                         });
@@ -113,6 +113,8 @@ class DAOAvisos {
             }
         });
     }
+
+
 }
 
 module.exports = DAOAvisos;

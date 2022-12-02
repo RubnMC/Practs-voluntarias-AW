@@ -13,19 +13,14 @@ CREATE TABLE UCM_AW_CAU_USU_Usuarios(
     rol VARCHAR(10) NOT NULL,
     fecha TIMESTAMP NOT NULL,
     imagen BLOB,
-    perfilUniversitario VARCHAR(20) NOT NULL
+    perfilUniversitario VARCHAR(20) NOT NULL,
+    numTecnico VARCHAR(8) UNIQUE
 );
 
 CREATE TABLE UCM_AW_CAU_CON_Contrasenas(
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     password VARCHAR(32) NOT NULL,
    	FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
-);
-
-CREATE TABLE UCM_AW_CAU_UT_UsuarioTecnico(
-    numTecnico VARCHAR(8) PRIMARY KEY,
-    idUsuario INT,
-    FOREIGN KEY(idUsuario) REFERENCES UCM_AW_CAU_USU_Usuarios(idUsuario)
 );
 
 CREATE TABLE UCM_AW_CAU_AV_Avisos(

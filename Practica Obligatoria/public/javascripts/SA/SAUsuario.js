@@ -1,5 +1,4 @@
 "use strict";
-
 const DAOUsuario = require("../DAO/DAOUsuario");
 
 class SAUsuario {
@@ -44,7 +43,7 @@ class SAUsuario {
         });
     }
 
-    usurioCorrecto(userData, callback) {
+    usuarioCorrecto(userData, callback) {
         this.daoUser.isUserCorrect(userData.email, userData.password, function(err, res){
             if (err) {
                 callback(err);

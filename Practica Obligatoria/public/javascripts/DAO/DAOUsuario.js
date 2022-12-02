@@ -71,23 +71,23 @@ class DAOUsuario {
                         }
                         else {
                             if (rows.length === 0) {
-                                let userRol, signal = false;
+                                let userRol;
                                 if (user.rol === true) {
                                     userRol = "Técnico";
-                                    connection.query("SELECT * FROM UCM_AW_CAU_UT_UsuarioTecnico WHERE numTecnico = ?",
+                                    connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE numTecnico = ?",
                                         [user.numTecnico],
                                         function (err, rows) {
                                             if (err) {
                                                 callback(new Error("Error de acceso a la base de datos"));
                                             }
                                             else {
-                                                if (rows.length === 0) {
-                                                    callback(null, "Este numero de técnico no existe"); //no está el usuario con el password proporcionado
+                                                if (rows.length > 0) {
+                                                    callback(null, "Este numero de técnico ya existe"); //no está el usuario con el password proporcionado
                                                 }
                                                 else {
 
-                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?);",
-                                                        [user.nombre, user.correo, user.perfilUniversitario],
+                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario,numTecnico) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?, ?);",
+                                                        [user.nombre, user.correo, user.perfilUniversitario, user.numTecnico],
                                                         function (err, rows) {
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos, insertar usuario"));
@@ -101,6 +101,7 @@ class DAOUsuario {
                                                                     connection.query("INSERT INTO UCM_AW_CAU_CON_Contrasenas(idUsuario, password) VALUES (?, ?)",
                                                                         [idUsuario, user.password],
                                                                         function (err, rows) {
+                                                                            connection.release();
                                                                             if (err) {
                                                                                 callback(new Error("Error de acceso a la base de datos, insertar tarea"));
                                                                             }
@@ -108,22 +109,8 @@ class DAOUsuario {
                                                                                 if (rows.length === 0) {
                                                                                     callback(null, "No se ha podido añadir la tarea"); //no está el usuario con el password proporcionado
                                                                                 }
-                                                                            }
-                                                                        }
-                                                                    );
-
-                                                                    connection.query("UPDATE UCM_AW_CAU_UT_UsuarioTecnico SET idUsuario = ? WHERE numTecnico = ?",
-                                                                        [idUsuario, user.numTecnico],
-                                                                        function (err, rows) {
-                                                                            if (err) {
-                                                                                callback(new Error("Error de acceso a la base de datos"));
-                                                                            }
-                                                                            else {
-                                                                                if (rows.length === 0) {
-                                                                                    callback(null, false);
-                                                                                }
-                                                                                else {
-                                                                                    callback(null, true);
+                                                                                else{
+                                                                                    callback(null,true);
                                                                                 }
                                                                             }
                                                                         }
@@ -155,6 +142,7 @@ class DAOUsuario {
                                                     connection.query("INSERT INTO UCM_AW_CAU_CON_Contrasenas(idUsuario, password) VALUES (?, ?)",
                                                         [idUsuario, user.password],
                                                         function (err, rows) {
+                                                            connection.release();
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos, insertar tarea"));
                                                             }
