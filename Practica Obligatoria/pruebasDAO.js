@@ -33,13 +33,7 @@ let aviso = {
     observaciones: "estoy ciego",
 };
 
-//dao.createAviso(aviso,1,2,prueba);
-// dao.isUserCorrect("ministraGOV@vivaLaRepublica.ru", "pepe", prueba);
-// dao.createUser({
-//     nombre: "IreneMontero", correo: "ministraGOV@vivaLaRepublica.ru",
-//     rol: true, numTecnico: "1234-IRN", perfilUniversitario: "master", password: "pepe"
-// }, prueba);
-
+dao.createAviso(aviso,1,2,prueba);
 dao.getAvisos({idUsuario: 1, rol:"Usuario"}, prueba);
 
 console.log("FIN");

@@ -1,5 +1,10 @@
 "use strict"
 
+function stampToDate(timestamp) {
+    let date = new Date(timestamp);
+    return date.getDay + "/" + date.getMonth + "/" + date.getFullYear;
+}
+
 class DAOAvisos {
     constructor(pool) {
         this.pool = pool;
@@ -79,11 +84,12 @@ class DAOAvisos {
                                     callback(null, null); //no tiene avisos
                                 }
                                 else {
-        
-                                    let arrayAvisos=[];
+
+                                    let arrayAvisos = [];
                                     let i = 0;
-        
+
                                     rows.forEach(element => {
+                                        console.log(element);
                                         arrayAvisos.push({
                                             idAviso: element.idAviso,
                                             tipo: element.tipo,
@@ -92,17 +98,17 @@ class DAOAvisos {
                                             fecha: element.fecha,
                                             observaciones: element.observaciones,
                                             solucionado: element.solucionado
-                                        }) ;
+                                        });
                                         i++;
                                     });
-        
+
                                     callback(null, arrayAvisos);
-        
+
                                 }
                             }
                         });
                 } else {
-        
+
                 }
             }
         });

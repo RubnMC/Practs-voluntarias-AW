@@ -7,7 +7,7 @@ class SAAvisos {
         this.daoAvisos = new DAOAvisos(pool);
         this.today = new Date();
     }
-
+    
     getAvisos(user, callback){
         this.daoAvisos.getAvisos(user, function(err, res){
             if (err) {

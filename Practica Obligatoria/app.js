@@ -123,21 +123,17 @@ app.post("/process_login", function (request, response) {
 app.get("/logged_user", auth, function (request, response) {
     response.status(200);
 
-    saAvisos.getAvisos(request.session.currentUser, function(err, res){
+    saAvisos.getAvisos(request.session.currentUser, function (err, res) {
         if (err) {
             response.status(500);
             console.log(err);
         } else {
-            if (res) {
-                request.session.currentUser.avisos = res;
-            } else {
-                response.status(200);
-                //response.render("login.ejs", { error: "La contraseña o el correo son erroneos" })
-                console.log("Vacio");
-            }
+            response.status(200);
+            request.session.currentUser.avisos = res;
+            response.render("vistaUsuario.ejs", request.session.currentUser);
+
         }
     })
-    response.render("vistaUsuario.ejs", request.session.currentUser);
 });
 
 app.get("/logged_tec", auth, function (request, response) {
