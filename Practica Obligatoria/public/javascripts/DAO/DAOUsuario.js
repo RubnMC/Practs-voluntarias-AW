@@ -1,5 +1,9 @@
 "use strict";
 
+function stampToDate(timestamp) {
+    return moment(timestamp).format('DD/MM/YYYY HH:mm:ss')
+}
+
 class DAOUsuario {
     constructor(pool) {
         this.pool = pool;
@@ -29,7 +33,7 @@ class DAOUsuario {
                                     numTecnico: rows[0].numTecnico,
                                     nombre: rows[0].nombre,
                                     perfilUniversitario: rows[0].perfilUniversitario,
-                                    fecha: rows[0].fecha,
+                                    fecha: stampToDate(rows[0].fecha),
                                     imagen: rows[0].profile_Image
                                 };
 
