@@ -44,7 +44,7 @@ CREATE TABLE UCM_AW_CAU_AU_AvisosUsuarios(
 CREATE TABLE UCM_AW_CAU_AT_AvisosTecnicos(
     numTecnico VARCHAR(8),
     idAviso INT,
-   	FOREIGN KEY(numTecnico) REFERENCES ucm_aw_cau_ut_usuariotecnico(numTecnico),
+   	FOREIGN KEY(numTecnico) REFERENCES CREATE TABLE UCM_AW_CAU_USU_Usuarios(numTecnico),
     FOREIGN KEY(idAviso) REFERENCES UCM_AW_CAU_AV_Avisos(idAviso),
     CONSTRAINT PK_UCM_AW_CAU_AT_AvisosTecnicos PRIMARY KEY (numTecnico,idAviso)
 );
