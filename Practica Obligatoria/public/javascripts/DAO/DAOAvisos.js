@@ -11,7 +11,26 @@ class DAOAvisos {
         this.pool = pool;
     }
 
-    createAviso(aviso, idUser, numTecnico, callback) {
+    asignarTecnico(aviso, numTecnico, callback) {
+        connection.query("INSERT INTO UCM_AW_CAU_AT_AvisosTecnicos(numTecnico,idAviso) VALUES (?,?);",
+            [numTecnico, aviso.idAviso],
+            function (err, rows) {
+                connection.release();
+                if (err) {
+                    callback(new Error("Error de acceso a la base de datos"));
+                }
+                else {
+                    if (rows.length === 0) {
+                        callback(null, null); //no tiene avisos
+                    } else {
+                        callback(null, true);
+                    }
+                }
+            }
+        );
+    }
+
+    createAviso(aviso, idUser, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de acceso a la base de datos"));
@@ -38,22 +57,11 @@ class DAOAvisos {
                                             if (rows.length === 0) {
                                                 callback(null, null); //no tiene avisos
                                             } else {
-                                                connection.query("INSERT INTO UCM_AW_CAU_AT_AvisosTecnicos(numTecnico,idAviso) VALUES (?,?);",
-                                                    [numTecnico, idAviso],
-                                                    function (err, rows) {
-                                                        connection.release();
-                                                        if (err) {
-                                                            callback(new Error("Error de acceso a la base de datos"));
-                                                        }
-                                                        else {
-                                                            if (rows.length === 0) {
-                                                                callback(null, null); //no tiene avisos
-                                                            } else {
-                                                                callback(null, true);
-                                                            }
-                                                        }
-                                                    }
-                                                );
+                                                if (rows.length === 0) {
+                                                    callback(null, null); //no tiene avisos
+                                                } else {
+                                                    callback(null, true);
+                                                }
                                             }
                                         }
                                     }

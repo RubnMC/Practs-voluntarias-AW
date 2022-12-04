@@ -143,6 +143,29 @@ app.get("/logged_tec", auth, function (request, response) {
     response.render("vistaTecnico.ejs", request.session.currentUser);
 });
 
+//Avisos
+app.post("/process_aviso", function (request, response) {
+
+    
+    saAvisos.crearAviso(request.body, request.session.currentUser.idUsuario, function(err, res){
+        if (err) {
+            response.status(500);
+            console.log("Error Base Datos");
+            //response.render("login", { error: err });
+        } else {
+            if (res) {
+                response.status(200);
+                response.redirect("logged_user");
+
+            } else {
+                response.status(200);
+                console.log("Error al crear");
+                response.redirect("logged_user");
+            }
+        }
+    });
+})
+
 // Arrancar el servidor 
 app.listen(config.portS, function (err) {
     if (err) {

@@ -15,6 +15,7 @@
 <body class="backGround">
 
     <%- include ("subplantillas/cabecera") %>
+    <%- include ("subplantillas/modalesCrearAviso") %>
 
         <div class="container mt-2">
             <ul class="nav">
@@ -38,50 +39,50 @@
                     <tbody>
 
                         <% if(avisos){%>
-                            <% avisos.forEach(element => { %>
-                            <tr>
-                            <td class="align-middle tamFecha"> <%=  element.fecha %> </td>
-                            <td class="align-middle tamTexto"> <%=  element.texto %> </td>
+                            <% avisos.forEach(element=> { %>
+                                <tr>
+                                    <td class="align-middle tamFecha">
+                                        <%= element.fecha %>
+                                    </td>
+                                    <td class="align-middle tamTexto">
+                                        <%= element.texto %>
+                                    </td>
 
-                            <% 
-                            let imagen;
-                            switch(element.tipo){
+                                    <% let imagen; switch(element.tipo){ case "F" : imagen="./images/felicitacion.png" ;
+                                        break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
+                                        imagen="./images/incidencia.png" ; break; }%>
 
-                                case "F":
-                                    imagen = "./images/felicitacion.png";
-                                break;
-                                case "S":
-                                    imagen = "./images/sugerencia.png";
-                                break;
-                                case "I":
-                                    imagen = "./images/incidencia.png";
-                                break;
-                            }%> 
+                                        <td class="align-middle text-center tamTipo"> <img src=<%=imagen %> alt="">
+                                        </td>
+                                        <td class="align-middle tamTecnico"> ---- </td>
+                                </tr>
+                                <% }); %>
 
-                            <td class="align-middle text-center tamTipo"> <img src= <%= imagen %>  alt=""> </td>
-                            <td class="align-middle tamTecnico"> ---- </td>
-                        </tr>
-                        <% }); %> 
+                                    <%} else{%>
+                                        <tr>
+                                            <td class="align-middle "> </td>
+                                            <td class="align-middle text-center tamTexto"> <strong>
+                                                    Sin avisos ヾ(⌐■_■)ノ♪
+                                                </strong> </td>
+                                            <td class="align-middle text-center"> </td>
+                                            <td class="align-middle "> </td>
+                                        </tr>
 
-                        <%} else{%>
-                            <tr>
-                                <td class="align-middle "> </td>
-                                <td class="align-middle text-center tamTexto"> <strong>
-                                    Sin avisos ヾ(⌐■_■)ノ♪
-                                </strong> </td>
-                                <td class="align-middle text-center"> </td>
-                                <td class="align-middle "> </td>
-                            </tr>
-    
-                        <%}%> 
-                        
-                        
+                                        <%}%>
+
                     </tbody>
                 </table>
-            </div>
-        </div>
 
-        </div>
+                <div class="d-flex flex-row-reverse">
+                    <div class="col col-auto">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seleccionTipoAviso"> Nuevo Aviso </button>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
 </body>
 
