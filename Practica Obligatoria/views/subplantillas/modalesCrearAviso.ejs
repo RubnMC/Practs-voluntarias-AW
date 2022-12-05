@@ -2,101 +2,205 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear aviso</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear aviso</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="./css/modalesCrearAviso.css">
 </head>
 
 <body>
 
-    <div class="modal fade" id="seleccionTipoAviso">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
+  <div class="modal fade" id="seleccionTipoAviso">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
 
-                <!-- cabecera del diálogo -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Tipo de aviso</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <h4 class="modal-title">Tipo de aviso</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-                <!-- cuerpo del diálogo -->
-                <div class="modal-body">
-                    <div class="row d-flex text-center">
-                        <div class="col col-6 d-flex flex-column offset-3">
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+          <div class="row d-flex text-center">
+            <div class="col col-6 d-flex flex-column offset-3">
 
-                            <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#" data-bs-dismiss="modal"> Incidencia </button>
+              <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" id="botonInci"
+                data-bs-dismiss="modal"> Incidencia </button>
 
-                            <button type="button" class="btn btn-warning mt-1" data-bs-toggle="modal" data-bs-target="#" data-bs-dismiss="modal"> Sugerencia </button>
+              <button type="button" class="btn btn-warning mt-1" data-bs-toggle="modal" id="botonWarn"
+                data-bs-dismiss="modal"> Sugerencia </button>
 
-                            <button type="button" class="btn btn-success mt-1" data-bs-target="#modalFelicitaciones" data-bs-toggle="modal" data-bs-dismiss="modal"> Felicitación </button>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- pie del diálogo -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+              <button type="button" class="btn btn-success mt-1" data-bs-dismiss="modal" id="botonFel"> Felicitación
+              </button>
 
             </div>
+          </div>
         </div>
+
+        <!-- pie del diálogo -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalFelicitaciones">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
+  <div class="modal fade" id="modalFelicitaciones">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
 
-                <!-- cabecera del diálogo -->
-                <div class="modal-header">
-                    <img src="./images/felicitacion.png" alt="">
-                    <h4 class="modal-title"> Nueva Felicitación </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <img src="./images/felicitacion.png" alt="">
+          <h4 class="modal-title"> Nueva Felicitación </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-                <!-- cuerpo del diálogo -->
-                <div class="modal-body">
-                    <form class="" action="/process_aviso" method="POST" title="Formulario felicitaciones">
-                        
-                        <input type="text" name="type" class="d-none" value="F">
-                        
-                        <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario"
-                            required>
-                            <option disabled selected value>Seleciona una categoría</option>
-                            <option value="AU"> Archivo Universitario </option>
-                            <option value="AJ"> Asesoría Jurídica </option>
-                            <option value="B"> Biblioteca </option>
-                            <option value="CI"> Centro de Información </option>
-                            <option value="DD"> Departamentos Docentes </option>
-                            <option value="IS"> Inspección de Servicios </option>
-                            <option value="OGIM"> Oficina de Gestión de Infraestruccturas y Mantenimiento </option>
-                            <option value="SA"> Servicio de Administración </option>
-                            <option value="SI"> Servicios Informáticos </option>
-                            <option value="SD"> Servicio de Documentación </option>
-                            <option value="SIMP"> Servicio de Imprenta </option>
-                            <option value="SC"> Servicio de Caferetería </option>
-                            <option value="TU"> Toda la Universidad </option>
-                        </select>
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+          <form class="" action="/process_aviso" method="POST" title="Formulario felicitaciones">
 
-                        <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso" rows="4" maxlength="300" required></textarea>
+            <input type="text" name="type" class="d-none" value="F">
 
-                        <div class="row justify-content-end">
-                            <div class="col col-auto">
-                                <button type="submit" class="btn btn-primary shadow mb-2 mt-2"> Crear </button>
-                            </div>
-                        </div>
-                        
-                    </form>
-                </div>
+            <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
+              <option disabled selected value>Seleciona una categoría</option>
+              <option value="Archivo_Universitario"> Archivo Universitario </option>
+              <option value="Asesoría_Jurídica"> Asesoría Jurídica </option>
+              <option value="Biblioteca"> Biblioteca </option>
+              <option value="Centro_de_Información"> Centro de Información </option>
+              <option value="Departamentos_Docentes"> Departamentos Docentes </option>
+              <option value="Inspección_de_Servicios"> Inspección de Servicios </option>
+              <option value="Oficina_de_Gestión_de_Infraestruccturas_y_Mantenimiento"> Oficina de Gestión de Infraestruccturas y Mantenimiento </option>
+              <option value="Servicio_de_Administración"> Servicio de Administración </option>
+              <option value="Servicios_Informáticos"> Servicios Informáticos </option>
+              <option value="Servicio_de_Documentación"> Servicio de Documentación </option>
+              <option value="Servicio_de_Imprenta"> Servicio de Imprenta </option>
+              <option value="Servicio_de_Caferetería"> Servicio de Caferetería </option>
+              <option value="Toda_la_Universidad"> Toda la Universidad </option>
+            </select>
 
+            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+              rows="4" maxlength="300" required></textarea>
+
+            <div class="row justify-content-end">
+              <div class="col col-auto">
+                <button type="submit" class="btn btn-primary shadow mb-2 mt-2"> Crear </button>
+              </div>
             </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalSugerencias">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <img src="./images/sugerencia.png" alt="">
+          <h4 class="modal-title"> Nueva Sugerencia </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+          <form class="" action="/process_aviso" method="POST" title="Formulario sugerencias">
+
+            <input type="text" name="type" class="d-none" value="S">
+
+            <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
+              <option disabled selected value>Seleciona una categoría</option>
+              <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
+                <option value="" disabled> <%= k %> </option>
+                <% locals.tiposAvisos[k].forEach(function(obj) {%>
+                  <% let aux = k + ':' + obj;%> 
+                  <option value=<%= aux %>><%= obj %> </option>
+                <% }) %> 
+              <% }); %> 
+            </select>
+
+            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+              rows="4" maxlength="300" required></textarea>
+
+            <div class="row justify-content-end">
+              <div class="col col-auto">
+                <button type="submit" class="btn btn-primary shadow mb-2 mt-2"> Crear </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalIncidencias">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <img src="./images/incidencia.png" alt="">
+          <h4 class="modal-title"> Nueva Incidencia </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+          <form class="" action="/process_aviso" method="POST" title="Formulario Incidencias">
+
+            <input type="text" name="type" class="d-none" value="I">
+
+            <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
+              <option disabled selected value>Seleciona una categoría</option>
+              <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
+                <option value="" disabled> <%= k %> </option>
+                <% locals.tiposAvisos[k].forEach(function(obj) {%>
+                  <% let aux = k + ':' + obj;%> 
+                  <option value=<%= aux %>><%= obj %> </option>
+                <% }) %> 
+              <% }); %> 
+            </select>
+
+            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+              rows="4" maxlength="300" required></textarea>
+
+            <div class="row justify-content-end">
+              <div class="col col-auto">
+                <button type="submit" class="btn btn-primary shadow mb-2 mt-2"> Crear </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#botonFel").click(function () {
+        $('#modalFelicitaciones').modal('toggle');
+      });
+      $("#botonWarn").click(function () {
+        $('#modalSugerencias').modal('toggle');
+      });
+      $("#botonInci").click(function () {
+        $('#modalIncidencias').modal('toggle');
+      });
+    });
+
+  </script>
 
 </body>
 

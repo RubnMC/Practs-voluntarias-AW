@@ -1,37 +1,14 @@
 {
-    "AD": [
-        "Certificado digital de persona física",
-        "Certificado electrónico de empleado público",
+    "Administración_digital": [
         "Registro electrónico",
-        "Sede electrónica",
-        "Portafirmas"
+        "Sede electrónica"
     ],
-    "COM": [
+    "Comunicaciones": [
         "Correo electrónico",
         "Google Meet",
-        "Cuenta de Alumno",
-        "Cuenta de personal",
-        "Cuenta genérica"
+        "Cuenta de Alumno"
     ],
-    "CONE": [
-        "Cuenta a la Res SARA",
-        "Conexión por cable en despachos",
-        "Cortafuegos corporativo",
-        "Resolución de nombres de dominio(DNS)",
-        "VPN Acceso remoto",
-        "Wifi Eduroam (ssid: eduroam)",
-        "Wifi para visitantes(ssid: UCM-Visitantes)"
-    ],
-    "DOC":[
-        "Aula Virtual",
-        "Blackboard Collaborate",
-        "Listados de clase",
-        "Moodle: Aula GLobal",
-        "Plataforma de cursos online Privados"
-    ],
-    "WEB":[
-        "Analítica Web",
-        "Emisión de certificados SSL",
-        "Hosting: alojamiento de páginas web"
+    "Web": [
+        "Portal de eventos"
     ]
 }

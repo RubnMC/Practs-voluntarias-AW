@@ -131,9 +131,54 @@ app.get("/logged_user", auth, function (request, response) {
         } else {
             response.status(200);
             request.session.currentUser.avisos = res;
-            console.log(request.session.currentUser.avisos);
-            response.render("vistaUsuario.ejs", request.session.currentUser);
-
+            switch (request.session.currentUser.perfilUniversitario) {
+                case "A":
+                    fs.readFile("./public/resources/avisosA.json", function (error, content) {
+                        if (!error) {
+                            response.locals.tiposAvisos = JSON.parse(content);
+                            response.render("vistaUsuario.ejs", request.session.currentUser);
+                        }
+                        else {
+                            console.log(error);
+                        }
+                    })
+                    break;
+                case "AA":
+                    fs.readFile("./public/resources/avisosAA.json", function (error, content) {
+                        if (!error) {
+                            response.locals.tiposAvisos = JSON.parse(content);
+                            response.render("vistaUsuario.ejs", request.session.currentUser);
+                        }
+                        else {
+                            console.log(error);
+                        }
+                    })
+                    break;
+                case "PAS":
+                    fs.readFile("./public/resources/avisosPAS.json", function (error, content) {
+                        if (!error) {
+                            response.locals.tiposAvisos = JSON.parse(content);
+                            response.render("vistaUsuario.ejs", request.session.currentUser);
+                        }
+                        else {
+                            console.log(error);
+                        }
+                    })
+                    break;
+                case "PDI":
+                    fs.readFile("./public/resources/avisosPDI.json", function (error, content) {
+                        if (!error) {
+                            response.locals.tiposAvisos = JSON.parse(content);
+                            response.render("vistaUsuario.ejs", request.session.currentUser);
+                        }
+                        else {
+                            console.log(error);
+                        }
+                    })
+                    break;
+                default:
+                    break;
+            }
         }
     })
 });
@@ -146,8 +191,7 @@ app.get("/logged_tec", auth, function (request, response) {
 //Avisos
 app.post("/process_aviso", function (request, response) {
 
-    
-    saAvisos.crearAviso(request.body, request.session.currentUser.idUsuario, function(err, res){
+    saAvisos.crearAviso(request.body, request.session.currentUser.idUsuario, function (err, res) {
         if (err) {
             response.status(500);
             console.log("Error Base Datos");
