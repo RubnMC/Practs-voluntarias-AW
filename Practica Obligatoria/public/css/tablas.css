@@ -19,6 +19,8 @@
 
  .tamTexto{
     width: 62%;
+    max-width: 50em;
+    overflow: hidden;
  }
 
  .tamAcciones{
