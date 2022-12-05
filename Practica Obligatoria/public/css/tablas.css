@@ -1,33 +1,36 @@
-.table{
-    color: black;
-    border-spacing: 1em;
-    background-color: white;
+.table {
+   color: black;
+   border-spacing: 1em;
+   background-color: white;
+   max-height: 400px;
+   overflow: auto;
+   display: inline-block;
 }
 
-.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: rgb(216, 216, 216); 
- }
+   background-color: rgb(216, 216, 216);
+}
 
- .tamTipo{
-    width: 8%;
- }
+.tamTipo {
+   width: 8%;
+}
 
- .tamFecha{
-    width: 10%;
- }
+.tamFecha {
+   width: 10%;
+}
 
- .tamTexto{
-    width: 62%;
-    max-width: 50em;
-    overflow: hidden;
- }
+.tamTexto {
+   width: 50em;
+   max-width: 50em;
+   overflow: hidden;
+}
 
- .tamAcciones{
-    width: 20%;
- }
+.tamAcciones {
+   width: 20%;
+}
 
- .tamTecnico{
+.tamTecnico {
    width: 20%;
 }
 
@@ -39,6 +42,6 @@
    border-bottom-left-radius: 0.3rem;
 }
 
-.nav-link{
+.nav-link {
    color: black !important;
 }
