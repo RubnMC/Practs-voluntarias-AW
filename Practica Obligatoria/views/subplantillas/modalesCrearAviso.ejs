@@ -119,10 +119,10 @@
             <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
               <option disabled selected value>Seleciona una categoría</option>
               <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
-                <option value="" disabled> <%= k %> </option>
+                <option value="" disabled> <%= k.replaceAll("_"," ") %> </option>
                 <% locals.tiposAvisos[k].forEach(function(obj) {%>
                   <% let aux = k + ':' + obj;%> 
-                  <option value=<%= aux %>><%= obj %> </option>
+                  <option value=<%= aux %>><%= obj.replaceAll("_"," ") %> </option>
                 <% }) %> 
               <% }); %> 
             </select>
@@ -163,10 +163,10 @@
             <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
               <option disabled selected value>Seleciona una categoría</option>
               <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
-                <option value="" disabled> <%= k %> </option>
+                <option value="" disabled> <%= k.replaceAll("_"," ") %> </option>
                 <% locals.tiposAvisos[k].forEach(function(obj) {%>
                   <% let aux = k + ':' + obj;%> 
-                  <option value=<%= aux %>><%= obj %> </option>
+                  <option value=<%= aux %>><%= obj.replaceAll("_"," ") %> </option>
                 <% }) %> 
               <% }); %> 
             </select>
