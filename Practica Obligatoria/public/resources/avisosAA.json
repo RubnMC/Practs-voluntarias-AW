@@ -1,14 +1,14 @@
 {
     "Administración_digital": [
-        "Registro electrónico",
-        "Sede electrónica"
+        "Registro_electrónico",
+        "Sede_electrónica"
     ],
     "Comunicaciones": [
-        "Correo electrónico",
-        "Google Meet",
-        "Cuenta de Alumno"
+        "Correo_electrónico",
+        "Google_Meet",
+        "Cuenta_de_Alumno"
     ],
     "Web": [
-        "Portal de eventos"
+        "Portal_de_eventos"
     ]
 }

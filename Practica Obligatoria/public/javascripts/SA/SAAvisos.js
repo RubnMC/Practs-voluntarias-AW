@@ -24,7 +24,7 @@ class SAAvisos {
         let avisoParseado = {
             tipo: aviso.type,
             texto: aviso.texto_aviso,
-            subtipo: aviso.profile_type.replaceAll("_"," ").replaceAll(":",": ")
+            subtipo: aviso.profile_type.replaceAll("_"," ").replace(":",": ")
         }
 
         this.daoAvisos.createAviso(avisoParseado, idUser, function (err, res) {
