@@ -1,0 +1,32 @@
+header,footer, a{
+    display: none !important;
+}
+.etiqueta-print{
+    font-weight: normal;
+}
+
+.tarea-print::after{
+    content: ":";
+}
+
+.etiqueta-print::before{
+    content: "(";
+}
+
+.etiqueta-print::after{
+    content: ")";
+}
+
+.en-negrita{
+    font-weight: bold;
+}
+
+.tarea-print{
+    display: list-item;
+    margin-left: 1em;
+}
+
+.tachada-print{
+    margin-left: 2em;
+}
+

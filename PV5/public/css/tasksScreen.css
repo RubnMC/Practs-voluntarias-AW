@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Shade&family=Finger+Paint&display=swap');
+
+#tareas{
+    display: none;
+}
+
+#botonesInferiores{
+    text-align: center;
+}
+
+#logo{
+    height: 4em;
+    width: 4em;
+}
+
+/*Clases propias*/
+.jungleGreen{
+    background-color: #292929;    
+}
+
+.darkGray{
+    background-color: #121212;
+}
+
+.timberwolfLetra{
+    color: #EADEDA;
+}
+
+.fontLetra{
+    font-family: 'Finger Paint', cursive;
+}
+
+.encabezado{
+    height: fit-content;
+    position: sticky;
+}
+
+.bordeado-morado{
+    border: 2px solid #9153F4;
+    padding: 7px;
+}
+
+.margenb{
+    margin-bottom: 4em;
+}
+
+.altura-tarea{
+    min-height: 3.5em;
+}
+
+.transparente{
+    background-color: transparent;
+}
+
+/*Clases Bootstrap*/
+.row{
+    width: 100%;
+}
