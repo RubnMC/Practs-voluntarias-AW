@@ -11,28 +11,46 @@ class DAOTasks {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                console.log(email);
-                connection.query("SELECT A.idUser, A.email, C.texto AS tarea, B.hecho, E.texto FROM aw_tareas_usuarios A" +
+                connection.query("SELECT A.idUser, A.email, C.texto AS tarea, C.idTarea, B.hecho FROM aw_tareas_usuarios A" +
                     " LEFT JOIN aw_tareas_user_tareas B ON A.idUser = B.idUser" +
                     " LEFT JOIN aw_tareas_tareas C ON B.idTarea = C.idTarea" +
-                    " LEFT JOIN aw_tareas_tareas_etiquetas D ON D.idTarea = C.idTarea" +
-                    " LEFT JOIN aw_tareas_etiquetas E ON E.idEtiqueta = D.idEtiqueta" +
                     " WHERE A.email = ?;",
                     [email],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            let tareas = rows;
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
                             else {
-                                callback(null, rows);
+                                connection.query("SELECT B.idTarea, E.idEtiqueta, E.texto FROM aw_tareas_usuarios A" +
+                                    " LEFT JOIN aw_tareas_user_tareas B ON A.idUser = B.idUser" +
+                                    " LEFT JOIN aw_tareas_tareas C ON B.idTarea = C.idTarea" +
+                                    " LEFT JOIN aw_tareas_tareas_etiquetas D ON D.idTarea = C.idTarea" +
+                                    " LEFT JOIN aw_tareas_etiquetas E ON E.idEtiqueta = D.idEtiqueta" +
+                                    " WHERE A.email = ?;",
+                                    [email],
+                                    function (err, rows) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        }
+                                        else {
+                                            connection.release();
+                                            if (rows.length === 0) {
+                                                callback(null, false); //no está el usuario con el password proporcionado
+                                            }
+                                            else {
+                                                callback(null, {tareas:tareas, etiquetas:rows});
+                                            }
+                                        }
+                                    });
                             }
                         }
-                    });
+                    }
+                );
             }
         }
         );
@@ -71,7 +89,6 @@ class DAOTasks {
                                                 let idTarea = rows.insertId;
                                                 let sentenciaTags = "INSERT INTO aw_tareas_etiquetas(texto) VALUES";
 
-                                                console.log(task.tags);
 
                                                 task.tags.forEach(function (element, idx, array) {
                                                     if (idx === array.length - 1) {
@@ -81,7 +98,6 @@ class DAOTasks {
                                                     }
                                                 });
 
-                                                console.log(sentenciaTags);
 
                                                 connection.query(sentenciaTags,
 
@@ -96,7 +112,6 @@ class DAOTasks {
                                                             else {
                                                                 let sentenciaTareaTag = "INSERT INTO aw_tareas_tareas_etiquetas (idEtiqueta, idTarea) VALUES";
 
-                                                                console.log(rows.affectedRows);
 
                                                                 for (let i = 0; i < rows.affectedRows; i++) {
                                                                     if (i === rows.affectedRows - 1) {
@@ -106,7 +121,6 @@ class DAOTasks {
                                                                     }
                                                                 }
 
-                                                                console.log(sentenciaTareaTag);
 
                                                                 connection.query(sentenciaTareaTag,
                                                                     function (err, rows) {
@@ -171,7 +185,7 @@ class DAOTasks {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
                             else {
-                                callback(null, "Tarea completada!");
+                                callback(null, true);
                             }
                         }
                     });
@@ -211,10 +225,8 @@ class DAOTasks {
                                                 callback(null, "No tiene ninguna tarea completada"); //no está el usuario con el password proporcionado
                                             }
                                             else {
-                                                console.log(rows);
 
                                                 rows.forEach((element, idx, array) => {
-                                                    console.log(element.idTarea);
                                                     connection.query("SELECT * FROM aw_tareas_user_tareas WHERE idTarea = ?;",
                                                         [element.idTarea],
                                                         function (err, rows) {

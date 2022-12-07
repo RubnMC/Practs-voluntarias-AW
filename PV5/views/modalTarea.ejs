@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cabecera </title>
+</head>
+
+<body>
+
+    <div class="modal fade" id="perfilUsuarioVModal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Crear tarea</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <form action="/createTask" method="post">
+                        <div class="d-flex flex-column">
+                            <h4>Todo el texto normal será el nombre de la tarea, todo lo que esté precedido por un @ será una tag</h4>
+                            <h5>Ej: Mi Tarea @Tag1 @Tag2</h5>
+                            <textarea class="mb-2" name="tarea" id="" cols="90" rows="10" placeholder="Texto aquí"></textarea>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

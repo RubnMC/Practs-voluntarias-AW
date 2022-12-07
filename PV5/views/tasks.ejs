@@ -23,88 +23,90 @@
 
 <body class="margenb jungleGreen">
 
-    <header class="navbar navbar-expand darkGray encabezado shadow sticky-top flex-wrap">
-        <div class="navbar-brand me-auto ms-2 timberwolfLetra fontLetra">
-            <a href="# "> <img src="/img/logoGT.png" alt="imagenLogo" class="bordeado-morado rounded-circle p-2"> </a>
-        </div>
+    <%- include ("modalTarea") %>
 
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <img src="/img/noUser.png" class="img-fluid img-thumbnail rounded-circle" id="logo"
-                    alt="imagen de perfil">
-            </li>
-            <li class="nav-item ms-2 me-2">
-                <ul class="nav flex-column justify-content-center">
-                    <li class="nav-item timberwolfLetra fw-bold">Nombre usuario</li>
-                    <li class="nav-item d-flex justify-content-center">
-                        <a href="#" class="btn btn-primary">Desconectar</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </header>
+        <header class="navbar navbar-expand darkGray encabezado shadow sticky-top flex-wrap">
+            <div class="navbar-brand me-auto ms-2 timberwolfLetra fontLetra">
+                <a href="# "> <img src="/img/logoGT.png" alt="imagenLogo" class="bordeado-morado rounded-circle p-2">
+                </a>
+            </div>
 
-    <div class="h1" id="tareas">Tareas</div>
-
-    <main class="mb-5">
-        <div class="container mt-2 mb-2">
-            <ul class="list-group gap-3">
-
-                
-                <!--
-                     <% tareas.forEach(function(tarea) { %>
-                    
-                <li class="list-group-item border-0 p-0 bordeado-morado timberwolfLetra">
-                    <div class="bordeado-morado d-flex justify-content-between align-items-center darkGray altura-tarea">
-                        <div class="d-flex flex-wrap align-items-center en-negrita">
-                            <n class="tarea-print"> <%= tarea.text %> </n>
-                            <ul class="list-group list-group-horizontal ms-2 gap-2">
-                                <% tarea.tags.forEach(function(tag)) {%>
-                                    <li class="list-group-item border-0 p-0">
-                                        <div class="bordeado-morado etiqueta-print"> <%= tag.text %> </div>
-                                    </li>
-                                <%}); %>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-danger ms-2"> Finalizar </a>
-                    </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <img src="/imagenUsuario" class="img-fluid img-thumbnail rounded-circle" id="logo"
+                        alt="imagen de perfil">
                 </li>
-                    
-                <%}); %>
-                    
-                -->
-               
+                <li class="nav-item ms-2 me-2">
+                    <ul class="nav flex-column justify-content-center">
+                        <li class="nav-item timberwolfLetra fw-bold">
+                            <%= locals.userEmail %>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center">
+                            <a class="btn btn-primary" href="/logout">Desconectar</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
 
-                <li class="list-group-item border-0 p-0 bordeado-morado timberwolfLetra">
-                    <div class="bordeado-morado d-flex justify-content-between align-items-center darkGray altura-tarea">
-                        <div class="d-flex flex-wrap align-items-center en-negrita">
-                            <n class="tarea-print">Preparar Prácticas AW</n>
-                            <ul class="list-group list-group-horizontal ms-2 gap-2">
-                                <li class="list-group-item border-0 p-0">
-                                    <div class="bordeado-morado etiqueta-print">Universidad</div>
+        <div class="h1" id="tareas">Tareas</div>
+
+        <main class="mb-5">
+            <div class="container mt-2 mb-2">
+                <ul class="list-group gap-3">
+
+
+
+                    <% tareas.forEach(function(tarea) { %>
+                        <% if (tarea.hecho) {%>
+                            <li class="list-group-item border-0 p-0 bordeado-morado tachada-print timberwolfLetra">
+                                <div
+                                    class="bordeado-morado d-flex justify-content-between align-items-center darkGray altura-tarea">
+                                    <del>
+                                        <%= tarea.tarea %>
+                                    </del>
+                                </div>
+                            </li>
+                            <%} else{%>
+                                <li class="list-group-item border-0 p-0 bordeado-morado timberwolfLetra">
+                                    <div
+                                        class="bordeado-morado d-flex justify-content-between align-items-center darkGray altura-tarea">
+                                        <div class="d-flex flex-wrap align-items-center en-negrita">
+                                            <n class="tarea-print">
+                                                <%= tarea.tarea%>
+                                            </n>
+                                            <ul class="list-group list-group-horizontal ms-2 gap-2">
+                                                <% tarea.tags.forEach(element=> { %>
+                                                    <li class="list-group-item border-0 p-0">
+                                                        <div class="bordeado-morado etiqueta-print">
+                                                            <%= element.texto %>
+                                                        </div>
+                                                    </li>
+                                                    <% }); %>
+                                            </ul>
+                                        </div>
+                                        <a href="/finish/<%= tarea.idTarea %> " class="btn btn-danger ms-2"> Finalizar
+                                        </a>
+                                    </div>
                                 </li>
-                                <li class="list-group-item border-0 p-0">
-                                    <div class="bordeado-morado etiqueta-print">AW</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-danger ms-2"> Finalizar </a>
-                    </div>
-                </li>
 
-                <li class="list-group-item border-0 p-0 bordeado-morado tachada-print timberwolfLetra">
-                    <div class="bordeado-morado d-flex justify-content-between align-items-center darkGray altura-tarea">
-                        <del>Mirar fechas del congreso</del>
-                    </div>
-                </li>
+                                <% }%>
+                                    <%}); %>
 
-            
-    <footer class="fixed-bottom darkGray p-2">
-        <div id="botonesInferiores" class="d-flex justify-content-evenly">
-            <a href="#" class="btn btn-danger"> Eliminar Tareas </a>
-            <a href="#" class="btn btn-success"> Añadir nueva </a>
-        </div>
-    </footer>
+
+
+                                        <footer class="fixed-bottom darkGray p-2">
+                                            <div id="botonesInferiores" class="d-flex justify-content-evenly">
+                                                <a href="/deleteCompleted" class="btn btn-danger"> Eliminar Tareas
+                                                </a>
+                                                <button class="btn btn-success" data-bs-target="#perfilUsuarioVModal"
+                                                    data-bs-toggle="modal"> Añadir nueva </button>
+                                            </div>
+                                        </footer>
+                                        <script
+                                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                                            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                                            crossorigin="anonymous"></script>
 
 </body>
 

@@ -18,7 +18,7 @@ function countDone(listaTareas) {
     return listaTareas.reduce((acum, t) => acum + (t.done ? 1 : 0), 0);
 }
 
-function createTask(tareaTexto) {
+function parseTask(tareaTexto) {
 
     let arrayPalabras = tareaTexto.split(" ");
 
@@ -26,7 +26,17 @@ function createTask(tareaTexto) {
 
     let tareTexto = arrayPalabras.filter(r => !r.startsWith("@"));
 
-    return { text: tareTexto.join(' '), tags: labels }
+    return { texto: tareTexto.join(' '), tags: labels }
 }
 
-module.exports = { getToDoTasks, findByTag, findByTags, countDone, createTask };
+function auth(request, response, next) {
+    if (request.session.currentUser) {
+        response.locals.userEmail = request.session.currentUser;
+        next();
+    }
+    else {
+        response.redirect("login");
+    }
+}
+
+module.exports = { getToDoTasks, findByTag, findByTags, countDone, parseTask, auth };

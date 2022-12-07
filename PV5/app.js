@@ -1,6 +1,7 @@
 // app.js 
 const config = require("./config");
 const DAOTasks = require("./javascripts/DAOTasks");
+const DAOUsers = require("./javascripts/DAOUsers");
 const utils = require("./utils");
 const path = require("path");
 const mysql = require("mysql");
@@ -37,16 +38,7 @@ app.use(middelwareSession);
 // Crear un pool de conexiones a la base de datos de MySQL 
 const pool = mysql.createPool(config.mysqlConfig);
 const daoT = new DAOTasks(pool);
-
-
-function auth(request, response, next) {
-    if (request.session.currentUser) {
-        next();
-    }
-    else {
-        response.redirect("login");
-    }
-}
+const daoU = new DAOUsers(pool);
 
 //Manejadores de ruta
 //Login
@@ -60,7 +52,7 @@ app.get("/login", function (request, response) {
     response.render("login.ejs", { error: null });
 });
 
-app.get("/logout", auth, function (request, response) {
+app.get("/logout", utils.auth, function (request, response) {
     request.session.destroy();
     response.redirect("login");
 });
@@ -68,7 +60,7 @@ app.get("/logout", auth, function (request, response) {
 app.post("/process_login", function (request, response) {
 
     //TODO
-    usuarioCorrecto(request.body, function (err, res) {
+    daoU.isUserCorrect(request.body.email, request.body.password, function (err, res) {
         if (err) {
             response.status(500);
             response.render("login", { error: err });
@@ -76,6 +68,7 @@ app.post("/process_login", function (request, response) {
             if (res) {
                 request.session.currentUser = res;
                 response.status(200);
+                response.redirect("/tasks");
 
             } else {
                 response.status(200);
@@ -86,13 +79,53 @@ app.post("/process_login", function (request, response) {
     });
 })
 
-app.get("/tasks", function(request, response) {
+app.get("/tasks", utils.auth, function (request, response) {
     response.status(200);
-    daoT.getAllTasks("steve.curros@ucm.es", function(a, params) {
-       console.log(params);
-       response.render("tasks.ejs", {tareas: params});
+    daoT.getAllTasks(response.locals.userEmail, function (a, params) {
+        if(params){
+            params.tareas.forEach(tarea => {
+                tarea.tags = params.etiquetas.filter(tag => {
+                    return tag.idTarea === tarea.idTarea;
+                })
+            });
+            response.render("tasks.ejs", {tareas: params.tareas});
+        }
     });
 });
+
+app.get("/imagenUsuario",utils.auth, function (request, response) {
+    response.status(200);
+    daoU.getUserImage(response.locals.userEmail, function (a, params) {
+        if(!params.imagen){
+            response.sendFile("/img/profile_imgs/noUser.jpg", {root: "public"});
+        }
+        else{
+            response.sendFile("/img/profile_imgs/"+params.imagen, {root: "public"});
+        }
+    });
+});
+
+app.get("/finish/:taskId",utils.auth, function (request, response) {
+    response.status(200);
+    daoT.markTaskDone(request.params.taskId, function (a, ok) {
+        response.redirect("/tasks");
+    });
+});
+
+app.get("/deleteCompleted",utils.auth, function (request, response) {
+    response.status(200);
+    daoT.deleteCompleted(response.locals.userEmail, function (a, ok) {
+        response.redirect("/tasks");
+    });
+});
+
+app.post("/createTask",utils.auth, function (request, response) {
+    response.status(200);
+    daoT.insertTask(response.locals.userEmail, utils.parseTask(request.body.tarea), function (a, ok) {
+        response.redirect("/tasks");
+    });
+});
+
 
 // Arrancar el servidor 
 app.listen(config.port, function (err) {

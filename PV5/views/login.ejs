@@ -8,20 +8,21 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title> Login </title>
 </head>
-<body class="backGround d-flex align-items-center justify-content-center">
+<body class="d-flex align-items-center justify-content-center bg-dark">
 
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col col-auto justify-content-center d-flex flex-column loginCaract rounded-3 shadow-lg">
-                <span class="text-center mt-2"> Logeate </span>
+            <div class="col col-auto justify-content-center d-flex flex-column mt-5 rounded-3 shadow-lg bg-light">
+                <img src="/img/logoGT.png" class="col-xs-3 col-sm-4 offset-4" alt="">
+                <span class="text-center mt-2"> Bienvenido </span>
                 
                 <form class="" action="process_login" method="post" title="Formulario login">
-                    <div class="mb-3 mt-5 mx-sm-5">
-                        <input type="email" class="form-control controlGrey" id="email" name="email"
+                    <div class="mb-3 mt-1 mx-sm-5">
+                        <input type="email" class="form-control " id="email" name="email"
                             aria-describedby="emailHelp" placeholder="Email">
                     </div>
                     <div class="mb-2 mx-sm-5">
-                        <input type="password" class="form-control controlGrey" id="password" name="password"
+                        <input type="password" class="form-control " id="password" name="password"
                             aria-describedby="emailHelp" placeholder="Contraseña">
 
                     </div>
@@ -29,11 +30,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col col-auto d-flex flex-column">
                             <%= error %> 
-                            <button type="submit" class="btn shadow mb-2 mt-2 buttonBlue">LOGIN</button>
-                            <div>
-                                ¿Eres nuevo? 
-                                <a href="/singup"> Regístrate </a>
-                            </div>
+                            <button type="submit" class="btn shadow mb-2 mt-2 btn-primary">LOGIN</button>
                         </div>
                     </div>
                 </form>
