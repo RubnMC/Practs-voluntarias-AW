@@ -88,7 +88,7 @@ app.get("/tasks", utils.auth, function (request, response) {
                     return tag.idTarea === tarea.idTarea;
                 })
             });
-            response.render("tasks.ejs", {tareas: params.tareas});
+            response.render("tareas.ejs", {tareas: params.tareas});
         }
     });
 });
