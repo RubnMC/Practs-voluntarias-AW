@@ -42,7 +42,7 @@
                             <th scope="col">Fecha</th>
                             <th scope="col">Texto</th>
                             <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col">Ténico</th>
+                            <th scope="col">Técnico</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,13 @@
 
                                         <td class="align-middle text-center tamTipo"> <img src=<%=imagen %> alt="">
                                         </td>
-                                        <td class="align-middle tamTecnico"> ---- </td>
+                                        
+                                        <% if(element.nombreTecnico){ %>
+                                            <td class="align-middle tamTecnico"> <%= element.nombreTecnico %>  </td>
+                                        <% } else{ %>
+                                            <td class="align-middle tamTecnico"> </td>
+                                        <%}%> 
+                                        
                                 </tr>
                                 <% }); %>
 

@@ -81,8 +81,12 @@ class DAOAvisos {
                 callback(new Error("Error de acceso a la base de datos"));
             } else {
                 if (user.rol === "Usuario") {
-                    connection.query("SELECT * FROM ucm_aw_cau_au_avisosusuarios au JOIN ucm_aw_cau_av_avisos av ON au.idAviso = av.idAviso WHERE idUsuario = ? AND solucionado = ?",
-                        [user.idUsuario, historicos],
+                    connection.query("SELECT av.idAviso, av.texto, av.observaciones, av.tipo, av.subtipo, av.solucionado, "+
+                    " (SELECT nombre FROM ucm_aw_cau_usu_usuarios aw WHERE idUsuario = ?) as nombreUsuario, at.numTecnico, usu.nombre as nombreTecnico"+
+                    " FROM ucm_aw_cau_au_avisosusuarios au JOIN ucm_aw_cau_av_avisos av ON au.idAviso = av.idAviso " + 
+                    " LEFT JOIN ucm_aw_cau_at_avisostecnicos at ON av.idAviso = at.idAviso LEFT JOIN ucm_aw_cau_usu_usuarios usu ON at.numTecnico = usu.numTecnico " + 
+                    " WHERE au.idUsuario = ? AND av.solucionado = ?",
+                        [user.idUsuario, user.idUsuario, historicos],
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
                             if (err) {
@@ -96,7 +100,7 @@ class DAOAvisos {
 
                                     let arrayAvisos = [];
                                     let i = 0;
-
+                                    
                                     rows.forEach(element => {
                                         arrayAvisos.push({
                                             idAviso: element.idAviso,
@@ -105,7 +109,9 @@ class DAOAvisos {
                                             subtipo: element.subtipo,
                                             fecha: stampToDate(element.fecha),
                                             observaciones: element.observaciones,
-                                            solucionado: element.solucionado
+                                            solucionado: element.solucionado,
+                                            nombreTecnico: element.nombreTecnico,
+                                            nombreUsuario: element.nombreUsuario
                                         });
                                         i++;
                                     });

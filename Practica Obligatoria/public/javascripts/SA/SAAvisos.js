@@ -11,7 +11,7 @@ class SAAvisos {
     getAvisos(user, historico, callback) {
 
         if (historico) {
-            this.daoAvisos.getAvisos(user, 1, function (err, res) {
+            this.daoAvisos.getAvisosUsuario(user, 1, function (err, res) {
                 if (err) {
                     callback(err);
                 }
@@ -20,7 +20,7 @@ class SAAvisos {
                 }
             })
         } else {
-            this.daoAvisos.getAvisos(user, 0, function (err, res) {
+            this.daoAvisos.getAvisosUsuario(user, 0, function (err, res) {
                 if (err) {
                     callback(err);
                 }

@@ -121,6 +121,7 @@ app.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, res
             console.log(err);
         } else {
             response.status(200);
+            //console.log(res);
             response.render("vistaUsuario.ejs", {avisos: res});
         }
     })
@@ -181,7 +182,8 @@ app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, r
             response.status(500);
             console.log(err);
         } else {
-            console.log(response.locals);
+            
+            console.log(res);
             response.render("vistaUsuario.ejs", {avisos: res});
         }
     });
