@@ -163,19 +163,6 @@ app.post("/process_aviso", utils.auth, function (request, response) {
     });
 })
 
-//Manejadores usuario
-
-// app.get("/entrantesuser", utils.auth, utils.getTiposAvisos,  function(request, response){
-//     saAvisos.getAvisos(response.locals.currentUser, false, function(err, res){
-//         if (err) {
-//             response.status(500);
-//             console.log(err);
-//         } else {
-//             response.render("vistaUsuario.ejs", {avisos: res});
-//         }
-//     });
-// });
-
 app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, response){
     saAvisos.getAvisos(response.locals.currentUser, true, function(err, res){
         if (err) {
@@ -184,7 +171,7 @@ app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, r
         } else {
             
             console.log(res);
-            response.render("vistaUsuario.ejs", {avisos: res});
+            response.render("vistaUsuarioHist.ejs", {avisos: res});
         }
     });
 });
@@ -209,9 +196,13 @@ app.get("/historicostec", utils.auth, utils.getTiposAvisos, function(request, re
             console.log(err);
         } else {
             response.status(200);
-            response.render("vistaTecnico.ejs", {avisos: res});
+            response.render("vistaTecnicoHist.ejs", {avisos: res});
         }
     })
+});
+
+app.get("/prueba", utils.auth, function(request, response){
+    response.render("subplantillas/modalAsignarTec.ejs");
 });
 
 // Arrancar el servidor 

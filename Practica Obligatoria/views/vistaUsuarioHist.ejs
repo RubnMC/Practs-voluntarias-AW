@@ -15,29 +15,34 @@
 <body class="backGround">
 
     <%- include ("subplantillas/cabecera") %>
-        <a href="/prueba">Pepe</a>
-        <div class="container mt-5 ">
+
+        <div class="container mt-2">
             <div class="d-flex justify-content-between flex-row">
                 <ul class="nav">
                     <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
+                        <a class="nav-link" href="/logged_user">Mis avisos</a>
                     </li>
                     <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/misavisos">Mis Avisos</a>
+                        <a class="nav-link" href="/historicosuser">Histórico de avisos</a>
                     </li>
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
-                    </li>
+
                 </ul>
+                <div class="d-flex flex-row-reverse self">
+                    <div class="col col-auto">
+                        <%- include ("subplantillas/modalesCrearAviso") %>
+                            <button class="btn btn-primary" data-bs-toggle="modal" id="butModal"
+                                href="#seleccionTipoAviso" role="button">Nuevo Aviso</button>
+                    </div>
+                </div>
             </div>
             <div class="table-responsive mt-1">
-                <table class="table custom-table rounded-3 shadow-lg table-borderless table-striped">
+                <table class="overflow-auto table custom-table rounded-3 table-borderless table-striped">
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">Tipo</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Texto</th>
-                            <th scope="col" class="text-center">Acciones</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +50,6 @@
                         <% if(avisos){%>
                             <% avisos.forEach(element=> { %>
                                 <tr>
-
                                     <% let imagen; switch(element.tipo){ case "F" : imagen="./images/felicitacion.png" ;
                                         break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
                                         imagen="./images/incidencia.png" ; break; }%>
@@ -56,32 +60,15 @@
                                         <td class="align-middle tamFecha">
                                             <%= element.fecha %>
                                         </td>
+
                                         <td class="align-middle tamTexto">
                                             <%= element.texto %>
                                         </td>
 
-                                        <td class="align-middle text-center tamAcciones">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="button" <% if (element.nombreTecnico) {%>
-                                                    disabled
-                                                <%} %>>
-                                                <% if (element.nombreTecnico) {%>
-                                                    <img src="./images/headsetDisabled.png" alt="">
-                                                <%}else{%>
-                                                    <img src="./images/headset.png" alt="">
-                                                <%} %> 
-                                                </button>
-
-                                                <button class="button" <% if (element.tipo === "F") {%>
-                                                    disabled
-                                                <%} %>>
-                                                <% if (element.tipo === "F") {%>
-                                                    <img src="./images/binDisabled.png" alt="">
-                                                <%}else{%>
-                                                    <img src="./images/bin.png" alt="">
-                                                <%} %> 
-                                                </button>
-                                              </div>
+                                        <td class="align-middle text-center tamFecha">
+                                            <button>
+                                                <img src="./images/eye.png" alt="">
+                                            </button>
                                         </td>
 
                                 </tr>
@@ -101,10 +88,12 @@
 
                     </tbody>
                 </table>
+
+
             </div>
         </div>
 
-        </div>
+
 
 </body>
 

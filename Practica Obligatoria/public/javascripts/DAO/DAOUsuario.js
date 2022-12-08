@@ -115,8 +115,8 @@ class DAOUsuario {
                                                                                 if (rows.length === 0) {
                                                                                     callback(null, "No se ha podido añadir la tarea"); //no está el usuario con el password proporcionado
                                                                                 }
-                                                                                else{
-                                                                                    callback(null,true);
+                                                                                else {
+                                                                                    callback(null, true);
                                                                                 }
                                                                             }
                                                                         }
@@ -169,6 +169,40 @@ class DAOUsuario {
                             }
                             else {
                                 callback(new Error("Esta dirección de correo ya está asignada a un usuario"));
+                            }
+                        }
+                    });
+            }
+        }
+        );
+    }
+
+    getAllTecnicos(callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE numTecnico IS NOT NULL",
+                    [email],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                callback(null, false); //no está el usuario con el password proporcionado
+                            }
+                            else {
+                                let tecnicos = [];
+                                rows.forEach(t => {
+                                    tecnicos.push({
+                                        idUsuario: t.idUsuario,
+                                        numTecnico: t.numTecnico,
+                                        nombre: t.nombre,
+                                    });
+                                });
+                                callback(null, tecnicos);
                             }
                         }
                     });

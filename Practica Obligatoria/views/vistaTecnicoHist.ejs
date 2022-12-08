@@ -15,7 +15,7 @@
 <body class="backGround">
 
     <%- include ("subplantillas/cabecera") %>
-        <a href="/prueba">Pepe</a>
+
         <div class="container mt-5 ">
             <div class="d-flex justify-content-between flex-row">
                 <ul class="nav">
@@ -62,24 +62,8 @@
 
                                         <td class="align-middle text-center tamAcciones">
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="button" <% if (element.nombreTecnico) {%>
-                                                    disabled
-                                                <%} %>>
-                                                <% if (element.nombreTecnico) {%>
-                                                    <img src="./images/headsetDisabled.png" alt="">
-                                                <%}else{%>
-                                                    <img src="./images/headset.png" alt="">
-                                                <%} %> 
-                                                </button>
-
-                                                <button class="button" <% if (element.tipo === "F") {%>
-                                                    disabled
-                                                <%} %>>
-                                                <% if (element.tipo === "F") {%>
-                                                    <img src="./images/binDisabled.png" alt="">
-                                                <%}else{%>
-                                                    <img src="./images/bin.png" alt="">
-                                                <%} %> 
+                                                <button class="button" >
+                                                    <img src="./images/eye.png" alt="">
                                                 </button>
                                               </div>
                                         </td>
