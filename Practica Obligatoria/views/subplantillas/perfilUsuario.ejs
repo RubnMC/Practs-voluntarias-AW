@@ -29,11 +29,11 @@
                     </div>
                     
                     <div class="col col-8 d-flex flex-column">
-                        <h5>Nombre: <%= nombre %> </h5>
-                        <h5>Fecha: <%= fecha %></h5>
-                        <h5>Perfil: <%= perfilUniversitario %></h5>
+                        <h5>Nombre: <%= locals.currentUser.nombre %> </h5>
+                        <h5>Fecha: <%= locals.currentUser.fecha %></h5>
+                        <h5>Perfil: <%= locals.currentUser.perfilUniversitario %></h5>
                         <h5>Contraseña: no</h5>
-                        <h5>Nombre para mostrar: <%= nombre %> </h5>
+                        <h5>Nombre para mostrar: <%= locals.currentUser.nombre %> </h5>
                     </div>
                 </div>
                 <div class="row">

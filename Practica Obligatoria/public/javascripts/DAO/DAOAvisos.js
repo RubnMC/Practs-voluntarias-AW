@@ -74,15 +74,15 @@ class DAOAvisos {
         });
     }
 
-    getAvisos(user, callback) {
+    getAvisosUsuario(user, historicos, callback) {
 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de acceso a la base de datos"));
             } else {
                 if (user.rol === "Usuario") {
-                    connection.query("SELECT * FROM ucm_aw_cau_au_avisosusuarios au JOIN ucm_aw_cau_av_avisos av ON au.idAviso = av.idAviso WHERE idUsuario = ?",
-                        [user.idUsuario],
+                    connection.query("SELECT * FROM ucm_aw_cau_au_avisosusuarios au JOIN ucm_aw_cau_av_avisos av ON au.idAviso = av.idAviso WHERE idUsuario = ? AND solucionado = ?",
+                        [user.idUsuario, historicos],
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
                             if (err) {
@@ -119,6 +119,99 @@ class DAOAvisos {
 
                 }
             }
+        });
+    }
+
+    getAvisosEntrantes(callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de acceso a la base de datos"));
+            } else {
+                    connection.query("SELECT av.idAviso, av.texto, av.tipo, av.subtipo, av.fecha, av.observaciones, av.solucionado, at.numTecnico, usu.nombre" +
+                                    " FROM ucm_aw_cau_av_avisos av LEFT JOIN ucm_aw_cau_at_avisostecnicos at ON av.idAviso = at.idAviso" + 
+                                    " LEFT JOIN ucm_aw_cau_usu_usuarios usu ON usu.numtecnico = at.numTecnico WHERE av.solucionado = 0",
+                        function (err, rows) {
+                            connection.release(); // devolver al pool la conexión
+                            if (err) {
+                                callback(new Error("Error de acceso a la base de datos"));
+                            }
+                            else {
+                                if (rows.length === 0) {
+                                    callback(null, null); //no tiene avisos
+                                }
+                                else {
+
+                                    let arrayAvisos = [];
+                                    let i = 0;
+
+                                    rows.forEach(element => {
+                                        arrayAvisos.push({
+                                            idAviso: element.idAviso,
+                                            tipo: element.tipo,
+                                            texto: element.texto,
+                                            subtipo: element.subtipo,
+                                            fecha: stampToDate(element.fecha),
+                                            observaciones: element.observaciones,
+                                            solucionado: element.solucionado,
+                                            numTecnico: element.numTecnico,
+                                            nombreTecnico: element.nombre
+                                        });
+                                        i++;
+                                    });
+
+                                    callback(null, arrayAvisos);
+
+                                }
+                            }
+                        });
+           }
+        });
+    }
+
+    getAvisosTecnico(user, historicos, callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de acceso a la base de datos"));
+            } else {
+                    connection.query("SELECT av.idAviso, av.texto, av.tipo, av.subtipo, av.fecha, av.observaciones, av.solucionado, at.numTecnico, usu.nombre" +
+                                    " FROM ucm_aw_cau_av_avisos av LEFT JOIN ucm_aw_cau_at_avisostecnicos at ON av.idAviso = at.idAviso" + 
+                                    " LEFT JOIN ucm_aw_cau_usu_usuarios usu ON usu.numtecnico = at.numTecnico WHERE av.solucionado = ? AND at.numTecnico = ?",
+                            [historicos, user.numTecnico],
+                        function (err, rows) {
+                            connection.release(); // devolver al pool la conexión
+                            if (err) {
+                                callback(new Error("Error de acceso a la base de datos"));
+                            }
+                            else {
+                                if (rows.length === 0) {
+                                    callback(null, null); //no tiene avisos
+                                }
+                                else {
+
+                                    let arrayAvisos = [];
+                                    let i = 0;
+
+                                    rows.forEach(element => {
+                                        arrayAvisos.push({
+                                            idAviso: element.idAviso,
+                                            tipo: element.tipo,
+                                            texto: element.texto,
+                                            subtipo: element.subtipo,
+                                            fecha: stampToDate(element.fecha),
+                                            observaciones: element.observaciones,
+                                            solucionado: element.solucionado,
+                                            numTecnico: element.numTecnico,
+                                            nombreTecnico: element.nombre
+                                        });
+                                        i++;
+                                    });
+
+                                    callback(null, arrayAvisos);
+
+                                }
+                            }
+                        });
+           }
         });
     }
 

@@ -1,7 +1,7 @@
 // app.js 
 
 const config = require("./config");
-//const utils = require("./utils");
+const utils = require("./utils");
 const path = require("path");
 const mysql = require("mysql");
 const express = require("express");
@@ -16,6 +16,7 @@ const mysqlSession = require("express-mysql-session");
 const SAUsuario = require("./public/javascripts/SA/SAUsuario");
 const SAAvisos = require("./public/javascripts/SA/SAAvisos");
 const { nextTick } = require("process");
+const { render } = require("express/lib/response");
 
 //Sesiones
 const MySQLStore = mysqlSession(session);
@@ -43,16 +44,6 @@ const pool = mysql.createPool(config.mysqlConfig);
 const saUsuario = new SAUsuario(pool);
 const saAvisos = new SAAvisos(pool);
 
-
-function auth(request, response, next) {
-    if (request.session.currentUser) {
-        next();
-    }
-    else {
-        response.redirect("login");
-    }
-}
-
 //Manejadores de ruta
 //Login
 app.get("/", function (request, response) {
@@ -65,7 +56,7 @@ app.get("/login", function (request, response) {
     response.render("login.ejs", { error: null });
 });
 
-app.get("/logout", auth, function (request, response) {
+app.get("/logout", utils.auth, function (request, response) {
     request.session.destroy();
     response.redirect("login");
 });
@@ -121,75 +112,36 @@ app.post("/process_login", function (request, response) {
 })
 
 //Usuario
-app.get("/logged_user", auth, function (request, response) {
+app.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, response) {
     response.status(200);
 
-    saAvisos.getAvisos(request.session.currentUser, function (err, res) {
+    saAvisos.getAvisos(request.session.currentUser, false, function (err, res) {
         if (err) {
             response.status(500);
             console.log(err);
         } else {
             response.status(200);
-            request.session.currentUser.avisos = res;
-            switch (request.session.currentUser.perfilUniversitario) {
-                case "A":
-                    fs.readFile("./public/resources/avisosA.json", function (error, content) {
-                        if (!error) {
-                            response.locals.tiposAvisos = JSON.parse(content);
-                            response.render("vistaUsuario.ejs", request.session.currentUser);
-                        }
-                        else {
-                            console.log(error);
-                        }
-                    })
-                    break;
-                case "AA":
-                    fs.readFile("./public/resources/avisosAA.json", function (error, content) {
-                        if (!error) {
-                            response.locals.tiposAvisos = JSON.parse(content);
-                            response.render("vistaUsuario.ejs", request.session.currentUser);
-                        }
-                        else {
-                            console.log(error);
-                        }
-                    })
-                    break;
-                case "PAS":
-                    fs.readFile("./public/resources/avisosPAS.json", function (error, content) {
-                        if (!error) {
-                            response.locals.tiposAvisos = JSON.parse(content);
-                            response.render("vistaUsuario.ejs", request.session.currentUser);
-                        }
-                        else {
-                            console.log(error);
-                        }
-                    })
-                    break;
-                case "PDI":
-                    fs.readFile("./public/resources/avisosPDI.json", function (error, content) {
-                        if (!error) {
-                            response.locals.tiposAvisos = JSON.parse(content);
-                            response.render("vistaUsuario.ejs", request.session.currentUser);
-                        }
-                        else {
-                            console.log(error);
-                        }
-                    })
-                    break;
-                default:
-                    break;
-            }
+            response.render("vistaUsuario.ejs", {avisos: res});
         }
     })
 });
 
-app.get("/logged_tec", auth, function (request, response) {
+app.get("/logged_tec", utils.auth, function (request, response) {
     response.status(200);
-    response.render("vistaTecnico.ejs", request.session.currentUser);
+
+    saAvisos.getAvisosTecnico(request.session.currentUser, 1, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.render("vistaTecnico.ejs", {avisos: res});
+        }
+    })
 });
 
 //Avisos
-app.post("/process_aviso", function (request, response) {
+app.post("/process_aviso", utils.auth, function (request, response) {
 
     saAvisos.crearAviso(request.body, request.session.currentUser.idUsuario, function (err, res) {
         if (err) {
@@ -209,6 +161,56 @@ app.post("/process_aviso", function (request, response) {
         }
     });
 })
+
+//Manejadores usuario
+
+// app.get("/entrantesuser", utils.auth, utils.getTiposAvisos,  function(request, response){
+//     saAvisos.getAvisos(response.locals.currentUser, false, function(err, res){
+//         if (err) {
+//             response.status(500);
+//             console.log(err);
+//         } else {
+//             response.render("vistaUsuario.ejs", {avisos: res});
+//         }
+//     });
+// });
+
+app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, response){
+    saAvisos.getAvisos(response.locals.currentUser, true, function(err, res){
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            console.log(response.locals);
+            response.render("vistaUsuario.ejs", {avisos: res});
+        }
+    });
+});
+
+//Manejadores tecnico
+app.get("/misavisos", utils.auth, utils.getTiposAvisos,  function(request, response){
+    saAvisos.getAvisosTecnico(request.session.currentUser, 2, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.render("vistaTecnico.ejs", {avisos: res});
+        }
+    })
+});
+
+app.get("/historicostec", utils.auth, utils.getTiposAvisos, function(request, response){
+    saAvisos.getAvisosTecnico(request.session.currentUser, 3, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.render("vistaTecnico.ejs", {avisos: res});
+        }
+    })
+});
 
 // Arrancar el servidor 
 app.listen(config.portS, function (err) {
