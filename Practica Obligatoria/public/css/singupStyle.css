@@ -4,8 +4,9 @@ body,html{
     margin: 0;
 }
 
-.loginCaract{
-    height: 30em;
+.singupCustom{
+    height: 33em;
+    width: 50em;
     background-color: rgb(255, 255, 255);
     padding-left: 2em;
     padding-right: 2em;

@@ -35,14 +35,14 @@
                     </div>
                 </div>
             </div>
-            <div class="table-responsive mt-1">
-                <table class="overflow-auto table custom-table rounded-3 table-borderless table-striped">
+            <div class="mt-1">
+                <table id="tablaAvisos" class="table-responsive overflow-auto table custom-table rounded-3 table-borderless table-striped">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Texto</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col-1" class="text-center">Tipo</th>
+                            <th scope="col-1">Fecha</th>
+                            <th scope="col-9">Texto</th>
+                            <th scope="col-1">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,18 +54,18 @@
                                         break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
                                         imagen="./images/incidencia.png" ; break; }%>
 
-                                        <td class="align-middle text-center tamTipo"> <img src=<%=imagen %> alt="">
+                                        <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
                                         </td>
 
-                                        <td class="align-middle tamFecha">
+                                        <td class="align-middle col-2">
                                             <%= element.fecha %>
                                         </td>
 
-                                        <td class="align-middle tamTexto">
+                                        <td class="align-middle col-8">
                                             <%= element.texto %>
                                         </td>
 
-                                        <td class="align-middle text-center tamFecha">
+                                        <td class="align-middle text-center col-1>
                                             <button>
                                                 <img src="./images/eye.png" alt="">
                                             </button>
@@ -76,12 +76,12 @@
 
                                     <%} else{%>
                                         <tr>
-                                            <td class="align-middle "> </td>
-                                            <td class="align-middle text-center tamTexto"> <strong>
+                                            <td class="align-middle col-1"> </td>
+                                            <td class="align-middle text-center col-9"> <strong>
                                                     Sin avisos ヾ(⌐■_■)ノ♪
                                                 </strong> </td>
-                                            <td class="align-middle text-center"> </td>
-                                            <td class="align-middle "> </td>
+                                            <td class="align-middle col-1 text-center"> </td>
+                                            <td class="align-middle col-1 "> </td>
                                         </tr>
 
                                         <%}%>

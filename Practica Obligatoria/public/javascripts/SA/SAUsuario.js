@@ -25,13 +25,13 @@ class SAUsuario {
 
     crearUsuario(user,callback) {
         if (user.password !== user.password_2) {
-            throw new Error("Error: Las contraseñas no coinciden");
+            callback(new Error("Las contraseñas no coinciden"));
         }
         if (user.numEmpleado && !(/\d{4}\-[A-Z]{3}/.test(user.numEmpleado))) {
-            throw new Error("Formato de num.empleado incorrecto (0000-ABC)");
+            callback(new Error("Formato de num.empleado incorrecto (0000-ABC)"));
         }
         if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(user.password)) {
-            throw new Error("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayuscula y un caracter especial")
+            callback(new Error("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayuscula y un caracter especial"));
         }
         this.daoUser.createUser(this.parseUser(user), function (err, res) {
             if (err) {

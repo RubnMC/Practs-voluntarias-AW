@@ -29,10 +29,13 @@
                             aria-describedby="emailHelp" placeholder="Contraseña">
 
                     </div>
-                    
+                    <div class="mt-3 mb-2 row d-flex justify-content-center">
+                        <div class="text-danger col col-auto d-flex flex-column">
+                            <%= error %> 
+                        </div>
+                    </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col col-auto d-flex flex-column">
-                            <%= error %> 
                             <button type="submit" class="btn shadow mb-2 mt-2 buttonBlue">LOGIN</button>
                             <div>
                                 ¿Eres nuevo? 

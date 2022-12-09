@@ -35,9 +35,9 @@
                     </div>
                 </div>
             </div>
-            <div class="table-responsive mt-1">
-                <table class="overflow-auto table custom-table rounded-3 table-borderless table-striped">
-                    <thead>
+            <div class="mt-1 tbheight rounded-3">
+                <table id="tablaAvisos" class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
+                    <thead class="sticky-top bg-white">
                         <tr>
                             <th scope="col">Fecha</th>
                             <th scope="col">Texto</th>
@@ -50,10 +50,11 @@
                         <% if(avisos){%>
                             <% avisos.forEach(element=> { %>
                                 <tr>
-                                    <td class="align-middle tamFecha">
+                                    <td class="d-none"><%= element.idAviso %> </td>
+                                    <td class="col-2">
                                         <%= element.fecha %>
                                     </td>
-                                    <td class="align-middle tamTexto">
+                                    <td class="col-8">
                                         <%= element.texto %>
                                     </td>
 
@@ -61,13 +62,13 @@
                                         break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
                                         imagen="./images/incidencia.png" ; break; }%>
 
-                                        <td class="align-middle text-center tamTipo"> <img src=<%=imagen %> alt="">
+                                        <td class="text-center col-1"> <img src=<%=imagen %> alt="">
                                         </td>
                                         
                                         <% if(element.nombreTecnico){ %>
-                                            <td class="align-middle tamTecnico"> <%= element.nombreTecnico %>  </td>
+                                            <td class="col-1"> <%= element.nombreTecnico %>  </td>
                                         <% } else{ %>
-                                            <td class="align-middle tamTecnico"> </td>
+                                            <td class="col-1"> </td>
                                         <%}%> 
                                         
                                 </tr>
@@ -75,12 +76,11 @@
 
                                     <%} else{%>
                                         <tr>
-                                            <td class="align-middle "> </td>
-                                            <td class="align-middle text-center tamTexto"> <strong>
+                                            <th scope="row"></th>
+                                            <td> <strong>
                                                     Sin avisos ヾ(⌐■_■)ノ♪
                                                 </strong> </td>
-                                            <td class="align-middle text-center"> </td>
-                                            <td class="align-middle "> </td>
+                                            
                                         </tr>
 
                                         <%}%>
@@ -91,8 +91,6 @@
 
             </div>
         </div>
-
-
 
 </body>
 

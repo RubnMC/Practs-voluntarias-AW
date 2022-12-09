@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 const { request } = require("http");
 const session = require("express-session");
 const mysqlSession = require("express-mysql-session");
+const multer = require("multer");
 
 // Imports de SA's
 const SAUsuario = require("./public/javascripts/SA/SAUsuario");
@@ -27,6 +28,17 @@ const middelwareSession = session({
     resave: false,
     store: sessionStore
 });
+
+//Multer
+var almacen = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, 'public', 'uploads'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+  });
+const multerFactory = multer({ storage: almacen });
 
 // Crear un servidor Express.js 
 const app = express();
@@ -68,16 +80,15 @@ app.get("/singup", function (request, response) {
 });
 
 app.post("/process_singup", function (request, response) {
-
+    
     saUsuario.crearUsuario(request.body, function (err, res) {
         if (err) {
-            response.status(200);
-            console.log(err);
-            response.render("singup", { error: err });
+            response.status(500);
+            response.render("singup.ejs", { error: err });
         } else {
             if (res) {
                 response.status(200);
-                response.render("login", { error: null });
+                response.redirect("login");
             } else {
                 response.status(200);
                 response.render("singup.ejs", { error: null });
@@ -148,7 +159,6 @@ app.post("/process_aviso", utils.auth, function (request, response) {
         if (err) {
             response.status(500);
             console.log("Error Base Datos");
-            //response.render("login", { error: err });
         } else {
             if (res) {
                 response.status(200);
@@ -168,9 +178,7 @@ app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, r
         if (err) {
             response.status(500);
             console.log(err);
-        } else {
-            
-            console.log(res);
+        } else {            
             response.render("vistaUsuarioHist.ejs", {avisos: res});
         }
     });

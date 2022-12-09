@@ -3,8 +3,12 @@
    border-spacing: 1em;
    background-color: white;
    max-height: 400px;
+   word-break: break-word;
+}
+
+.tbheight{
+   max-height: clamp(25em,10vh,250px);
    overflow: auto;
-   display: inline-block;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td,
@@ -12,27 +16,6 @@
    background-color: rgb(216, 216, 216);
 }
 
-.tamTipo {
-   width: 8%;
-}
-
-.tamFecha {
-   width: 10%;
-}
-
-.tamTexto {
-   width: 50em;
-   max-width: 50em;
-   overflow: hidden;
-}
-
-.tamAcciones {
-   width: 20%;
-}
-
-.tamTecnico {
-   width: 20%;
-}
 
 .table-striped tr:last-child td:last-child {
    border-bottom-right-radius: 0.3rem;
