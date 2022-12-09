@@ -15,89 +15,158 @@
 <body class="backGround">
 
     <%- include ("subplantillas/cabecera") %>
-        <div class="container mt-4 ">
-            <div class="d-flex justify-content-between flex-row">
-                <ul class="nav">
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
-                    </li>
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/misavisos">Mis Avisos</a>
-                    </li>
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
-                    </li>
-                </ul>
+        <%- include ("subplantillas/modalAsignarTec") %>
+
+            <div class="container mt-4 ">
+                <div class="d-flex justify-content-between flex-row">
+                    <ul class="nav">
+                        <li class="nav-item bg-light me-1 rounded-3">
+                            <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
+                        </li>
+                        <li class="nav-item bg-light me-1 rounded-3">
+                            <a class="nav-link" href="/misavisos">Mis Avisos</a>
+                        </li>
+                        <li class="nav-item bg-light me-1 rounded-3">
+                            <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-1 tbheight rounded-3">
+                    <table id="tablaAvisos"
+                        class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
+                        <thead class="sticky-top bg-white">
+                            <tr>
+                                <th scope="col" class="text-center">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Texto</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% if(avisos){%>
+                                <% avisos.forEach(element=> { %>
+                                    <tr>
+
+                                        <td class="d-none">
+                                            <%= element.idAviso %>
+                                        </td>
+
+                                        <% let imagen; switch(element.tipo){ case "F" :
+                                            imagen="./images/felicitacion.png" ; break; case "S" :
+                                            imagen="./images/sugerencia.png" ; break; case "I" :
+                                            imagen="./images/incidencia.png" ; break; }%>
+
+                                            <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
+                                            </td>
+
+                                            <td class="align-middle col-2">
+                                                <%= element.fecha %>
+                                            </td>
+                                            <td class="align-middle col-8">
+                                                <%= element.texto %>
+                                            </td>
+
+                                            <td class="align-middle text-center col-1">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button class="button botonAsignarTecnico" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAsignarTec" <% if (element.nombreTecnico)
+                                                        {%>
+                                                        disabled
+                                                        <%} %>>
+                                                            <% if (element.nombreTecnico) {%>
+                                                                <img src="./images/headsetDisabled.png" alt="">
+                                                                <%}else{%>
+                                                                    <img src="./images/headset.png" alt="">
+                                                                    <%} %>
+                                                    </button>
+
+                                                    <button class="button" <% if (element.tipo==="F" ) {%>
+                                                        disabled
+                                                        <%} %>>
+                                                            <% if (element.tipo==="F" ) {%>
+                                                                <img src="./images/binDisabled.png" alt="">
+                                                                <%}else{%>
+                                                                    <img src="./images/bin.png" alt="">
+                                                                    <%} %>
+                                                    </button>
+                                                </div>
+                                            </td>
+
+                                    </tr>
+                                    <% }); %>
+
+                                        <%} else{%>
+                                            <td class="align-middle text-center" colspan="4"> <strong>
+                                                    Sin avisos ヾ(⌐■_■)ノ♪
+                                                </strong> </td>
+                                            <%}%>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="mt-1 tbheight rounded-3">
-                <table id="tablaAvisos" class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
-                    <thead class="sticky-top bg-white">
-                        <tr>
-                            <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Texto</th>
-                            <th scope="col" class="text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <% if(avisos){%>
-                            <% avisos.forEach(element=> { %>
-                                <tr>
-
-                                    <% let imagen; switch(element.tipo){ case "F" : imagen="./images/felicitacion.png" ;
-                                        break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
-                                        imagen="./images/incidencia.png" ; break; }%>
-
-                                        <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
-                                        </td>
-
-                                        <td class="align-middle col-2">
-                                            <%= element.fecha %>
-                                        </td>
-                                        <td class="align-middle col-8">
-                                            <%= element.texto %>
-                                        </td>
-
-                                        <td class="align-middle text-center col-1">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="button" <% if (element.nombreTecnico) {%>
-                                                    disabled
-                                                    <%} %>>
-                                                        <% if (element.nombreTecnico) {%>
-                                                            <img src="./images/headsetDisabled.png" alt="">
-                                                            <%}else{%>
-                                                                <img src="./images/headset.png" alt="">
-                                                                <%} %>
-                                                </button>
-
-                                                <button class="button" <% if (element.tipo==="F" ) {%>
-                                                    disabled
-                                                    <%} %>>
-                                                        <% if (element.tipo==="F" ) {%>
-                                                            <img src="./images/binDisabled.png" alt="">
-                                                            <%}else{%>
-                                                                <img src="./images/bin.png" alt="">
-                                                                <%} %>
-                                                </button>
-                                            </div>
-                                        </td>
-
-                                </tr>
-                                <% }); %>
-
-                        <%} else{%>
-                            <td class="align-middle text-center" colspan="4"> <strong>
-                                Sin avisos ヾ(⌐■_■)ノ♪
-                            </strong> </td>           
-                        <%}%>
-
-                    </tbody>
-                </table>
             </div>
-        </div>
 
-        </div>
+            <script type="application/javascript">
+                $(document).ready(function () {
+                    // Cada vez que se pulse el botón de 'Enviar'
+                    $(".botonAsignarTecnico").on("click", function () {
+                        //Obtener el valor contenido en el cuadro de texto
+                        let idAviso = $($(this).parents("tr")).find("td").eq(0).html()
+
+                        // Realizar la petición al servidor
+                        $.ajax({
+                            method: "GET",
+                            url: "/aviso/ " + idAviso,
+                            // En caso de éxito, mostrar el resultado en el documento HTML
+                            success: function (data, textStatus, jqXHR) {
+                                //Primera columna
+                                $("#nombreUsuario").text(data.aviso.nombreUsuario);
+                                $("#idAviso").text(data.aviso.idAviso);
+                                $("#inputIdAviso").val(data.aviso.idAviso)
+                                $("#tipoAviso").text(data.aviso.tipo);
+                                //Fecha
+                                $("#fechaAviso").text(data.aviso.fecha);
+                                //Tipo
+                                $("#subtipoUno").text(data.aviso.subtipo[0]);
+                                $("#subtipoDos").text(data.aviso.subtipo[1]);
+                                //Perfil Usuario
+                                $("#perfilUsuarioAviso").text(data.aviso.perfilUniversitario);
+                                //Observaciones
+                                $("#textoAviso").text(data.aviso.texto);
+
+                            },
+                            // En caso de error, mostrar el error producido
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert("Se ha producido un error: " + errorThrown);
+                            }
+                        });
+
+                    });
+
+                    $.ajax({
+                            method: "GET",
+                            url: "/tecnicos",
+                            // En caso de éxito, mostrar el resultado en el documento HTML
+                            success: function (data, textStatus, jqXHR) {
+
+                                Object.entries(data).forEach(([key, value]) => {
+                                    value.forEach(element => {
+                                        $('#dropTecnicos').append(new Option(element.nombre, element.numTecnico));
+                                    });
+                                    
+                                });
+
+                            },
+                            // En caso de error, mostrar el error producido
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert("Se ha producido un error: " + errorThrown);
+                            }
+                        });
+                });
+            </script>
 
 </body>
 

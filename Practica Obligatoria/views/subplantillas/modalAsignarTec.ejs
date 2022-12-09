@@ -1,54 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cabecera </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/cabecera.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Cabecera </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/cabecera.css">
 </head>
+
 <body>
 
-    <div class="modal fade" id="perfilUsuarioVModal" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Perfil de Usuario</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col col-4">
-                        <img src="./images/ucmLogo.png" alt="">
-                    </div>
-                    
-                    <div class="col col-8 d-flex flex-column">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-auto">
-                       <h5>Avisos realizados</h5>
-                       <h5>Incidencias</h5>
-                       <h5>Sugerencias</h5>
-                       <h5>Felicitaciones</h5>
-                    </div>
-                </div>
-            </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-      
-          </div>
+  <div class="modal fade" id="modalAsignarTec" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <h4 class="modal-title">Asignar técnico a aviso</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+
+          <div class="row justify-content-between">
+            <div class="col col-auto">
+              <h5 id="nombreUsuario"></h5>
+            </div>
+
+            <div class="col col-auto d-flex flex-row">
+              <h5 id="idAviso"></h5>
+              <h5 id="tipoAviso"></h5>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col col-auto d-flex flex-row">
+              <h5> <strong> Fecha:&nbsp </strong> </h5>
+              <h5 id="fechaAviso"></h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-auto d-flex flex-row">
+              <h5> <strong id="subtipoUno"> </strong> &nbsp </h5>
+              <h5 id="subtipoDos"></h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-auto d-flex flex-row">
+              <h5> <strong> Perfil:&nbsp </strong> </h5>
+              <h5 id="perfilUsuarioAviso"></h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-auto d-flex flex-row">
+              <h5> <strong> Observaciones:&nbsp </strong> </h5>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col col-11">
+              <div id="textoAviso" class="border rounded-3 border-dark text-break"></div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center mt-4">
+            <div class="col col-10 d-flex flex-row">
+              <h6> <strong> Técnico asignado:&nbsp </strong> </h6>
+              <form action="asignarTecnico" method="POST">
+
+                <input type="text" id="inputIdAviso" name="idAvisoAsignado" class="d-none">
+
+                <select class="form-select" id="dropTecnicos" name="tecnicoAsignado"
+                aria-label="dropTecnicos" required>
+                <option disabled selected value>Asigne un ténico</option>
+                </select>
+
+                <button type="submit" class="btn shadow btn-primary">Asginar</button>
+              </form>
+             
+              
+              
+            </div>
+            
+          </div>
+
+        </div>
+
+        <!-- pie del diálogo -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+
       </div>
+    </div>
+  </div>
 
 </body>
+
 </html>

@@ -184,7 +184,6 @@ class DAOUsuario {
             }
             else {
                 connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE numTecnico IS NOT NULL",
-                    [email],
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
@@ -202,6 +201,7 @@ class DAOUsuario {
                                         nombre: t.nombre,
                                     });
                                 });
+
                                 callback(null, tecnicos);
                             }
                         }

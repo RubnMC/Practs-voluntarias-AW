@@ -32,12 +32,12 @@ const middelwareSession = session({
 //Multer
 var almacen = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, 'public', 'uploads'));
+        cb(null, path.join(__dirname, 'public', 'uploads'));
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
     }
-  });
+});
 const multerFactory = multer({ storage: almacen });
 
 // Crear un servidor Express.js 
@@ -80,7 +80,7 @@ app.get("/singup", function (request, response) {
 });
 
 app.post("/process_singup", function (request, response) {
-    
+
     saUsuario.crearUsuario(request.body, function (err, res) {
         if (err) {
             response.status(500);
@@ -133,7 +133,7 @@ app.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, res
         } else {
             response.status(200);
             //console.log(res);
-            response.render("vistaUsuario.ejs", {avisos: res});
+            response.render("vistaUsuario.ejs", { avisos: res });
         }
     })
 });
@@ -147,7 +147,7 @@ app.get("/logged_tec", utils.auth, function (request, response) {
             console.log(err);
         } else {
             response.status(200);
-            response.render("vistaTecnico.ejs", {avisos: res});
+            response.render("vistaTecnico.ejs", { avisos: res });
         }
     })
 });
@@ -173,45 +173,97 @@ app.post("/process_aviso", utils.auth, function (request, response) {
     });
 })
 
-app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function(request, response){
-    saAvisos.getAvisos(response.locals.currentUser, true, function(err, res){
+app.get("/historicosuser", utils.auth, utils.getTiposAvisos, function (request, response) {
+    saAvisos.getAvisos(response.locals.currentUser, true, function (err, res) {
         if (err) {
             response.status(500);
             console.log(err);
-        } else {            
-            response.render("vistaUsuarioHist.ejs", {avisos: res});
+        } else {
+            response.render("vistaUsuarioHist.ejs", { avisos: res });
         }
     });
 });
 
 //Manejadores tecnico
-app.get("/misavisos", utils.auth, utils.getTiposAvisos,  function(request, response){
+app.get("/misavisos", utils.auth, utils.getTiposAvisos, function (request, response) {
     saAvisos.getAvisosTecnico(request.session.currentUser, 2, function (err, res) {
         if (err) {
             response.status(500);
             console.log(err);
         } else {
             response.status(200);
-            response.render("vistaTecnico.ejs", {avisos: res});
+            response.render("vistaTecnico.ejs", { avisos: res });
         }
     })
 });
 
-app.get("/historicostec", utils.auth, utils.getTiposAvisos, function(request, response){
+app.get("/historicostec", utils.auth, utils.getTiposAvisos, function (request, response) {
     saAvisos.getAvisosTecnico(request.session.currentUser, 3, function (err, res) {
         if (err) {
             response.status(500);
             console.log(err);
         } else {
             response.status(200);
-            response.render("vistaTecnicoHist.ejs", {avisos: res});
+            response.render("vistaTecnicoHist.ejs", { avisos: res });
         }
     })
 });
 
-app.get("/prueba", utils.auth, function(request, response){
+app.get("/prueba", utils.auth, function (request, response) {
     response.render("subplantillas/modalAsignarTec.ejs");
 });
+
+//AJAX
+app.get("/aviso/:idAviso", function (request, response) {
+
+    saAvisos.getInfoAviso(request.params.idAviso, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.json({ aviso: res });
+        }
+    });
+    
+});
+
+app.get("/tecnicos", function (request, response) {
+
+    saUsuario.getAllTecnicos(function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.json({ tecnicos: res });
+        }
+    });
+    
+});
+
+app.post("/asignarTecnico", utils.auth, function (request, response) {
+
+
+    console.log(request.body);
+
+    saAvisos.asignarTecnico(request.body.idAvisoAsignado, request.body.tecnicoAsignado, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            if (res) {
+                response.status(200);
+                response.redirect("logged_tec");
+
+            } else {
+                response.status(200);
+                console.log("Error al crear");
+                response.redirect("logged_tec");
+            }
+        }
+    });
+})
 
 // Arrancar el servidor 
 app.listen(config.portS, function (err) {

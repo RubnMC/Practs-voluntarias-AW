@@ -69,26 +69,6 @@ class SAAvisos {
             break;
         }
 
-        /*if (historico) {
-            this.daoAvisos.getAvisosHistoricos(user, function (err, res) {
-                if (err) {
-                    callback(err);
-                }
-                else {
-                    callback(null, res);
-                }
-            })
-        } else {
-            this.daoAvisos.getAvisosEntrantes(user, function (err, res) {
-                if (err) {
-                    callback(err);
-                }
-                else {
-                    callback(null, res);
-                }
-            })
-        }*/
-
     }
 
     crearAviso(aviso, idUser, callback) {
@@ -109,8 +89,20 @@ class SAAvisos {
         });
     }
 
-    asignarTecnico(aviso, numTecnico, callback) {
-        this.daoAvisos.asignarTecnico(aviso, numTecnico, function (err, res) {
+    asignarTecnico(idAviso, numTecnico, callback) {
+        this.daoAvisos.asignarTecnico(idAviso, numTecnico, function (err, res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        });
+    }
+
+    getInfoAviso(id, callback) {
+
+        this.daoAvisos.getInfoAviso(id, function (err, res) {
             if (err) {
                 callback(err);
             }

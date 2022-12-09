@@ -23,7 +23,7 @@ class SAUsuario {
         };
     }
 
-    crearUsuario(user,callback) {
+    crearUsuario(user, callback) {
         if (user.password !== user.password_2) {
             callback(new Error("Las contraseñas no coinciden"));
         }
@@ -38,13 +38,24 @@ class SAUsuario {
                 callback(err);
             }
             else {
-                callback(null,res);
+                callback(null, res);
             }
         });
     }
 
     usuarioCorrecto(userData, callback) {
-        this.daoUser.isUserCorrect(userData.email, userData.password, function(err, res){
+        this.daoUser.isUserCorrect(userData.email, userData.password, function (err, res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
+
+    getAllTecnicos(callback) {
+        this.daoUser.getAllTecnicos(function (err, res) {
             if (err) {
                 callback(err);
             }
