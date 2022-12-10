@@ -1,10 +1,7 @@
 "use strict"
 
-const moment = require("moment");
+const utils = require("../../../utils")
 
-function stampToDate(timestamp) {
-    return moment(timestamp).format('DD/MM/YYYY')
-}
 
 class DAOAvisos {
     constructor(pool) {
@@ -42,7 +39,7 @@ class DAOAvisos {
             if (err) {
                 callback(new Error("Error de acceso a la base de datos"));
             } else {
-                connection.query("INSERT INTO UCM_AW_CAU_AV_Avisos(texto,tipo,subtipo,observaciones,solucionado) VALUES (?,?,?,?,0);",
+                connection.query("INSERT INTO UCM_AW_CAU_AV_Avisos(texto,tipo,subtipo,observaciones,solucionado,activo) VALUES (?,?,?,?,0,1);",
                     [aviso.texto, aviso.tipo, aviso.subtipo, aviso.observaciones],
                     function (err, rows) {
                         if (err) {
@@ -114,7 +111,7 @@ class DAOAvisos {
                                             tipo: element.tipo,
                                             texto: element.texto,
                                             subtipo: element.subtipo,
-                                            fecha: stampToDate(element.fecha),
+                                            fecha: utils.stampToDate(element.fecha),
                                             observaciones: element.observaciones,
                                             solucionado: element.solucionado,
                                             nombreTecnico: element.nombreTecnico,
@@ -163,7 +160,7 @@ class DAOAvisos {
                                             tipo: element.tipo,
                                             texto: element.texto,
                                             subtipo: element.subtipo,
-                                            fecha: stampToDate(element.fecha),
+                                            fecha: utils.stampToDate(element.fecha),
                                             observaciones: element.observaciones,
                                             solucionado: element.solucionado,
                                             numTecnico: element.numTecnico,
@@ -210,7 +207,7 @@ class DAOAvisos {
                                             tipo: element.tipo,
                                             texto: element.texto,
                                             subtipo: element.subtipo,
-                                            fecha: stampToDate(element.fecha),
+                                            fecha: utils.stampToDate(element.fecha),
                                             observaciones: element.observaciones,
                                             solucionado: element.solucionado,
                                             numTecnico: element.numTecnico,
@@ -254,16 +251,16 @@ class DAOAvisos {
                                     let aviso = {
                                         idAviso: rows[0].idAviso,
                                         texto: rows[0].texto,
-                                        tipo: rows[0].tipo,
-                                        subtipo: rows[0].subtipo.split(" "),
-                                        fecha: stampToDate(rows[0].fecha),
+                                        tipo: utils.parseAvisoTipo(rows[0].tipo),
+                                        subtipo: rows[0].subtipo.split(": "),
+                                        fecha:utils.stampToDate(rows[0].fecha),
                                         observaciones: rows[0].observaciones,
                                         solucionado: rows[0].solucionado,
                                         idUsuario: rows[0].idUsuario,
                                         nombreUsuario: rows[0].nombreUsuario,
                                         idTecnico: rows[0].idTecnico,
                                         nombreTecnico: rows[0].nombreTecnico, 
-                                        perfilUniversitario: rows[0].perfilUniversitario
+                                        perfilUniversitario: utils.parseUserType(rows[0].perfilUniversitario)
                                     };
 
                                     callback(null, aviso);

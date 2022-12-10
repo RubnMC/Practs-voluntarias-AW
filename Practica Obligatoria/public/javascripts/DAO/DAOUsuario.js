@@ -1,6 +1,7 @@
 "use strict";
 
 const moment = require("moment");
+const utils = require("../../../utils");
 
 function stampToDate(timestamp) {
     return moment(timestamp).format('DD/MM/YYYY HH:mm:ss')
@@ -32,6 +33,7 @@ class DAOUsuario {
                                     idUsuario: rows[0].idUsuario,
                                     correo: rows[0].correo,
                                     rol: rows[0].rol,
+                                    perfilVisible: utils.parseUserType(rows[0].perfilUniversitario),
                                     numTecnico: rows[0].numTecnico,
                                     nombre: rows[0].nombre,
                                     perfilUniversitario: rows[0].perfilUniversitario,

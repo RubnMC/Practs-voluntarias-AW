@@ -30,15 +30,7 @@ const middelwareSession = session({
 });
 
 //Multer
-var almacen = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'public', 'uploads'));
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
-});
-const multerFactory = multer({ storage: almacen });
+const multerFactory = multer({ storage: multer.memoryStorage() });
 
 // Crear un servidor Express.js 
 const app = express();
@@ -132,7 +124,6 @@ app.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, res
             console.log(err);
         } else {
             response.status(200);
-            //console.log(res);
             response.render("vistaUsuario.ejs", { avisos: res });
         }
     })
@@ -192,7 +183,7 @@ app.get("/misavisos", utils.auth, utils.getTiposAvisos, function (request, respo
             console.log(err);
         } else {
             response.status(200);
-            response.render("vistaTecnico.ejs", { avisos: res });
+            response.render("vistaTecnicoMisAvisos.ejs", { avisos: res });
         }
     })
 });

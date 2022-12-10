@@ -17,7 +17,7 @@
   <%- include ("subplantillas/cabecera") %>
   <%- include ("subplantillas/modalInfoAviso") %>
 
-  <div class="container mt-5 ">
+  <div class="container mt-4 ">
     <div class="d-flex justify-content-between flex-row">
       <ul class="nav">
         <li class="nav-item bg-light me-1 rounded-3">
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </div>
-    <div class="tbheight mt-1 rounded-3">
+    <div class="mt-1 tbheight rounded-3">
       <table id="tablaAvisos" class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
         <thead class="sticky-top bg-white">
           <tr>
@@ -47,13 +47,14 @@
           <% avisos.forEach(element=> { %>
           <tr>
 
-            <% let imagen; switch(element.tipo){ case "F" : imagen="./images/felicitacion.png" ;
-                                        break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
-                                        imagen="./images/incidencia.png" ; break; }%>
-
             <td class="d-none">
               <%= element.idAviso %>
             </td>
+
+            <% let imagen; switch(element.tipo){ case "F" :
+                                            imagen="./images/felicitacion.png" ; break; case "S" :
+                                            imagen="./images/sugerencia.png" ; break; case "I" :
+                                            imagen="./images/incidencia.png" ; break; }%>
 
             <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
             </td>
@@ -75,6 +76,10 @@
                 <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalInfoAviso">
                   <img src="./images/eye.png" alt="">
                 </button>
+
+                <button class="button">
+                  <img src="./images/bin.png" alt="">
+                </button>
               </div>
             </td>
 
@@ -85,16 +90,16 @@
           <td class="align-middle text-center" colspan="4"> <strong>
               Sin avisos ヾ(⌐■_■)ノ♪
             </strong> </td>
-
           <%}%>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        </div>
-        <script src="./javascripts/JQuery/openVerAviso.js"></script>
+            </div>
+
+            <script src="./javascripts/JQuery/openVerAviso.js"></script>
 </body>
 
 </html>

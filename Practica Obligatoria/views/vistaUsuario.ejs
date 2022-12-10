@@ -2,95 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> UCM-CAU </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/tablas.css">
-    <link rel="stylesheet" href="./css/fondo.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> UCM-CAU </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/tablas.css">
+  <link rel="stylesheet" href="./css/fondo.css">
+  <link rel="icon" href="https://www.ucm.es/themes/ucm16/media/img/logoucm.ico">
 </head>
 
 <body class="backGround">
+  <%- include("subplantillas/modalInfoAviso") %>
+  <%- include ("subplantillas/cabecera") %>
 
-    <%- include ("subplantillas/cabecera") %>
+  <div class="container mt-2">
+    <div class="d-flex justify-content-between flex-row">
+      <ul class="nav">
+        <li class="nav-item bg-light me-1 rounded-3">
+          <a class="nav-link" href="/logged_user">Mis avisos</a>
+        </li>
+        <li class="nav-item bg-light me-1 rounded-3">
+          <a class="nav-link" href="/historicosuser">Histórico de avisos</a>
+        </li>
 
-        <div class="container mt-2">
-            <div class="d-flex justify-content-between flex-row">
-                <ul class="nav">
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/logged_user">Mis avisos</a>
-                    </li>
-                    <li class="nav-item bg-light me-1 rounded-3">
-                        <a class="nav-link" href="/historicosuser">Histórico de avisos</a>
-                    </li>
+      </ul>
+      <div class="d-flex flex-row-reverse self">
+        <div class="col col-auto">
+          <%- include ("subplantillas/modalesCrearAviso") %>
+          <button class="btn btn-primary" data-bs-toggle="modal" id="butModal" href="#seleccionTipoAviso" role="button">Nuevo Aviso</button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-1 tbheight rounded-3">
+      <table id="tablaAvisos" class="align-middle table tablaClickable table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
+        <thead class="sticky-top bg-white">
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Texto</th>
+            <th scope="col" class="text-center">Tipo</th>
+            <th scope="col">Técnico</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                </ul>
-                <div class="d-flex flex-row-reverse self">
-                    <div class="col col-auto">
-                        <%- include ("subplantillas/modalesCrearAviso") %>
-                            <button class="btn btn-primary" data-bs-toggle="modal" id="butModal"
-                                href="#seleccionTipoAviso" role="button">Nuevo Aviso</button>
-                    </div>
+          <% if(avisos){%>
+          <% avisos.forEach(element=> { %>
+          <tr class="avisoClickable">
+            <td class="d-none">
+              <%= element.idAviso %>
+            </td>
+            <td class="col-1 p-0">
+              <%= element.fecha %>
+            </td>
+            <td class="col-8">
+              <% let aux =  element.texto
+                if (aux.length > 200) {
+                    aux = element.texto.slice(0,199) +"...";
+                }
+               %>
+              <%= aux %>
+            </td>
+
+            <% let imagen; switch(element.tipo){ case "F" :
+                                            imagen="./images/felicitacion.png" ; break; case "S" :
+                                            imagen="./images/sugerencia.png" ; break; case "I" :
+                                            imagen="./images/incidencia.png" ; break; }%>
+
+            <td class="text-center col-1"> <img src=<%=imagen %> alt="">
+            </td>
+
+            <% if(element.nombreTecnico){ %>
+            <td class="col-1">
+              <%= element.nombreTecnico %>
+            </td>
+            <% } else{ %>
+            <td class="col-1"> </td>
+            <%}%>
+
+                                    </tr>
+                                    <% }); %>
+
+            <%} else{%>
+              <td class="align-middle text-center" colspan="4"> <strong>
+                Sin avisos ヾ(⌐■_■)ノ♪
+              </strong> </td>
+
+          <%}%>
+
+                        </tbody>
+                    </table>
+
+
                 </div>
             </div>
-            <div class="mt-1 tbheight rounded-3">
-                <table id="tablaAvisos" class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
-                    <thead class="sticky-top bg-white">
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Texto</th>
-                            <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col">Técnico</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <% if(avisos){%>
-                            <% avisos.forEach(element=> { %>
-                                <tr>
-                                    <td class="d-none"><%= element.idAviso %> </td>
-                                    <td class="col-2">
-                                        <%= element.fecha %>
-                                    </td>
-                                    <td class="col-8">
-                                        <%= element.texto %>
-                                    </td>
+            <script type="application/javascript">
+                $(document).ready(function () {
+                $(".tablaClickable").on("click", "tr", function () {
+                    let idAviso = $(this).find("td").eq(0).html()
 
-                                    <% let imagen; switch(element.tipo){ case "F" : imagen="./images/felicitacion.png" ;
-                                        break; case "S" : imagen="./images/sugerencia.png" ; break; case "I" :
-                                        imagen="./images/incidencia.png" ; break; }%>
+                    // Realizar la petición al servidor
+                    $.ajax({
+                        method: "GET",
+                        url: "/aviso/ " + idAviso,
+                        // En caso de éxito, mostrar el resultado en el documento HTML
+                        success: function (data, textStatus, jqXHR) {
+                            //Primera columna
+                            console.log(data.aviso);
+                            $("#nombreUsuario").text(data.aviso.nombreUsuario);
+                            $("#idAviso").text("Aviso " + data.aviso.idAviso + ":");
+                            $("#tipoAviso").text(data.aviso.tipo);
+                            //Fecha
+                            $("#fechaAviso").text(data.aviso.fecha);
+                            //Tipo
+                            $("#subtipoUno").text(data.aviso.subtipo[0]);
+                            $("#subtipoDos").text(data.aviso.subtipo[1]);
+                            //Perfil Usuario
+                            $("#perfilUsuarioAviso").text(data.aviso.perfilUniversitario);
+                            //Texto
+                            $("#textoAviso").text(data.aviso.texto);
+                            //Observaciones Técnico
+                            if (data.aviso.observaciones) {
+                                $("#comentarioTecnico").text(data.aviso.observaciones);
+                            }
+                        },
+                        // En caso de error, mostrar el error producido
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert("Se ha producido un error: " + errorThrown);
+                        }
+                    });
 
-                                        <td class="text-center col-1"> <img src=<%=imagen %> alt="">
-                                        </td>
-                                        
-                                        <% if(element.nombreTecnico){ %>
-                                            <td class="col-1"> <%= element.nombreTecnico %>  </td>
-                                        <% } else{ %>
-                                            <td class="col-1"> </td>
-                                        <%}%> 
-                                        
-                                </tr>
-                                <% }); %>
-
-                                    <%} else{%>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td> <strong>
-                                                    Sin avisos ヾ(⌐■_■)ノ♪
-                                                </strong> </td>
-                                            
-                                        </tr>
-
-                                        <%}%>
-
-                    </tbody>
-                </table>
-
-
-            </div>
-        </div>
+                    $('#modalInfoAviso').modal('show');
+                });
+            });
+            </script>
 
 </body>
 

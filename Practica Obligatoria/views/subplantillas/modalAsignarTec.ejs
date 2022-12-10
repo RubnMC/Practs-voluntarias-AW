@@ -33,6 +33,7 @@
 
             <div class="col col-auto d-flex flex-row">
               <h5 id="idAviso"></h5>
+              <h5>&nbsp</h5>
               <h5 id="tipoAviso"></h5>
             </div>
 
@@ -71,24 +72,25 @@
           </div>
 
           <div class="row justify-content-center mt-4">
-            <div class="col col-10 d-flex flex-row">
-              <h6> <strong> Técnico asignado:&nbsp </strong> </h6>
+            <div class="col align-middle col-auto d-flex flex-row">
               <form action="asignarTecnico" method="POST">
+                <div class="d-flex align-middle">
 
-                <input type="text" id="inputIdAviso" name="idAvisoAsignado" class="d-none">
+                  <input type="text" id="inputIdAviso" name="idAvisoAsignado" class="d-none">
 
-                <select class="form-select" id="dropTecnicos" name="tecnicoAsignado"
-                aria-label="dropTecnicos" required>
-                <option disabled selected value>Asigne un ténico</option>
-                </select>
+                  <select class="form-select" id="dropTecnicos" name="tecnicoAsignado" aria-label="dropTecnicos"
+                    required>
+                    <option disabled selected value>Asigne un ténico</option>
+                  </select>
 
-                <button type="submit" class="btn shadow btn-primary">Asginar</button>
+                  <button type="submit" class="ms-3 btn shadow btn-primary">Asginar</button>
+                </div>
               </form>
-             
-              
-              
+
+
+
             </div>
-            
+
           </div>
 
         </div>
