@@ -6,25 +6,66 @@
    word-break: break-word;
 }
 
+th:not(.tec){
+   border-right: 1px solid #182c4c;
+}
+
+td:not(.tec){
+   border-right: 1px solid #182c4c;
+}
+
+
+
 .tbheight{
    max-height: clamp(25em,10vh,250px);
    overflow: auto;
+   background-color: white;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: rgb(216, 216, 216);
+   background-color: #eef8ff;
 }
 
+.anchura-min{
+   min-width: 6em;
+}
 
 .table-striped tr:last-child td:last-child {
    border-bottom-right-radius: 0.3rem;
 }
 
-.table-striped tr:last-child td:first-child {
+.table-striped tr:last-child td:nth-child(2) {
    border-bottom-left-radius: 0.3rem;
 }
 
 .nav-link {
    color: black !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+   width: 10px;
+ }
+ 
+ /* Track */
+ ::-webkit-scrollbar-track {
+   background: lightgray;
+   border-top-right-radius: 0.3rem;
+   border-bottom-right-radius: 0.3rem;
+ }
+ 
+ /* Handle */
+ ::-webkit-scrollbar-thumb {
+   border-radius: 0.3rem;
+   border-left: 3px solid lightgray;
+   border-right: 3px solid lightgray;
+   background:  grey;
+ }
+ 
+ /* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+   background: #555;
+   border-left: 2px solid lightgray;
+   border-right: 2px solid lightgray;
+ }

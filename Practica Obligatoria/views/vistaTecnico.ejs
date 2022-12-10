@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> UCM-CAU </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/tablas.css">
   <link rel="stylesheet" href="./css/fondo.css">
+  <link rel="stylesheet" href="./css/tablas.css">
   <link rel="icon" href="https://www.ucm.es/themes/ucm16/media/img/logoucm.ico">
 </head>
 
@@ -38,7 +38,7 @@
             <th scope="col" class="text-center">Tipo</th>
             <th scope="col">Fecha</th>
             <th scope="col">Texto</th>
-            <th scope="col" class="text-center">Acciones</th>
+            <th scope="col" class="text-center tec">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@
               <%= aux %>
             </td>
 
-            <td class="align-middle text-center col-1">
+            <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="button botonAsignarTecnico" data-bs-toggle="modal" data-bs-target="#modalAsignarTec" <% if (element.nombreTecnico){%> disabled <%} %>>
                   <% if (element.nombreTecnico) {%>
@@ -113,7 +113,6 @@
                     $(".botonAsignarTecnico").on("click", function () {
                         //Obtener el valor contenido en el cuadro de texto
                         let idAviso = $($(this).parents("tr")).find("td").eq(0).html()
-
                         // Realizar la petición al servidor
                         $.ajax({
                             method: "GET",

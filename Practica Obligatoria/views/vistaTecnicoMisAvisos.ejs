@@ -38,7 +38,7 @@
             <th scope="col" class="text-center">Tipo</th>
             <th scope="col">Fecha</th>
             <th scope="col">Texto</th>
-            <th scope="col" class="text-center">Acciones</th>
+            <th scope="col" class="text-center tec">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@
               <%= aux %>
             </td>
 
-            <td class="align-middle text-center col-1">
+            <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalInfoAviso">
                   <img src="./images/eye.png" alt="">
@@ -87,7 +87,7 @@
           <% }); %>
 
           <%} else{%>
-          <td class="align-middle text-center" colspan="4"> <strong>
+          <td class="align-middle text-center tec" colspan="4"> <strong>
               Sin avisos ヾ(⌐■_■)ノ♪
             </strong> </td>
           <%}%>
