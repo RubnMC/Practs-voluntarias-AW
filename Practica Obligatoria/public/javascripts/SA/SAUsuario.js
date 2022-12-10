@@ -7,40 +7,26 @@ class SAUsuario {
         this.today = new Date();
     }
 
-    parseUser(user) {
-        let tec = false;
-        if (user.esTecnico === 'ON') {
-            tec = true;
-        }
-        return {
-            correo: user.email,
-            rol: tec,
-            numTecnico: user.numEmpleado,
-            nombre: user.nombre,
-            perfilUniversitario: user.profile_type,
-            password: user.password,
-            imagen: user.profile_Image,
-        };
-    }
-
     crearUsuario(user, callback) {
         if (user.password !== user.password_2) {
             callback(new Error("Las contraseñas no coinciden"));
         }
-        if (user.numEmpleado && !(/\d{4}\-[A-Z]{3}/.test(user.numEmpleado))) {
+        else if (user.numTecnico && !(/\d{4}\-[A-Z]{3}/.test(user.numTecnico))) {
             callback(new Error("Formato de num.empleado incorrecto (0000-ABC)"));
         }
-        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(user.password)) {
-            callback(new Error("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayuscula y un caracter especial"));
+        // if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(user.password)) {
+        //     callback(new Error("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayuscula y un caracter especial"));
+        // }
+        else {
+            this.daoUser.createUser(user, function (err, res) {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    callback(null, res);
+                }
+            });
         }
-        this.daoUser.createUser(this.parseUser(user), function (err, res) {
-            if (err) {
-                callback(err);
-            }
-            else {
-                callback(null, res);
-            }
-        });
     }
 
     usuarioCorrecto(userData, callback) {

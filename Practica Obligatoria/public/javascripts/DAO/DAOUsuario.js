@@ -94,8 +94,8 @@ class DAOUsuario {
                                                 }
                                                 else {
 
-                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario,numTecnico) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?, ?);",
-                                                        [user.nombre, user.correo, user.perfilUniversitario, user.numTecnico],
+                                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, imagen, perfilUniversitario,numTecnico) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP(), ?, ?, ?);",
+                                                        [user.nombre, user.correo, user.imagen, user.perfilUniversitario, user.numTecnico],
                                                         function (err, rows) {
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos, insertar usuario"));
@@ -134,8 +134,8 @@ class DAOUsuario {
                                 }
                                 else {
                                     userRol = "Usuario";
-                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, perfilUniversitario) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP() , ?);",
-                                        [user.nombre, user.correo, user.perfilUniversitario],
+                                    connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios(nombre, correo, rol, fecha, imagen, perfilUniversitario) VALUES (?, ?, '" + userRol + "', CURRENT_TIMESTAMP(), ?, ?);",
+                                        [user.nombre, user.correo, user.imagen, user.perfilUniversitario],
                                         function (err, rows) {
                                             if (err) {
                                                 callback(new Error("Error de acceso a la base de datos, insertar usuario"));
