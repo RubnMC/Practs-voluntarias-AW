@@ -67,7 +67,7 @@ router.post("/process_singup",multerFactory.single('foto'), function (request, r
     if (request.file) {
         user.imagen= request.file.buffer ;
     }
-    
+
     saUsuario.crearUsuario(user, function (err, res) {
         if (err) {
             response.status(500);
@@ -229,9 +229,6 @@ router.get("/tecnicos", function (request, response) {
 });
 
 router.post("/asignarTecnico", utils.auth, function (request, response) {
-
-
-    console.log(request.body);
 
     saAvisos.asignarTecnico(request.body.idAvisoAsignado, request.body.tecnicoAsignado, function (err, res) {
         if (err) {

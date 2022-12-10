@@ -238,7 +238,6 @@ class DAOAvisos {
                             [id],
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
-                            console.log(rows);
                             if (err) {
                                 callback(new Error("Error de acceso a la base de datos"));
                             }
