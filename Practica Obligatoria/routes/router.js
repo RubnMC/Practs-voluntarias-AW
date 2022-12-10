@@ -195,12 +195,8 @@ router.get("/historicostec", utils.auth, utils.getTiposAvisos, function (request
     })
 });
 
-router.get("/prueba", utils.auth, function (request, response) {
-    response.render("subplantillas/modalAsignarTec.ejs");
-});
-
 //AJAX
-router.get("/aviso/:idAviso", function (request, response) {
+router.get("/aviso/:idAviso", utils.auth, function (request, response) {
 
     saAvisos.getInfoAviso(request.params.idAviso, function (err, res) {
         if (err) {
@@ -214,7 +210,7 @@ router.get("/aviso/:idAviso", function (request, response) {
     
 });
 
-router.get("/tecnicos", function (request, response) {
+router.get("/tecnicos", utils.auth, function (request, response) {
 
     saUsuario.getAllTecnicos(function (err, res) {
         if (err) {
