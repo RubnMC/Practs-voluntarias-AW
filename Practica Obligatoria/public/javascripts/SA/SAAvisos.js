@@ -124,6 +124,17 @@ class SAAvisos {
         });
     }
 
+    contadorAvisos(id, rol, callback){
+        this.daoAvisos.contadorAvisos(id, rol, function (err, res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        });
+    }
+
 }
 
 module.exports = SAAvisos;

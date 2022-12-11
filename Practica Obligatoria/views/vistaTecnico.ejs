@@ -16,11 +16,12 @@
 
   <%- include ("subplantillas/cabecera") %>
   <%- include ("subplantillas/modalAsignarTec") %>
+  <%- include ("subplantillas/modalEliminarAviso") %>
 
   <div class="container mt-4 ">
     <div class="d-flex justify-content-between flex-row">
       <ul class="nav">
-        <li class="nav-item bg-light me-1 rounded-3">
+        <li class="nav-item bg-secondary me-1 rounded-3">
           <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
         </li>
         <li class="nav-item bg-light me-1 rounded-3">
@@ -59,10 +60,10 @@
             <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
             </td>
 
-            <td class="align-middle col-2">
+            <td class="align-middle col-1 text-center">
               <%= element.fecha %>
             </td>
-            <td class="align-middle col-8">
+            <td class="align-middle col-8 texoTabla">
               <% let aux =  element.texto
                 if (aux.length > 200) {
                     aux = element.texto.slice(0,199) +"...";
@@ -81,7 +82,7 @@
                   <%} %>
                 </button>
 
-                <button class="button" <% if (element.tipo==="F" ) {%> disabled <%} %>>
+                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso" <% if (element.tipo==="F" ) {%> disabled <%} %>>
                   <% if (element.tipo==="F" ) {%>
                   <img src="./images/binDisabled.png" alt="">
                   <%}else{%>
@@ -106,6 +107,8 @@
             </div>
 
             </div>
+
+            <script src="./javascripts/JQuery/openVerAviso.js"></script>
 
             <script type="application/javascript">
                 $(document).ready(function () {

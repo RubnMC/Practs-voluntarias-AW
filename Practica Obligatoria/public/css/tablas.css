@@ -43,6 +43,10 @@ td:not(.tec){
    color: black !important;
 }
 
+button:disabled{
+   pointer-events: none;
+}
+
 /* width */
 ::-webkit-scrollbar {
    width: 10px;

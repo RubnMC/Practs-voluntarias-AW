@@ -24,7 +24,7 @@
         <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
         </li>
-        <li class="nav-item bg-light me-1 rounded-3">
+        <li class="nav-item me-1 rounded-3 bg-secondary">
           <a class="nav-link" href="/misavisos">Mis Avisos</a>
         </li>
         <li class="nav-item bg-light me-1 rounded-3">
@@ -60,10 +60,10 @@
             <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
             </td>
 
-            <td class="align-middle col-2">
+            <td class="align-middle col-1 text-center">
               <%= element.fecha %>
             </td>
-            <td class="align-middle col-8">
+            <td class="align-middle col-8 texoTabla">
                 <% let aux =  element.texto
                 if (aux.length > 200) {
                     aux = element.texto.slice(0,199) +"...";

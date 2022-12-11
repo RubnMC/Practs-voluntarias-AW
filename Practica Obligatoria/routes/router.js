@@ -304,4 +304,18 @@ router.post("/asignarTecnico", utils.auth, function (request, response) {
     });
 })
 
+router.get("/contador", utils.auth, function (request, response) {
+
+    saAvisos.contadorAvisos(response.locals.currentUser.idUsuario, response.locals.currentUser.rol, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.json({ contador: res });
+        }
+    });
+
+});
+
 module.exports = router;

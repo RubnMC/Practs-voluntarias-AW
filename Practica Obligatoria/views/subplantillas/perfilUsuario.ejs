@@ -24,8 +24,8 @@
             <!-- cuerpo del diálogo -->
             <div class="modal-body">
                 <div class="row">
-                    <div class="col col-4">
-                        <img src="/imagen/<%=locals.currentUser.idUsuario%>" alt="">
+                    <div class="col col-4 text-center align-items-center">
+                        <img src="/imagen/<%=locals.currentUser.idUsuario%>" alt="" class="img-thumbnail">
                     </div>
                     
                     <div class="col col-8 d-flex flex-column">
@@ -38,10 +38,18 @@
                 </div>
                 <div class="row">
                     <div class="col col-auto">
-                       <h5>Avisos realizados:</h5>
+                      <% if(locals.currentUser.rol === "Usuario"){%>
+                        <h5>Avisos realizados:</h5>
+                      <%} else{%>
+                        <h5>Avisos gestionados:</h5>
+                      <%}%> 
+                       <h5 id="perfilAvisos"></h5>
                        <h5>Incidencias</h5>
+                       <h5 id="perfilIndicendias"></h5>
                        <h5>Sugerencias</h5>
+                       <h5 id="perfilSugerencias"></h5>
                        <h5>Felicitaciones</h5>
+                       <h5 id="perfilFelicitaciones"></h5>
                     </div>
                 </div>
             </div>

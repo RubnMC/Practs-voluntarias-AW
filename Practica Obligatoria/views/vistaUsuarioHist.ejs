@@ -23,7 +23,7 @@
         <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/logged_user">Mis avisos</a>
         </li>
-        <li class="nav-item bg-light me-1 rounded-3">
+        <li class="nav-item bg-secondary me-1 rounded-3">
           <a class="nav-link" href="/historicosuser">Histórico de avisos</a>
         </li>
 
@@ -55,11 +55,11 @@
             <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
             </td>
 
-            <td class="align-middle col-1 p-0">
+            <td class="align-middle col-1 p-0 text-center">
               <%= element.fecha %>
             </td>
 
-            <td class="align-middle col-9">
+            <td class="align-middle col-9 texoTabla">
               <% let aux =  element.texto
                 if (aux.length > 200) {
                     aux = element.texto.slice(0,199) +"...";
