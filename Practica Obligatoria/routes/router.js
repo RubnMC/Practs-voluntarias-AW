@@ -47,13 +47,13 @@ router.get("/singup", function (request, response) {
     response.render("singup.ejs", { error: null });
 });
 
-router.post("/process_singup",multerFactory.single('foto'), function (request, response) {
+router.post("/process_singup", multerFactory.single('foto'), function (request, response) {
     let tec = false;
     if (request.body.esTecnico === 'ON') {
         tec = true;
     }
 
-    let user ={
+    let user = {
         correo: request.body.email,
         rol: tec,
         numTecnico: request.body.numEmpleado,
@@ -65,7 +65,7 @@ router.post("/process_singup",multerFactory.single('foto'), function (request, r
     };
 
     if (request.file) {
-        user.imagen= request.file.buffer ;
+        user.imagen = request.file.buffer;
     }
 
     saUsuario.crearUsuario(user, function (err, res) {
@@ -86,6 +86,7 @@ router.post("/process_singup",multerFactory.single('foto'), function (request, r
 
 router.post("/process_login", function (request, response) {
     saUsuario.usuarioCorrecto(request.body, function (err, res) {
+        console.log(res);
         if (err) {
             response.status(500);
             response.render("login", { error: err });
@@ -108,6 +109,23 @@ router.post("/process_login", function (request, response) {
 
     });
 })
+
+// router.get("/imagen/:id", utils.auth, function (request, response) {
+//     let n = Number(request.params.id);
+//     if (isNaN(n)) {
+//         response.status(400);
+//         response.end("Petición incorrecta");
+//     } else {
+//         saUsuario.obtenerImagen(n, function (err, imagen) {
+//             if (imagen) {
+//                 response.end(imagen);
+//             } else {
+//                 response.status(404);
+//                 response.end("Not found");
+//             }
+//         });
+//     }
+// });
 
 //Usuario
 router.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, response) {
@@ -207,7 +225,7 @@ router.get("/aviso/:idAviso", utils.auth, function (request, response) {
             response.json({ aviso: res });
         }
     });
-    
+
 });
 
 router.get("/tecnicos", utils.auth, function (request, response) {
@@ -221,7 +239,7 @@ router.get("/tecnicos", utils.auth, function (request, response) {
             response.json({ tecnicos: res });
         }
     });
-    
+
 });
 
 router.post("/asignarTecnico", utils.auth, function (request, response) {

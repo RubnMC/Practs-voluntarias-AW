@@ -50,6 +50,17 @@ class SAUsuario {
             }
         })
     }
+
+    obtenerImagen(id, callback){
+        this.daoUser.obtenerImagen(id, function (err, res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
 }
 
 module.exports = SAUsuario;
