@@ -86,7 +86,6 @@ router.post("/process_singup", multerFactory.single('foto'), function (request, 
 
 router.post("/process_login", function (request, response) {
     saUsuario.usuarioCorrecto(request.body, function (err, res) {
-        console.log(res);
         if (err) {
             response.status(500);
             response.render("login", { error: err });
@@ -110,22 +109,22 @@ router.post("/process_login", function (request, response) {
     });
 })
 
-// router.get("/imagen/:id", utils.auth, function (request, response) {
-//     let n = Number(request.params.id);
-//     if (isNaN(n)) {
-//         response.status(400);
-//         response.end("Petición incorrecta");
-//     } else {
-//         saUsuario.obtenerImagen(n, function (err, imagen) {
-//             if (imagen) {
-//                 response.end(imagen);
-//             } else {
-//                 response.status(404);
-//                 response.end("Not found");
-//             }
-//         });
-//     }
-// });
+router.get("/imagen/:id", utils.auth, function (request, response) {
+    let n = Number(request.params.id);
+    if (isNaN(n)) {
+        response.status(400);
+        response.end("Petición incorrecta");
+    } else {
+        saUsuario.obtenerImagen(n, function (err, imagen) {
+            if (imagen) {
+                response.end(imagen);
+            } else {
+                response.status(404);
+                response.end("Not found");
+            }
+        });
+    }
+});
 
 //Usuario
 router.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, response) {

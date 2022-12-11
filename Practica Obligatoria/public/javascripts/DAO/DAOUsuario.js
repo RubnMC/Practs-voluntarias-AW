@@ -37,8 +37,7 @@ class DAOUsuario {
                                     numTecnico: rows[0].numTecnico,
                                     nombre: rows[0].nombre,
                                     perfilUniversitario: rows[0].perfilUniversitario,
-                                    fecha: stampToDate(rows[0].fecha),
-                                    imagen: rows[0].imagen
+                                    fecha: stampToDate(rows[0].fecha)
                                 };
 
                                 connection.query("SELECT * FROM UCM_AW_CAU_CON_Contrasenas WHERE password = ? AND idUsuario = ?",
@@ -213,33 +212,33 @@ class DAOUsuario {
         );
     }
 
-    // obtenerImagen(id, callback) {
-    //     this.pool.getConnection(function (err, connection) {
-    //         if (err) {
-    //             callback(new Error("Error de conexión a la base de datos"));
-    //         }
-    //         else {
-    //             let sql = "SELECT imagen FROM UCM_AW_CAU_USU_Usuarios WHERE idUsuario = ?";
-    //             connection.query(sql, [id], function (err, rows) {
-    //                 connection.release();
-    //                     if (err) {
-    //                         callback(new Error("Error de acceso a la base de datos"));
-    //                     }
-    //                     else {
-    //                         if (rows.length === 0) {
-    //                             callback(null, false); //no está el usuario con el password proporcionado
-    //                         }
-    //                         else {
-    //                             console.log(rows);
+    obtenerImagen(id, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                let sql = "SELECT imagen FROM UCM_AW_CAU_USU_Usuarios WHERE idUsuario = ?";
+                connection.query(sql, [id], function (err, rows) {
+                    connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                callback(null, false); //no está el usuario con el password proporcionado
+                            }
+                            else {
+                                console.log(rows);
                                
-    //                             callback(null, rows[0].foto);
-    //                         }
-    //                     }
-    //                 });
-    //         }
-    //     }
-    //     );    
-    // }
+                                callback(null, rows[0].imagen);
+                            }
+                        }
+                    });
+            }
+        }
+        );    
+    }
 }
 
 module.exports = DAOUsuario;
