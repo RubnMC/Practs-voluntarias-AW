@@ -112,6 +112,17 @@ class SAAvisos {
         });
     }
 
+    solucionarAviso(id, solucion, callback) {
+
+        this.daoAvisos.solucionarAviso(id, solucion, function (err, res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        });
+    }
 
 }
 

@@ -228,9 +228,7 @@ class DAOUsuario {
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
-                            else {
-                                console.log(rows);
-                               
+                            else {                               
                                 callback(null, rows[0].imagen);
                             }
                         }

@@ -271,6 +271,31 @@ class DAOAvisos {
         });
     }
 
+    solucionarAviso(id, solucion, callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de acceso a la base de datos"));
+            } else {
+                connection.query("UPDATE UCM_AW_CAU_AV_Avisos SET observaciones = ?, solucionado = 1 WHERE idAviso = ?",
+                [solucion, id],
+                function (err, rows) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"));
+                    }
+                    else {
+                        if (rows.length === 0) {
+                            callback(null, false);
+                        } else {
+                            callback(null, true);
+                        }
+                    }
+                }
+            );
+           }
+        });
+    }
+
 
 }
 

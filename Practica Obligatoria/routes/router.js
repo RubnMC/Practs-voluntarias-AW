@@ -119,7 +119,6 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
             if (imagen) {
                 response.end(imagen);
             } else {
-                response.status(404);
                 response.sendFile("./images/default.png", {root: "public"});
             }
         });
@@ -211,6 +210,50 @@ router.get("/historicostec", utils.auth, utils.getTiposAvisos, function (request
         }
     })
 });
+
+router.post("/solucionarAviso", utils.auth, function (request, response) {
+
+    saAvisos.solucionarAviso(request.body.idAviso, request.body.observacionTecnico, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log("Error Base Datos");
+        } else {
+            if (res) {
+                response.status(200);
+                response.redirect("misavisos");
+
+            } else {
+                response.status(200);
+                console.log("Error al crear");
+                response.redirect("misavisos");
+            }
+        }
+    });
+})
+
+router.post("/eliminarAviso", utils.auth, function (request, response) {
+
+    let aux = "Este aviso ha sido eliminado por el técnico " + response.locals.currentUser.nombre +  " debido a: " + request.body.observacionTecnicoEliminar;
+
+    console.log(request.body);
+    saAvisos.solucionarAviso(request.body.idAviso, aux, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log("Error Base Datos");
+        } else {
+            if (res) {
+                response.status(200);
+                response.redirect("misavisos");
+
+            } else {
+                response.status(200);
+                console.log("Error al crear");
+                response.redirect("misavisos");
+            }
+        }
+    });
+})
+
 
 //AJAX
 router.get("/aviso/:idAviso", utils.auth, function (request, response) {

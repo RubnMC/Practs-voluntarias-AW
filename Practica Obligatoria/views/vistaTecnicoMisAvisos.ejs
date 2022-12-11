@@ -15,7 +15,8 @@
 <body class="backGround">
 
   <%- include ("subplantillas/cabecera") %>
-  <%- include ("subplantillas/modalInfoAviso") %>
+  <%- include ("subplantillas/modalComentarAviso") %>
+  <%- include ("subplantillas/modalEliminarAviso") %>
 
   <div class="container mt-4 ">
     <div class="d-flex justify-content-between flex-row">
@@ -73,11 +74,11 @@
 
             <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalInfoAviso">
+                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalComentarAviso">
                   <img src="./images/eye.png" alt="">
                 </button>
 
-                <button class="button">
+                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso">
                   <img src="./images/bin.png" alt="">
                 </button>
               </div>

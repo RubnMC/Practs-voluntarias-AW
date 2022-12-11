@@ -71,7 +71,7 @@
 
             <td class="align-middle text-center col-1">
               <div class="btn-group" role="group" id="botonVistaAnuncio" aria-label="Basic example">
-                <button class="button" data-bs-toggle="modal" data-bs-target="#modalInfoAviso">
+                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalInfoAviso">
                   <img src="./images/eye.png" alt="">
                 </button>
               </div>
@@ -101,7 +101,7 @@
         <script>
             $(document).ready(function () {
                 // Cada vez que se pulse el botón de 'Enviar'
-                $("#botonVistaAnuncio").on("click", function () {
+                $(".botonVistaAnuncio").on("click", function () {
                     //Obtener el valor contenido en el cuadro de texto
                     let idAviso = $($(this).parents("tr")).find("td").eq(0).html()
                     console.log(idAviso);

@@ -11,19 +11,23 @@ $(document).ready(function () {
             // En caso de éxito, mostrar el resultado en el documento HTML
             success: function (data, textStatus, jqXHR) {
                 //Primera columna
-                $("#nombreUsuario").text(data.aviso.nombreUsuario);
-                $("#idAviso").text("Aviso " + data.aviso.idAviso + ":");
-                $("#inputIdAviso").val(data.aviso.idAviso)
-                $("#tipoAviso").text(data.aviso.tipo);
+                $(".nombreUsuario").text(data.aviso.nombreUsuario);
+                $(".idAviso").text("Aviso " + data.aviso.idAviso + ":");
+                $(".inputIdAviso").val(data.aviso.idAviso);
+                $(".tipoAviso").text(data.aviso.tipo);
                 //Fecha
-                $("#fechaAviso").text(data.aviso.fecha);
+                $(".fechaAviso").text(data.aviso.fecha);
                 //Tipo
-                $("#subtipoUno").text(data.aviso.subtipo[0]);
-                $("#subtipoDos").text(data.aviso.subtipo[1]);
+                $(".subtipoUno").text(data.aviso.subtipo[0]);
+                $(".subtipoDos").text(data.aviso.subtipo[1]);
                 //Perfil Usuario
-                $("#perfilUsuarioAviso").text(data.aviso.perfilUniversitario);
+                $(".perfilUsuarioAviso").text(data.aviso.perfilUniversitario);
+                //Texto
+                $(".textoAviso").text(data.aviso.texto);
                 //Observaciones
-                $("#textoAviso").text(data.aviso.texto);
+                if(data.aviso.observaciones){
+                $(".comentarioTecnico").text(data.aviso.observaciones);
+                }
 
             },
             // En caso de error, mostrar el error producido
