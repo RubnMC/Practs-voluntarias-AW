@@ -120,7 +120,7 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
                 response.end(imagen);
             } else {
                 response.status(404);
-                response.end("Not found");
+                response.sendFile("./images/default.png", {root: "public"});
             }
         });
     }

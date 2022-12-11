@@ -42,9 +42,10 @@
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="me-1">
                             <%= locals.currentUser.nombre %>  
-                        </div>
-                        <img class="navbar-brand ms-2" src="/imagen/<%=locals.currentUser.idUsuario%>" alt="">
+                        </div> 
+                        <img class="navbar-brand ms-2 rounded-circle img-thumbnail" src="/imagen/<%=locals.currentUser.idUsuario%>" alt="">
                     </button>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                         <li>
                             <a href="#" class="dropdown-item" data-bs-toggle="modal"
