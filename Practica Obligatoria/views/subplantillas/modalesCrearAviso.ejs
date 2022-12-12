@@ -28,21 +28,17 @@
             <div class="col col-6 d-flex flex-column offset-3">
 
               <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" id="botonInci"
-                data-bs-dismiss="modal"> Incidencia </button>
+                data-bs-dismiss="modal"> <i class="bi bi-exclamation-triangle">&nbsp;Incidencia</i> </button>
 
               <button type="button" class="btn btn-warning mt-1" data-bs-toggle="modal" id="botonWarn"
-                data-bs-dismiss="modal"> Sugerencia </button>
+                data-bs-dismiss="modal"> <i class="bi bi-lightbulb">Sugerencia</i> </button>
 
-              <button type="button" class="btn btn-success mt-1" data-bs-dismiss="modal" id="botonFel"> Felicitación
+              <button type="button" class="btn btn-success mt-1 mb-3" data-bs-dismiss="modal" id="botonFel"> 
+                <i class="bi bi-heart">Felicitación</i>
               </button>
 
             </div>
           </div>
-        </div>
-
-        <!-- pie del diálogo -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
 
       </div>
@@ -83,8 +79,8 @@
               <option value="Toda_la_Universidad"> Toda la Universidad </option>
             </select>
 
-            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
-              rows="4" maxlength="300" required></textarea>
+            <textarea class="form-control mt-4 saltos" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+              rows="4" maxlength="1000" required></textarea>
 
             <div class="row justify-content-end">
               <div class="col col-auto">
@@ -127,8 +123,8 @@
               <% }); %> 
             </select>
 
-            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
-              rows="4" maxlength="300" required></textarea>
+            <textarea class="form-control mt-4 saltos" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+              rows="4" maxlength="1000" required></textarea>
 
             <div class="row justify-content-end">
               <div class="col col-auto">
@@ -171,7 +167,7 @@
               <% }); %> 
             </select>
 
-            <textarea class="form-control mt-4" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
+            <textarea class="form-control mt-4 saltos" placeholder="Texto explicativo sobre el aviso..." name="texto_aviso"
               rows="4" maxlength="1000" required></textarea>
 
             <div class="row justify-content-end">

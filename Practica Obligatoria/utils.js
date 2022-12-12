@@ -77,8 +77,8 @@ function parseAvisoTipo(tipo) {
     }
 }
 
-function stampToDate(timestamp) {
-    return moment(timestamp).format('DD/MM/YYYY')
+function stampToDate(timestamp,format) {
+    return moment(timestamp).format(format);
 }
 
 function parseUserType(userType) {

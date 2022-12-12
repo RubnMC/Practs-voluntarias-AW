@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cabecera </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/cabecera.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Cabecera </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/cabecera.css">
+  <link rel="stylesheet" href="./css/userProfile.css">
 </head>
+
 <body>
 
-    <div class="modal fade" id="perfilUsuarioVModal" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Perfil de Usuario</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col col-4 text-center align-items-center">
-                        <img src="/imagen/<%=locals.currentUser.idUsuario%>" alt="" class="img-thumbnail">
-                    </div>
-                    
-                    <div class="col col-8 d-flex flex-column">
-                        <h5>Nombre: <%= locals.currentUser.nombre %> </h5>
-                        <h5>Fecha: <%= locals.currentUser.fecha %></h5>
-                        <h5>Perfil: <%= locals.currentUser.perfilVisible %></h5>
-                        <h5>Contraseña: no</h5>
-                        <h5>Nombre para mostrar: <%= locals.currentUser.nombre %> </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-auto">
-                      <% if(locals.currentUser.rol === "Usuario"){%>
-                        <h5>Avisos realizados:</h5>
-                      <%} else{%>
-                        <h5>Avisos gestionados:</h5>
-                      <%}%> 
-                       <h5 id="perfilAvisos"></h5>
-                       <h5>Incidencias</h5>
-                       <h5 id="perfilIndicendias"></h5>
-                       <h5>Sugerencias</h5>
-                       <h5 id="perfilSugerencias"></h5>
-                       <h5>Felicitaciones</h5>
-                       <h5 id="perfilFelicitaciones"></h5>
-                    </div>
-                </div>
-            </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-      
-          </div>
+  <div class="modal fade" id="perfilUsuarioVModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-m modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- cabecera del diálogo -->
+        <div class="modal-header">
+          <h6 class="modal-title">Perfil de Usuario</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+
+        <!-- cuerpo del diálogo -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col text-center align-items-center">
+              <img src="/imagen/<%=locals.currentUser.idUsuario%>" alt=""
+                class="img-thumbnail userImage rounded-circle shadow-lg">
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col text-center">
+              <h4>
+                <%= locals.currentUser.nombre %>
+              </h4>
+            </div>
+          </div>
+
+          <hr class="rounded visible">
+
+          <div class="row justify-content-center">
+            <div class="col col-auto text-center d-flex border border-light rounded-3  mb-2 ps-1 pe-1">
+              <% if(locals.currentUser.rol==="Usuario" ){%>
+                <h6 class="mb-0">Avisos realizados:&nbsp;</h6>
+                <%} else{%>
+                  <h6>Avisos gestionados:&nbsp;</h6>
+                  <%}%>
+                    <h6 class="mb-0" id="perfilAvisos"></h6>
+            </div>
+          </div>
+
+          <div class="row gx-3 align-items-center justify-content-evenly">
+            <div class="col col-auto bg-warning ps-2 pe-2 rounded-pill text-dark">
+              <h7>Sugerencias:&nbsp;</h7>
+              <h7 id="perfilSugerencias"></h7>
+            </div>
+            <div class="col col-auto bg-success ps-2 pe-2 rounded-pill">
+              <h7>Felicitaciones:&nbsp;</h7>
+              <h7 id="perfilFelicitaciones"></h7>
+            </div>
+            <div class="col col-auto bg-danger ps-2 pe-2 rounded-pill">
+              <h7>Incidencias:&nbsp;</h7>
+              <h7 id="perfilIndicendias"></h7>
+            </div>
+          </div>
+
+          <hr class="rounded visible">
+
+          <h5>Información personal</h5>
+          <div class="row">
+            <h7>Fecha de creación: <%= locals.currentUser.fecha %>
+            </h7>
+          </div>
+          <div class="row">
+            <h7>Perfil de usuario: <%= locals.currentUser.perfilVisible %>
+            </h7>
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer"><h6 class="invisible">Me encontraste :)</h6></div>
       </div>
+    </div>
+  </div>
 
 </body>
+
 </html>

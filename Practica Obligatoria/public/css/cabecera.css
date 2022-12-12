@@ -14,3 +14,7 @@
 .form{
     position: relative;
 }
+
+.saltos{
+    white-space: pre-wrap;
+}

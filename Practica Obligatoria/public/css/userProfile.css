@@ -1,0 +1,14 @@
+.userImage{
+    width: 100px;
+    height: 100px;
+}
+
+.modal-body{
+    background-color: #182c4c;
+    color: white;
+}
+
+.visible{
+    color: #02D2F0;
+    height: 5px !important;
+}

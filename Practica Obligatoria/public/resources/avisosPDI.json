@@ -17,8 +17,8 @@
         "Conexión_por_cable_en_despachos",
         "Cortafuegos_corporativo",
         "VPN_Acceso_remoto",
-        "Wifi_Eduroam_(ssid:_eduroam)",
-        "Wifi_para_visitantes(ssid:_UCM-Visitantes)"
+        "Wifi_Eduroam_(ssid_eduroam)",
+        "Wifi_para_visitantes(ssid_UCM-Visitantes)"
     ],
     "Docencia":[
         "Aula_Virtual",
@@ -30,7 +30,7 @@
     "Web":[
         "Analítica_Web",
         "Emisión_de_certificados_SSL",
-        "Hosting:_alojamiento_de_páginas_web",
+        "Hosting_alojamiento_de_páginas_web",
         "Portal_de_eventos",
         "Redirecciones_web"
     ]

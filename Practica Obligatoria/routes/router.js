@@ -211,6 +211,35 @@ router.get("/historicostec", utils.auth, utils.getTiposAvisos, function (request
     })
 });
 
+router.get("/gestionUsuarios", utils.auth, utils.getTiposAvisos, function (request, response) {
+    saUsuario.getUsuarios(function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.render("vistaGestionUsu.ejs", { usuarios: res });
+        }
+    })
+});
+
+router.post("/bajaUsuario", utils.auth, function (request, response) {
+    saUsuario.bajaUsuario(request.body.idUsuario, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            if (request.body.idUsuario == response.locals.currentUser.idUsuario) {
+                response.status(200);
+                response.redirect("logout");
+            }else{
+                response.status(200);
+                response.redirect("gestionUsuarios");
+            }
+        }
+    })
+});
+
 router.post("/solucionarAviso", utils.auth, function (request, response) {
 
     saAvisos.solucionarAviso(request.body.idAviso, request.body.observacionTecnico, function (err, res) {
@@ -233,9 +262,8 @@ router.post("/solucionarAviso", utils.auth, function (request, response) {
 
 router.post("/eliminarAviso", utils.auth, function (request, response) {
 
-    let aux = "Este aviso ha sido eliminado por el técnico " + response.locals.currentUser.nombre +  " debido a: " + request.body.observacionTecnicoEliminar;
+    let aux = "Este aviso ha sido eliminado por el técnico " + response.locals.currentUser.nombre +  " debido a: \r\n" + request.body.observacionTecnicoEliminar;
 
-    console.log(request.body);
     saAvisos.solucionarAviso(request.body.idAviso, aux, function (err, res) {
         if (err) {
             response.status(500);

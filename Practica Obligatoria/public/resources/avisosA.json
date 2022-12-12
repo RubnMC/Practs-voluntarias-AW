@@ -12,7 +12,7 @@
     "Conectividad": [
         "Cortafuegos_corporativo",
         "VPN_Acceso_remoto",
-        "Wifi_Eduroam_(ssid:_eduroam)"
+        "Wifi_Eduroam_(ssid_eduroam)"
     ],
     "Docencia": [
         "Aula_Virtual",

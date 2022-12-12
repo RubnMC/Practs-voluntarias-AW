@@ -29,6 +29,9 @@
         <li class="nav-item  bg-secondary me-1 rounded-3">
           <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
         </li>
+        <li class="nav-item bg-light me-1 rounded-3">
+          <a class="nav-link" href="/gestionUsuarios">Gestión de ususarios</a>
+        </li>
       </ul>
     </div>
     <div class="tbheight mt-1 rounded-3">
@@ -53,6 +56,10 @@
 
             <td class="d-none">
               <%= element.idAviso %>
+            </td>
+
+            <td class="d-none nombreUsuario">
+              <%= element.nombreUsuario %>
             </td>
 
             <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">

@@ -1,0 +1,20 @@
+.maxSized,
+.maxSized-sm {
+    background-color: #2a497a;
+}
+
+.maxSized {
+    max-height: 200px;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.maxSized-sm {
+    max-height: 120px;
+    min-height: 120px;
+    overflow: auto;
+}
+
+.saltos {
+    white-space: pre-wrap;
+}

@@ -11,6 +11,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/singupStyle.css">
     <link rel="stylesheet" href="./css/fondo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="icon" href="https://www.ucm.es/themes/ucm16/media/img/logoucm.ico">
     <script src="./javascripts/JQuery/singupDisabler.js"></script>
 </head>
@@ -27,43 +28,62 @@
                     </div>
                 </div>
 
-                <form class="" action="process_singup" method="POST" title="Formulario login" enctype="multipart/form-data">
+                <form class="" action="process_singup" method="POST" title="Formulario login"
+                    enctype="multipart/form-data">
                     <div class="row mt-4">
                         <div class="col col-12">
                             <div class="row">
                                 <div class="col col-6 ">
-                                    <input type="email" class="form-control controlGrey" name="email" id="email"
-                                        aria-describedby="emailHelp" placeholder="Email" required>
+                                    <div class="input-group">
+                                        <i class="input-group-text bi bi-envelope-at-fill"></i>
+                                        <input type="email" class="form-control controlGrey" name="email" id="email"
+                                            aria-describedby="emailHelp" placeholder="Email" required>
+                                    </div>
                                 </div>
                                 <div class="col col-6 ">
-                                    <input type="text" class="form-control controlGrey" name="nombre" id="nombre"
-                                        aria-describedby="nombreHelp" placeholder="Nombre para mostrar" required>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col col-6 ">
-                                    <input type="password" maxlength="16" class="form-control controlGrey"
-                                        name="password" id="password" aria-describedby="conttrasenia"
-                                        placeholder="Contraseña" required>
-                                </div>
-                                <div class="col col-6 ">
-                                    <select class="form-select controlGrey" id="profileSelect" name="profile_type"
-                                        aria-label="perfil_universitario" required>
-                                        <option disabled selected value>Perfil Universitario</option>
-                                        <option value="A">Alumno</option>
-                                        <option value="PAS">Personal de Administración y Servicio</option>
-                                        <option value="PDI">Personal Docente e Investigador</option>
-                                        <option value="AA">Antiguo Alumno</option>
-                                    </select>
+                                    <div class="input-group">
+                                        <i class="input-group-text bi bi-at"></i>
+                                        <input type="text" class="form-control controlGrey" name="nombre" id="nombre"
+                                            aria-describedby="nombreHelp" placeholder="Nombre para mostrar" required>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col col-6 ">
-                                    <input type="password" maxlength="16" class="form-control controlGrey"
-                                        name="password_2" id="password_2" aria-describedby="confirmarContrasenia"
-                                        placeholder="Confirmar contraseña" required>
+                                    <div class="input-group">
+                                        <i class="input-group-text bi bi-lock-fill"></i>
+                                        <input type="password" maxlength="16"
+                                            class="form-control controlGrey hiddable esconder" name="password"
+                                            id="password" aria-describedby="conttrasenia" placeholder="Contraseña"
+                                            required>
+                                        <i class="showOrHide input-group-text bi bi-eye-fill"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-6 ">
+                                    <div class="input-group">
+                                        <i class="input-group-text bi bi-person-lines-fill"></i>
+                                        <select class="form-select controlGrey" id="profileSelect" name="profile_type"
+                                            aria-label="perfil_universitario" required>
+                                            <option disabled selected value>Perfil Universitario</option>
+                                            <option value="A">Alumno</option>
+                                            <option value="PAS">Personal de Administración y Servicio</option>
+                                            <option value="PDI">Personal Docente e Investigador</option>
+                                            <option value="AA">Antiguo Alumno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col col-6 ">
+                                    <div class="input-group">
+                                        <i class="input-group-text bi bi-lock-fill"></i>
+                                        <input type="password" maxlength="16"
+                                            class="form-control controlGrey hiddable esconder" name="password_2"
+                                            id="password_2" aria-describedby="confirmarContrasenia"
+                                            placeholder="Confirmar contraseña" required>
+                                    </div>
                                 </div>
                                 <div class="col col-6 d-flex align-items-center justify-content-around">
                                     <div class="form-check" id="checkTec">
@@ -85,8 +105,7 @@
                                 <div class="col col-12 ">
                                     <div class="input-group">
                                         <input type="file" class="form-control" name="foto" id="profile_Image">
-                                        <label class="input-group-text" for="inputGroupFile02"> Seleccionar imagen de
-                                            perfil </label>
+                                        <i class="input-group-text bi bi-camera-fill"></i>
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +130,8 @@
             </div>
         </div>
     </div>
+    <script src="./javascripts/JQuery/textHide.js"></script>
+
 </body>
 
 </html>

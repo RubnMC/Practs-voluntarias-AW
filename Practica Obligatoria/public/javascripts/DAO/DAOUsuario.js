@@ -3,10 +3,6 @@
 const moment = require("moment");
 const utils = require("../../../utils");
 
-function stampToDate(timestamp) {
-    return moment(timestamp).format('DD/MM/YYYY HH:mm:ss')
-}
-
 class DAOUsuario {
     constructor(pool) {
         this.pool = pool;
@@ -18,7 +14,7 @@ class DAOUsuario {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE correo = ?",
+                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE correo = ? AND activo = 1",
                     [email],
                     function (err, rows) {
                         if (err) {
@@ -37,7 +33,8 @@ class DAOUsuario {
                                     numTecnico: rows[0].numTecnico,
                                     nombre: rows[0].nombre,
                                     perfilUniversitario: rows[0].perfilUniversitario,
-                                    fecha: stampToDate(rows[0].fecha)
+                                    fecha: utils.stampToDate(rows[0].fecha, 'DD/MM/YYYY HH:mm:ss'),
+                                    activo: rows[0].activo
                                 };
 
                                 connection.query("SELECT * FROM UCM_AW_CAU_CON_Contrasenas WHERE password = ? AND idUsuario = ?",
@@ -178,6 +175,72 @@ class DAOUsuario {
         );
     }
 
+    getAllUsuarios(callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE activo = 1",
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                callback(null, false); //no está el usuario con el password proporcionado
+                            }
+                            else {
+                                let usuarios = [];
+                                rows.forEach(t => {
+                                    usuarios.push({
+                                        idUsuario: t.idUsuario,
+                                        correo: t.correo,
+                                        rol: t.rol,
+                                        perfilVisible: utils.parseUserType(t.perfilUniversitario),
+                                        numTecnico: t.numTecnico,
+                                        nombre: t.nombre,
+                                        perfilUniversitario: t.perfilUniversitario,
+                                        fecha: utils.stampToDate(t.fecha, 'DD/MM/YYYY'),
+                                        activo: t.activo
+                                    });
+                                });
+
+                                callback(null, usuarios);
+                            }
+                        }
+                    });
+            }
+        }
+        );
+    }
+
+    bajaUsuario(idUsuario, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("UPDATE UCM_AW_CAU_USU_Usuarios SET activo = 0 WHERE idUsuario = ?",
+                    [idUsuario],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                callback(null, false); //no está el usuario con el password proporcionado
+                            }
+                            else {
+                                callback(null, true);
+                            }
+                        }
+                    });
+            }
+        }
+        );
+    }
+
     getAllTecnicos(callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
@@ -221,21 +284,21 @@ class DAOUsuario {
                 let sql = "SELECT imagen FROM UCM_AW_CAU_USU_Usuarios WHERE idUsuario = ?";
                 connection.query(sql, [id], function (err, rows) {
                     connection.release();
-                        if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"));
+                    }
+                    else {
+                        if (rows.length === 0) {
+                            callback(null, false); //no está el usuario con el password proporcionado
                         }
                         else {
-                            if (rows.length === 0) {
-                                callback(null, false); //no está el usuario con el password proporcionado
-                            }
-                            else {                               
-                                callback(null, rows[0].imagen);
-                            }
+                            callback(null, rows[0].imagen);
                         }
-                    });
+                    }
+                });
             }
         }
-        );    
+        );
     }
 }
 

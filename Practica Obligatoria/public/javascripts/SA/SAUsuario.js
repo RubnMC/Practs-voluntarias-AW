@@ -51,6 +51,28 @@ class SAUsuario {
         })
     }
 
+    getUsuarios(callback){
+        this.daoUser.getAllUsuarios(function (err,res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
+
+    bajaUsuario(idUsuario, callback){
+        this.daoUser.bajaUsuario(idUsuario,function (err,res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
+
     obtenerImagen(id, callback){
         this.daoUser.obtenerImagen(id, function (err, res) {
             if (err) {

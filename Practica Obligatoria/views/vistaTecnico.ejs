@@ -30,6 +30,9 @@
         <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
         </li>
+        <li class="nav-item bg-light me-1 rounded-3">
+          <a class="nav-link" href="/gestionUsuarios">Gestión de ususarios</a>
+        </li>
       </ul>
     </div>
     <div class="mt-1 tbheight rounded-3">
@@ -50,6 +53,10 @@
 
             <td class="d-none">
               <%= element.idAviso %>
+            </td>
+            
+            <td class="d-none nombreUsuario">
+              <%= element.nombreUsuario %>
             </td>
 
             <% let imagen; switch(element.tipo){ case "F" :
@@ -74,7 +81,7 @@
 
             <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="button botonAsignarTecnico" data-bs-toggle="modal" data-bs-target="#modalAsignarTec" <% if (element.nombreTecnico){%> disabled <%} %>>
+                <button class="btn p-1 btn-light btn-outline-secondary botonAsignarTecnico" data-bs-toggle="modal" data-bs-target="#modalAsignarTec" <% if (element.nombreTecnico){%> disabled <%} %>>
                   <% if (element.nombreTecnico) {%>
                   <img src="./images/headsetDisabled.png" alt="">
                   <%}else{%>
@@ -82,7 +89,7 @@
                   <%} %>
                 </button>
 
-                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso" <% if (element.tipo==="F" ) {%> disabled <%} %>>
+                <button class="btn p-1 btn-light btn-outline-secondary botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso" <% if (element.tipo==="F" ) {%> disabled <%} %>>
                   <% if (element.tipo==="F" ) {%>
                   <img src="./images/binDisabled.png" alt="">
                   <%}else{%>

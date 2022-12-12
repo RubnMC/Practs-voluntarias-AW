@@ -7,16 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> UCM-CAU </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/tablas.css">
   <link rel="stylesheet" href="./css/fondo.css">
+  <link rel="stylesheet" href="./css/tablas.css">
   <link rel="icon" href="https://www.ucm.es/themes/ucm16/media/img/logoucm.ico">
 </head>
 
 <body class="backGround">
 
   <%- include ("subplantillas/cabecera") %>
-  <%- include ("subplantillas/modalComentarAviso") %>
-  <%- include ("subplantillas/modalEliminarAviso") %>
+  <%- include ("subplantillas/modalBajaUsuario") %> 
 
   <div class="container mt-4 ">
     <div class="d-flex justify-content-between flex-row">
@@ -24,13 +23,13 @@
         <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/logged_tec">Avisos Entrantes</a>
         </li>
-        <li class="nav-item me-1 rounded-3 bg-secondary">
+        <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/misavisos">Mis Avisos</a>
         </li>
         <li class="nav-item bg-light me-1 rounded-3">
           <a class="nav-link" href="/historicostec">Histórico de Avisos</a>
         </li>
-        <li class="nav-item bg-light me-1 rounded-3">
+        <li class="nav-item bg-secondary me-1 rounded-3">
           <a class="nav-link" href="/gestionUsuarios">Gestión de ususarios</a>
         </li>
       </ul>
@@ -39,53 +38,37 @@
       <table id="tablaAvisos" class="table table-responsive custom-table rounded-3 shadow-lg table-borderless table-striped">
         <thead class="sticky-top bg-white">
           <tr>
-            <th scope="col" class="text-center">Tipo</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Texto</th>
+            <th scope="col" class="text-center">Fecha</th>
+            <th scope="col">Nombre</th>
+            <th scope="col" class="text-center">Rol</th>
             <th scope="col" class="text-center tec">Acciones</th>
           </tr>
         </thead>
         <tbody>
 
-          <% if(avisos){%>
-          <% avisos.forEach(element=> { %>
+          <% if(usuarios){%>
+          <% usuarios.forEach(element=> { %>
           <tr>
 
             <td class="d-none">
-              <%= element.idAviso %>
+              <%= element.idUsuario %>
             </td>
 
-            <td class="d-none nombreUsuario">
-              <%= element.nombreUsuario %>
-            </td>
-
-            <% let imagen; switch(element.tipo){ case "F" :
-                                            imagen="./images/felicitacion.png" ; break; case "S" :
-                                            imagen="./images/sugerencia.png" ; break; case "I" :
-                                            imagen="./images/incidencia.png" ; break; }%>
-
-            <td class="align-middle text-center col-1"> <img src=<%=imagen %> alt="">
-            </td>
-
-            <td class="align-middle col-1 text-center">
+            <td class="align-middle col-1 text-center p-0">
               <%= element.fecha %>
             </td>
-            <td class="align-middle col-8 texoTabla">
-                <% let aux =  element.texto
-                if (aux.length > 200) {
-                    aux = element.texto.slice(0,199) +"...";
-                }
-               %>
-              <%= aux %>
+
+            <td class="align-middle col-8 texoTabla nombreUsuario">
+              <%= element.nombre %>
+            </td>
+
+            <td class="align-middle col-2 text-center">
+              <%= element.rol %>
             </td>
 
             <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalComentarAviso">
-                  <img src="./images/eye.png" alt="">
-                </button>
-
-                <button class="button botonVistaAnuncio" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso">
+                <button class="button botonBajaUsuario" data-bs-toggle="modal" data-bs-target="#modalBajaUsuario" >
                   <img src="./images/bin.png" alt="">
                 </button>
               </div>
@@ -95,19 +78,32 @@
           <% }); %>
 
           <%} else{%>
-          <td class="align-middle text-center tec" colspan="4"> <strong>
+          <td class="align-middle text-center" colspan="4"> <strong>
               Sin avisos ヾ(⌐■_■)ノ♪
             </strong> </td>
           <%}%>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            </div>
+                </div>
 
-            <script src="./javascripts/JQuery/openVerAviso.js"></script>
+                <script type="application/javascript">
+                    $(document).ready(function () {
+                        // Cada vez que se pulse el botón de 'Enviar'
+                        $(".botonBajaUsuario").on("click", function () {
+                            //Obtener el valor contenido en el cuadro de texto
+                            let idUsuario = $($(this).parents("tr")).find("td").eq(0).html()
+                            let nombre = $($(this).parents("tr")).find("td").eq(2).html()
+                            // Realizar la petición al servidor
+                            $('#inputIdUsuario').val(idUsuario);
+                            $('#nombreUsuario').text(nombre);
+                        });
+                    });
+                </script>
+
 </body>
 
 </html>

@@ -14,7 +14,8 @@ CREATE TABLE UCM_AW_CAU_USU_Usuarios(
     fecha TIMESTAMP NOT NULL,
     imagen BLOB,
     perfilUniversitario VARCHAR(20) NOT NULL,
-    numTecnico VARCHAR(8) UNIQUE
+    numTecnico VARCHAR(8) UNIQUE,
+    activo BOOLEAN NOT NULL DEFAULT 1
 );
 
 CREATE TABLE UCM_AW_CAU_CON_Contrasenas(

@@ -19,7 +19,7 @@
 
                 <!-- cabecera del diálogo -->
                 <div class="modal-header">
-                    <h4 class="modal-title"> Solucionar aviso </h4>
+                    <h6 class="modal-title"> Eliminar aviso </h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
@@ -28,46 +28,50 @@
 
                     <div class="row justify-content-between">
                         <div class="col col-auto">
-                            <h5 id="nombreUsuario" class="nombreUsuario"></h5>
+                            <h4 id="nombreUsuario" class="nombreUsuario"></h4>
                         </div>
 
                         <div class="col col-auto d-flex flex-row">
-                            <h5 id="idAviso" class="idAviso"></h5>
-                            <h5>&nbsp</h5>
-                            <h5 id="tipoAviso" class="tipoAviso"></h5>
+                            <h4 id="idAviso" class="idAviso"></h4>
+                            <h4>&nbsp</h4>
+                            <h4 id="tipoAviso" class="tipoAviso"></h4>
                         </div>
 
                     </div>
 
-                    <div class="row">
-                        <div class="col col-auto d-flex flex-row">
-                            <h5> <strong> Fecha:&nbsp </strong> </h5>
-                            <h5 id="fechaAviso" class="fechaAviso"></h5>
-                        </div>
-                    </div>
+                    <hr class="rounded visible mb-1 mt-1">
 
                     <div class="row">
                         <div class="col col-auto d-flex flex-row">
-                            <h5> <strong id="subtipoUno" class="subtipoUno"> </strong> &nbsp </h5>
-                            <h5 id="subtipoDos" class="subtipoDos"></h5>
+                            <h6> <strong> Fecha&nbsp </strong> </h6>
+                            <h6 id="fechaAviso" class="ps-2 pe-2 rounded-pill bg-light text-dark fechaAviso"></h6>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col col-auto d-flex flex-row">
-                            <h5> <strong> Perfil:&nbsp </strong> </h5>
-                            <h5 id="perfilUsuarioAviso" class="perfilUsuarioAviso"></h5>
+                            <h6> <strong id="subtipoUno" class="subtipoUno"> </strong> &nbsp </h6>
+                            <h6 id="subtipoDos" class="ps-2 pe-2 rounded-pill bg-light text-dark subtipoDos"></h6>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col col-auto d-flex flex-row">
-                            <h5> <strong> Observaciones:&nbsp </strong> </h5>
+                            <h6> <strong> Perfil&nbsp </strong> </h6>
+                            <h6 id="perfilUsuarioAviso" class="ps-2 pe-2 rounded-pill bg-light text-dark perfilUsuarioAviso"></h6>
+                        </div>
+                    </div>
+
+                    <hr class="rounded visible mb-1 mt-1">
+
+                    <div class="row">
+                        <div class="col col-auto d-flex flex-row">
+                            <h6> <strong> Observaciones </strong> </h6>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col col-11">
-                            <div id="textoAviso" class="border rounded-3 border-dark text-break textoAviso"></div>
+                            <div id="textoAviso" class="border rounded-3 border-light p-1 maxSized-sm text-break textoAviso saltos"></div>
                         </div>
                     </div>
                     
@@ -75,18 +79,18 @@
 
                         <input type="text" id="inputIdAviso" name="idAviso" value="0" class="d-none inputIdAviso">
 
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col col-auto d-flex flex-row">
-                                <h5> <strong> Comentarios del técnico:&nbsp </strong> </h5>
+                                <h6> <strong> Comentarios del técnico </strong> </h6>
                             </div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col col-11">
-                                <textarea name="observacionTecnicoEliminar" id="observacionTecnico" cols="92" rows="8" placeholder="Escriba la observación deseada..."></textarea>
+                                <textarea maxlength="1000" name="observacionTecnicoEliminar" id="observacionTecnico" cols="92" rows="5" placeholder="Escriba la observación deseada..."></textarea>
                             </div>
                         </div>
 
-                        <div class="row d-flex justify-content-end mt-2 me-3">
+                        <div class="row d-flex justify-content-end me-3">
                             <div class="col col-auto d-flex flex-row">
                                 <button id="observarBoton" data-bs-dismiss="modal" class="btn btn-primary"> Eliminar Aviso </button>
                             </div>
@@ -94,6 +98,10 @@
 
                     </form>
                     
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
                 </div>
 
             </div>
