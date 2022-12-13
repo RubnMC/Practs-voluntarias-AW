@@ -14,18 +14,15 @@ td:not(.tec){
    border-right: 1px solid #182c4c;
 }
 
-
-
 .tbheight{
    max-height: clamp(25em,10vh,250px);
    overflow: auto;
    background-color: white;
 }
 
-.table-striped>tbody>tr:nth-child(odd)>td,
-.table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: #eef8ff;
-}
+.table {
+   --bs-table-striped-bg: rgba(15, 150, 255, 0.1) !important;
+ }
 
 .anchura-min{
    min-width: 6em;
@@ -43,9 +40,32 @@ td:not(.tec){
    color: black !important;
 }
 
-.borde:hover{
-   border: 2px solid black;
+.shadow-inset-center:hover {
+	-webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both !important;
+	        animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both !important;
 }
+
+ @-webkit-keyframes shadow-inset-center {
+   0% {
+     -webkit-box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+             box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+   }
+   100% {
+     -webkit-box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+             box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+   }
+ }
+ @keyframes shadow-inset-center {
+   0% {
+     -webkit-box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+             box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+   }
+   100% {
+     -webkit-box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+             box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+   }
+ }
+ 
 
 button:disabled{
    pointer-events: none;
