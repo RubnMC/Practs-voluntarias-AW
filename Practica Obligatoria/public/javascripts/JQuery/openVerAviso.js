@@ -20,6 +20,14 @@ $(document).ready(function () {
                 //Tipo
                 $(".subtipoUno").text(data.aviso.subtipo[0]);
                 $(".subtipoDos").text(data.aviso.subtipo[1]);
+
+                if(!data.aviso.subtipo[1]){
+                    $(".subtipoDos").hide()
+                  } else{
+                    $(".subtipoDos").show()
+                  }
+
+
                 //Perfil Usuario
                 $(".perfilUsuarioAviso").text(data.aviso.perfilUniversitario);
                 //Texto

@@ -73,12 +73,16 @@
 
           <h5>Información personal</h5>
           <div class="row">
-            <h7>Fecha de creación: <%= locals.currentUser.fecha %>
-            </h7>
+            <div class="col col-auto d-flex flex-row">
+              <h7>Fecha de creación&nbsp;</h7>
+              <h7 class="ps-2 pe-2 rounded-pill bg-light text-dark">  <%= locals.currentUser.fecha %> </h7>
+            </div>
           </div>
-          <div class="row">
-            <h7>Perfil de usuario: <%= locals.currentUser.perfilVisible %>
-            </h7>
+          <div class="row mt-2">
+            <div class="col col-auto d-flex flex-row">
+              <h7>Perfil de usuario&nbsp;</h7>
+              <h7 class="ps-2 pe-2 rounded-pill bg-light text-dark">  <%= locals.currentUser.perfilVisible %> </h7>
+            </div>
           </div>
 
 
