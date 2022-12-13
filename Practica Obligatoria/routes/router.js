@@ -293,6 +293,7 @@ router.get("/aviso/:idAviso", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ aviso: res });
+            response.end();
         }
     });
 
@@ -307,6 +308,7 @@ router.get("/tecnicos", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ tecnicos: res });
+            response.end();
         }
     });
 
@@ -341,9 +343,16 @@ router.get("/contador", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ contador: res });
+            response.end();
         }
     });
 
+});
+
+// ERR 404
+router.use(function (request, response) {
+    response.status(404);
+    response.redirect("Error404.html");
 });
 
 module.exports = router;
