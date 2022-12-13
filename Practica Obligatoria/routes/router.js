@@ -156,7 +156,6 @@ router.get("/logged_tec", utils.auth, function (request, response) {
 
 //Avisos
 router.post("/process_aviso", utils.auth, function (request, response) {
-
     saAvisos.crearAviso(request.body, request.session.currentUser.idUsuario, function (err, res) {
         if (err) {
             response.status(500);

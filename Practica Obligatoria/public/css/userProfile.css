@@ -1,6 +1,10 @@
 .userImage{
-    width: 100px;
-    height: 100px;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 100px;
+    min-width: 100px;
+    width: 20%;
+    height: auto;
 }
 
 .modal-body{

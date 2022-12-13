@@ -78,7 +78,7 @@ class SAAvisos {
             texto: aviso.texto_aviso,
             subtipo: aviso.profile_type.replaceAll("_", " ").replace(":", ": ")
         }
-
+        
         this.daoAvisos.createAviso(avisoParseado, idUser, function (err, res) {
             if (err) {
                 callback(err);

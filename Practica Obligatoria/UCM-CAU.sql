@@ -28,7 +28,7 @@ CREATE TABLE UCM_AW_CAU_AV_Avisos(
     idAviso INT PRIMARY KEY AUTO_INCREMENT,
     texto VARCHAR(1000) NOT NULL,
     tipo VARCHAR(30) NOT NULL,
-    subtipo VARCHAR(50),
+    subtipo VARCHAR(100),
     fecha TIMESTAMP NOT NULL,
     observaciones VARCHAR(1000),
     solucionado BOOLEAN NOT NULL,

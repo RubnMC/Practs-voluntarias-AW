@@ -21,6 +21,7 @@ const middelwareSession = session({
 });
 
 app.set('view engine', 'ejs');
+app.use(express.json());
 app.use(express.static('views'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
