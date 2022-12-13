@@ -50,7 +50,7 @@
 
           <% if(avisos){%>
           <% avisos.forEach(element=> { %>
-          <tr class="avisoClickable">
+          <tr class="avisoClickable borde">
             <td class="d-none">
               <%= element.idAviso %>
             </td>
@@ -75,11 +75,11 @@
             </td>
 
             <% if(element.nombreTecnico){ %>
-            <td class="col-1 tec">
+            <td class="col-1 tec text-center">
               <%= element.nombreTecnico %>
             </td>
             <% } else{ %>
-            <td class="col-1 tec"> </td>
+            <td class="col-1 tec text-center"> </td>
             <%}%>
 
                                     </tr>

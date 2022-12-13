@@ -43,6 +43,10 @@ td:not(.tec){
    color: black !important;
 }
 
+.borde:hover{
+   border: 2px solid black;
+}
+
 button:disabled{
    pointer-events: none;
 }
