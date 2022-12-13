@@ -50,7 +50,12 @@
                 $("#doge").one(animationEvent, function (event) {
                     $("#doge").removeClass('scale-down-center')
                 });
-                $('#counter').text(nClicks);
+                if (nClicks > 100) {
+                    $('#doge').attr("src","./images/dogeMad.png");
+                    $('#counter').text('¡DEMASIADAS!');
+                } else {
+                    $('#counter').text(nClicks);
+                }
             })
         })
     </script>
