@@ -40,11 +40,11 @@ class DAOUsuario {
                                 connection.query("SELECT * FROM UCM_AW_CAU_CON_Contrasenas WHERE password = ? AND idUsuario = ?",
                                     [password, usuario.idUsuario],
                                     function (err, rows) {
+                                        connection.release(); // devolver al pool la conexión
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }
                                         else {
-                                            connection.release(); // devolver al pool la conexión
                                             if (rows.length === 0) {
                                                 callback(null, null); //no está el usuario con el password proporcionado
                                             }
@@ -183,11 +183,11 @@ class DAOUsuario {
             else {
                 connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios",
                     function (err, rows) {
+                        connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
@@ -225,11 +225,11 @@ class DAOUsuario {
                 connection.query("UPDATE UCM_AW_CAU_USU_Usuarios SET activo = 0 WHERE idUsuario = ?",
                     [idUsuario],
                     function (err, rows) {
+                        connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
@@ -252,11 +252,11 @@ class DAOUsuario {
                 connection.query("UPDATE UCM_AW_CAU_USU_Usuarios SET activo = 1 WHERE idUsuario = ?",
                     [idUsuario],
                     function (err, rows) {
+                        connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
@@ -278,11 +278,11 @@ class DAOUsuario {
             else {
                 connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE numTecnico IS NOT NULL",
                     function (err, rows) {
+                        connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
-                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, false); //no está el usuario con el password proporcionado
                             }
@@ -313,11 +313,11 @@ class DAOUsuario {
             else {
                 let sql = "SELECT imagen FROM UCM_AW_CAU_USU_Usuarios WHERE idUsuario = ?";
                 connection.query(sql, [id], function (err, rows) {
+                    connection.release();
                     if (err) {
                         callback(new Error("Error de acceso a la base de datos"));
                     }
                     else {
-                        connection.release();
                         if (rows.length === 0) {
                             callback(null, false); //no está el usuario con el password proporcionado
                         }
