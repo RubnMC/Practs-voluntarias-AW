@@ -112,6 +112,7 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
     let n = Number(request.params.id);
     if (isNaN(n)) {
         response.status(400);
+        response.end("Petición incorrecta");
     } else {
         saUsuario.obtenerImagen(n, function (err, imagen) {
             if (imagen) {
