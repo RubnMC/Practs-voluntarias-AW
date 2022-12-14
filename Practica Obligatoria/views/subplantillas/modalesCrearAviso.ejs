@@ -69,7 +69,7 @@
             <input type="text" name="type" class="d-none" value="F">
 
             <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
-              <option disabled selected value>Seleciona una categoría</option>
+              <option hidden selected value>Seleciona una categoría</option>
               <option value="Archivo_Universitario"> Archivo Universitario </option>
               <option value="Asesoría_Jurídica"> Asesoría Jurídica </option>
               <option value="Biblioteca"> Biblioteca </option>
@@ -121,7 +121,7 @@
             <input type="text" name="type" class="d-none" value="S">
 
             <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
-              <option disabled selected value>Seleciona una categoría</option>
+              <option hidden selected value>Seleciona una categoría</option>
               <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
                 <option value="" disabled> <%= k.replaceAll("_"," ") %> </option>
                 <% locals.tiposAvisos[k].forEach(function(obj) {%>
@@ -167,7 +167,7 @@
             <input type="text" name="type" class="d-none" value="I">
 
             <select class="form-select controlGrey" name="profile_type" aria-label="perfil_universitario" required>
-              <option disabled selected value>Seleciona una categoría</option>
+              <option hidden selected value>Seleciona una categoría</option>
               <% Object.keys(locals.tiposAvisos).forEach(function(k){  %>
                 <option value="" disabled> <%= k.replaceAll("_"," ") %> </option>
                 <% locals.tiposAvisos[k].forEach(function(obj) {%>
