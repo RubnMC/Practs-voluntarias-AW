@@ -48,10 +48,8 @@ router.get("/singup", function (request, response) {
 });
 
 router.post("/process_singup", multerFactory.single('foto'), function (request, response) {
-    let tec = false;
-    if (request.body.esTecnico === 'ON') {
-        tec = true;
-    }
+
+    let tec = request.body.esTecnico === 'ON' ? true : false;
 
     let user = {
         correo: request.body.email,
@@ -119,7 +117,7 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
             if (imagen) {
                 response.end(imagen);
             } else {
-                response.sendFile("./images/default.png", {root: "public"});
+                response.sendFile("./images/default.png", { root: "public" });
             }
         });
     }
@@ -229,7 +227,7 @@ router.post("/bajaUsuario", utils.auth, function (request, response) {
             if (request.body.idUsuario == response.locals.currentUser.idUsuario) {
                 response.status(200);
                 response.redirect("logout");
-            }else{
+            } else {
                 response.status(200);
                 response.redirect("gestionUsuarios");
             }
@@ -259,7 +257,7 @@ router.post("/solucionarAviso", utils.auth, function (request, response) {
 
 router.post("/eliminarAviso", utils.auth, function (request, response) {
 
-    let aux = "Este aviso ha sido eliminado por el técnico " + response.locals.currentUser.nombre +  " debido a: \r\n" + request.body.observacionTecnicoEliminar;
+    let aux = "Este aviso ha sido eliminado por el técnico " + response.locals.currentUser.nombre + " debido a: \r\n" + request.body.observacionTecnicoEliminar;
 
     saAvisos.solucionarAviso(request.body.idAviso, aux, function (err, res) {
         if (err) {
@@ -349,7 +347,7 @@ router.get("/contador", utils.auth, function (request, response) {
 // ERR 404
 router.use(function (request, response) {
     response.status(404);
-    response.redirect("Error404.html");
+    response.render("Error404.ejs");
 });
 
 module.exports = router;
