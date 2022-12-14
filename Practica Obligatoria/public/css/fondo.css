@@ -1,5 +1,7 @@
 .backGround {
-    background: url("../svg/Sprinkle.svg") center repeat;
-    background-size: cover;
-    position: relative;
+    background: transparent url("../svg/Sprinkle.svg") 0 0 scroll;
+}
+
+.backGround:hover{
+    background-position: 0 0;
 }

@@ -127,7 +127,6 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
 
 //Usuario
 router.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, response) {
-    response.status(200);
 
     saAvisos.getAvisos(request.session.currentUser, false, function (err, res) {
         if (err) {
@@ -141,7 +140,6 @@ router.get("/logged_user", utils.auth, utils.getTiposAvisos, function (request, 
 });
 
 router.get("/logged_tec", utils.auth, function (request, response) {
-    response.status(200);
 
     saAvisos.getAvisosTecnico(request.session.currentUser, 1, function (err, res) {
         if (err) {
