@@ -181,7 +181,7 @@ class DAOUsuario {
                 callback(new Error("Error de conexión a la base de datos"));
             }
             else {
-                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios WHERE activo = 1",
+                connection.query("SELECT * FROM UCM_AW_CAU_USU_Usuarios",
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
@@ -222,6 +222,32 @@ class DAOUsuario {
             }
             else {
                 connection.query("UPDATE UCM_AW_CAU_USU_Usuarios SET activo = 0 WHERE idUsuario = ?",
+                    [idUsuario],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                callback(null, false); //no está el usuario con el password proporcionado
+                            }
+                            else {
+                                callback(null, true);
+                            }
+                        }
+                    });
+            }
+        }
+        );
+    }
+
+    reactivarUsuario(idUsuario, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            }
+            else {
+                connection.query("UPDATE UCM_AW_CAU_USU_Usuarios SET activo = 1 WHERE idUsuario = ?",
                     [idUsuario],
                     function (err, rows) {
                         if (err) {

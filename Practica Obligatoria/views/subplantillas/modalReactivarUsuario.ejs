@@ -12,7 +12,7 @@
 </head>
 
 
-<div class="modal fade" id="modalBajaUsuario">
+<div class="modal fade" id="modalReactivarUsuario">
     <div class="modal-dialog modal-m modal-dialog-centered">
         <div class="modal-content">
 
@@ -21,9 +21,9 @@
             <div class="modal-body">
                 <div class="row d-flex text-center">
                     <div class="col col-6 d-flex flex-column offset-3">
-                        <strong>¿Estas seguro de que quieres dar de baja a este usuario?</strong>
-                        <div id="nombreUsuario" class="nombreUsuarioGestionUsuario mt-2 mb-4"></div>
-                        <form action="/bajaUsuario" method="post">
+                        <strong>¿Estas seguro de que quieres reactivar a este usuario?</strong>
+                        <div id="nombreUsuario" class="mt-2 mb-4 nombreUsuarioGestionUsuario"></div>
+                        <form action="/reactivarUsuario" method="post">
                             <input type="text" class="d-none inputIdUsuarioGestionUsuario" value="0" id="inputIdUsuario" name="idUsuario">
                             <button type="button submit" class="btn btn-secondary"
                                 data-bs-dismiss="modal">Aceptar</button>

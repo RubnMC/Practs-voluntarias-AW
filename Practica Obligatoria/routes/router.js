@@ -235,6 +235,18 @@ router.post("/bajaUsuario", utils.auth, function (request, response) {
     })
 });
 
+router.post("/reactivarUsuario", utils.auth, function (request, response) {
+    saUsuario.reactivarUsuario(request.body.idUsuario, function (err, res) {
+        if (err) {
+            response.status(500);
+            console.log(err);
+        } else {
+            response.status(200);
+            response.redirect("gestionUsuarios");
+        }
+    })
+});
+
 router.post("/solucionarAviso", utils.auth, function (request, response) {
 
     saAvisos.solucionarAviso(request.body.idAviso, request.body.observacionTecnico, function (err, res) {

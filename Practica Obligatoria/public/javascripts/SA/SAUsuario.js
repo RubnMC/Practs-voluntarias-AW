@@ -76,6 +76,17 @@ class SAUsuario {
         })
     }
 
+    reactivarUsuario(idUsuario, callback){
+        this.daoUser.reactivarUsuario(idUsuario,function (err,res) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, res);
+            }
+        })
+    }
+
     obtenerImagen(id, callback){
         this.daoUser.obtenerImagen(id, function (err, res) {
             if (err) {

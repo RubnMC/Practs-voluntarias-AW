@@ -16,6 +16,7 @@
 
   <%- include ("subplantillas/cabecera") %>
   <%- include ("subplantillas/modalBajaUsuario") %>
+  <%- include ("subplantillas/modalReactivarUsuario") %>
   <%- include("subplantillas/fondo") %>  
 
   <div class="container mt-4 ">
@@ -48,6 +49,7 @@
         <tbody>
 
           <% if(usuarios){%>
+            <% console.log(usuarios) %> 
           <% usuarios.forEach(element=> { %>
           <tr class="shadow-inset-center">
 
@@ -69,8 +71,22 @@
 
             <td class="align-middle text-center col-1 tec">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="btn p-1 btn-light btn-outline-secondary botonBajaUsuario" data-bs-toggle="modal" data-bs-target="#modalBajaUsuario" >
-                  <img src="./images/bin.png" alt="">
+                <button class="btn p-1 btn-light btn-outline-secondary botonsGestions" data-bs-toggle="modal" data-bs-target="#modalBajaUsuario"
+                <% if(!element.activo) { %> disabled <%}%> >
+                  <% if(!element.activo) { %>
+                    <img src="./images/binDisabled.png" alt="">
+                  <%} else {%>
+                    <img src="./images/bin.png" alt="">
+                  <%}%> 
+                </button>
+
+                <button class="btn p-1 btn-light btn-outline-secondary botonsGestions" data-bs-toggle="modal" data-bs-target="#modalReactivarUsuario"
+                <% if(element.activo) { %> disabled <%}%> >
+                  <% if(element.activo) { %>
+                    <img src="./images/deshacerDisabled.png" alt="">
+                  <%} else {%>
+                    <img src="./images/deshacer.png" alt="">
+                  <%}%> 
                 </button>
               </div>
             </td>
@@ -94,13 +110,13 @@
                 <script type="application/javascript">
                     $(document).ready(function () {
                         // Cada vez que se pulse el botón de 'Enviar'
-                        $(".botonBajaUsuario").on("click", function () {
+                        $(".botonsGestions").on("click", function () {
                             //Obtener el valor contenido en el cuadro de texto
                             let idUsuario = $($(this).parents("tr")).find("td").eq(0).html()
                             let nombre = $($(this).parents("tr")).find("td").eq(2).html()
                             // Realizar la petición al servidor
-                            $('#inputIdUsuario').val(idUsuario);
-                            $('#nombreUsuario').text(nombre);
+                            $('.inputIdUsuarioGestionUsuario').val(idUsuario);
+                            $('.nombreUsuarioGestionUsuario').text(nombre);
                         });
                     });
                 </script>
