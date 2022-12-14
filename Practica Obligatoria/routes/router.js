@@ -13,6 +13,7 @@ const SAUsuario = require("../public/javascripts/SA/SAUsuario");
 const SAAvisos = require("../public/javascripts/SA/SAAvisos");
 const { nextTick } = require("process");
 const { render } = require("express/lib/response");
+const res = require("express/lib/response");
 
 // Crear un pool de conexiones a la base de datos de MySQL 
 const pool = mysql.createPool(config.mysqlConfig);
@@ -111,7 +112,6 @@ router.get("/imagen/:id", utils.auth, function (request, response) {
     let n = Number(request.params.id);
     if (isNaN(n)) {
         response.status(400);
-        response.end("Petición incorrecta");
     } else {
         saUsuario.obtenerImagen(n, function (err, imagen) {
             if (imagen) {
@@ -300,7 +300,6 @@ router.get("/aviso/:idAviso", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ aviso: res });
-            response.end();
         }
     });
 
@@ -315,7 +314,6 @@ router.get("/tecnicos", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ tecnicos: res });
-            response.end();
         }
     });
 
@@ -350,7 +348,6 @@ router.get("/contador", utils.auth, function (request, response) {
         } else {
             response.status(200);
             response.json({ contador: res });
-            response.end();
         }
     });
 

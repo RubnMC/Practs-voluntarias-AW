@@ -16,11 +16,11 @@ class DAOAvisos {
                 connection.query("INSERT INTO UCM_AW_CAU_AT_AvisosTecnicos(numTecnico,idAviso) VALUES (?,?)",
                     [numTecnico, idAviso],
                     function (err, rows) {
-                        connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, null); //no tiene avisos
                             } else {
@@ -58,6 +58,7 @@ class DAOAvisos {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         }
                                         else {
+                                            connection.release();
                                             if (rows.length === 0) {
                                                 callback(null, null); //no tiene avisos
                                             } else {
@@ -92,11 +93,11 @@ class DAOAvisos {
                         " WHERE au.idUsuario = ? AND av.solucionado = ?",
                         [user.idUsuario, user.idUsuario, historicos],
                         function (err, rows) {
-                            connection.release(); // devolver al pool la conexión
                             if (err) {
                                 callback(new Error("Error de acceso a la base de datos"));
                             }
                             else {
+                                connection.release();
                                 if (rows.length === 0) {
                                     callback(null, null); //no tiene avisos
                                 }
@@ -143,11 +144,11 @@ class DAOAvisos {
                 " LEFT JOIN ucm_aw_cau_usu_usuarios usu ON au.idUsuario = usu.idUsuario LEFT JOIN ucm_aw_cau_at_avisostecnicos at" +
                 " ON av.idAviso = at.idAviso LEFT JOIN ucm_aw_cau_usu_usuarios usu2 ON usu2.numTecnico = at.numTecnico WHERE av.solucionado = 0",
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, null); //no tiene avisos
                             }
@@ -192,11 +193,11 @@ class DAOAvisos {
                 " ON av.idAviso = at.idAviso LEFT JOIN ucm_aw_cau_usu_usuarios usu2 ON usu2.numTecnico = at.numTecnico WHERE av.solucionado = ? AND at.numTecnico = ?",
                     [historicos, user.numTecnico],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, null); //no tiene avisos
                             }
@@ -242,11 +243,11 @@ class DAOAvisos {
                     " ON av.idAviso = at.idAviso LEFT JOIN ucm_aw_cau_usu_usuarios usu2 ON usu2.numTecnico = at.numTecnico WHERE av.idAviso = ?",
                     [id],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            connection.release();
                             if (rows.length === 0) {
                                 callback(null, null); //no tiene avisos
                             }
@@ -322,6 +323,7 @@ class DAOAvisos {
                             callback(new Error("Error de acceso a la base de datos"));
                         }
                         else {
+                            connection.release();
                             let contador = { total: 0, sugerencias: 0, incidencias: 0, felicitaciones: 0 }
                             if (rows.length === 0) {
                                 callback(null, contador); //no tiene avisos
